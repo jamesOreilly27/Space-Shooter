@@ -1,6 +1,6 @@
 import Phaser, { Scene } from 'phaser'
 
-export class Background extends Scene {
+export default class Background extends Scene {
   constructor() {
     super({ key: 'Background', active: true })
   }
@@ -10,6 +10,6 @@ export class Background extends Scene {
   }
 
   create() {
-    this.image.add(400, 300, 'space')
+    this.add.image(400, 300, 'space')
   }
 }
