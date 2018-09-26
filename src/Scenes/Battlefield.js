@@ -4,6 +4,7 @@ import { Player } from '../Sprites'
 export default class Battlefield extends Scene {
   constructor() {
     super({ key: 'Battlefield', active: true })
+    this.updateCount = 0
     this.player = {}
     this.cursors = {}
   }
@@ -24,6 +25,7 @@ export default class Battlefield extends Scene {
   }
 
   update() {
+    this.updateCount++
     this.player.move(this.cursors)
     this.player.shoot(this, 'laser')
   }

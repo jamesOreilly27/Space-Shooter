@@ -20,8 +20,9 @@ export default class Player {
 
   shoot(scene, spriteString) {
     const spacebar = scene.cursors.space
-    const interval = Math.floor( (scene.time.now - spacebar.timeDown) / 10) * 10
-    if(spacebar.isDown && interval % 150 === 0) {
+    const laserRechargeCount = scene.updateCount
+    if(spacebar.isDown &&
+      ((laserRechargeCount % 20 === 0) || scene.time.now - spacebar.timeDown < 10)) {
       this.laser = scene.physics.add.sprite(this.sprite.x, this.sprite.y - 60, spriteString)
       this.laser.setVelocityY(-750)
     }
