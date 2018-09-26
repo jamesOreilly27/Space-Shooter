@@ -1,14 +1,12 @@
 import Phaser, { GameObjects } from 'phaser'
 
 export default class Player {
-  constructor(sprite, cursors) {
+  constructor(sprite) {
     this.sprite = sprite
-    this.cursors = cursors
   }
 
-  movement() {
+  movement(cursors) {
     const sprite = this.sprite
-    const cursors = this.cursors
 
     if(cursors.left.isDown) sprite.setVelocityX(-250)
     else if(cursors.right.isDown) sprite.setVelocityX(250)
