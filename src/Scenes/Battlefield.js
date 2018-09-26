@@ -1,7 +1,7 @@
 import Phaser, { Scene } from 'phaser'
 import { Player } from '../Sprites'
 
-let player1
+let player
 
 export default class Battlefield extends Scene {
   constructor() {
@@ -13,8 +13,11 @@ export default class Battlefield extends Scene {
   }
 
   create() {
-    const player = new Player(this.physics.add.sprite(100, 450, 'player'))
-    console.log(player)
+    player = new Player(this.physics.add.sprite(100, 450, 'player'), this.input.keyboard.createCursorKeys())
     player.sprite.setCollideWorldBounds(true)
+  }
+
+  update() {
+    player.movement()
   }
 }
