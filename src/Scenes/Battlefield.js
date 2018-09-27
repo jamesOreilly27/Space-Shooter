@@ -1,5 +1,6 @@
 import Phaser, { Scene } from 'phaser'
 import { Player, Enemy } from '../Sprites'
+import { destroy } from './utils'
 
 export default class Battlefield extends Scene {
   constructor() {
@@ -28,7 +29,7 @@ export default class Battlefield extends Scene {
 
     // console.log('ENEMIES', this.enemies)
     //Colliders
-    this.physics.add.collider(this.enemies, this.lasers, testEnemy.destroy, null, this)
+    this.physics.add.collider(this.enemies, this.lasers, destroy, null, this)
     // testEnemy.checkCollision, null, this)
   }
 
