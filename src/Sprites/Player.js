@@ -25,7 +25,7 @@ export default class Player {
       spacebar.isDown &&
       ((laserRechargeCount % 20 === 0) || scene.time.now - spacebar.timeDown < 10)
     ) {
-      this.laser = scene.physics.add.sprite(this.sprite.x, this.sprite.y - 60, spriteString)
+      this.laser = scene.lasers.create(this.sprite.x, this.sprite.y - 60, spriteString)
       this.laser.setVelocityY(-750)
     }
   }

@@ -6,7 +6,8 @@ export default class Battlefield extends Scene {
     super({ key: 'Battlefield', active: true })
     this.updateCount = 0
     this.player = {}
-    this.enemies = []
+    this.enemies = {}
+    this.lasers = {}
     this.cursors = {}
   }
 
@@ -14,6 +15,8 @@ export default class Battlefield extends Scene {
     this.load.image('player', './assets/playerShip1_green.png')
     this.load.image('laser', './assets/laserGreen03.png')
     this.load.image('enemy', './assets/enemyRed1.png')
+    this.lasers = this.physics.add.group()
+    this.enemies = this.physics.add.group()
   }
 
   create() {
@@ -21,9 +24,12 @@ export default class Battlefield extends Scene {
     this.player = new Player(this.physics.add.sprite(100, 450, 'player')) 
     this.player.sprite.setCollideWorldBounds(true)
     this.cursors = this.input.keyboard.createCursorKeys()
-    this.enemies.push(new Enemy(this.physics.add.sprite(500, 100, 'enemy')))
-    console.log(this.enemies[0])
+    const testEnemy = new Enemy(this.enemies.create(500, 100, 'enemy'))
 
+    // console.log('ENEMIES', this.enemies)
+    //Colliders
+    this.physics.add.collider(this.enemies, this.lasers, testEnemy.destroy, null, this)
+    // testEnemy.checkCollision, null, this)
   }
 
   update() {

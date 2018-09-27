@@ -4,6 +4,11 @@ export default class Enemy {
   }
 
   move() {
-    
+
+  }
+
+  destroy(enemy, laser) {
+    enemy.disableBody(true, true)
+    laser.disableBody(true, true)
   }
 }
