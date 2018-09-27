@@ -27,10 +27,10 @@ export default class Battlefield extends Scene {
     this.cursors = this.input.keyboard.createCursorKeys()
     const testEnemy = new Enemy(this.enemies.create(500, 100, 'enemy'))
 
-    // console.log('ENEMIES', this.enemies)
     //Colliders
     this.physics.add.collider(this.enemies, this.lasers, destroy, null, this)
-    // testEnemy.checkCollision, null, this)
+    this.physics.add.collider(this.player.sprite, this.enemies, destroy, null, this)
+    console.log(this.physics.world)
   }
 
   update() {
