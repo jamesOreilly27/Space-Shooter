@@ -8,6 +8,7 @@ export default class Battlefield extends Scene {
     this.updateCount = 0
     this.player = {}
     this.enemies = {}
+    this.testEnemy = {}
     this.lasers = {}
     this.cursors = {}
   }
@@ -25,16 +26,21 @@ export default class Battlefield extends Scene {
     this.player = new Player(this.physics.add.sprite(100, 450, 'player')) 
     this.player.sprite.setCollideWorldBounds(true)
     this.cursors = this.input.keyboard.createCursorKeys()
-    const testEnemy = new Enemy(this.enemies.create(500, 100, 'enemy'))
+    this.testEnemy = new Enemy(this.enemies.create(700, 100, 'enemy'))
 
     //Colliders
     this.physics.add.collider(this.enemies, this.lasers, destroy, null, this)
     this.physics.add.collider(this.player.sprite, this.enemies, destroy, null, this)
+
+    console.log(this.testEnemy)
   }
 
   update() {
     this.updateCount++
     this.player.move(this.cursors)
     this.player.shoot(this, 'laser')
+    console.log(this.updateCount)
+    this.testEnemy.move(this.updateCount)
+    if(this.updateCount >= 200) this.updateCount = 0
   }
 }
