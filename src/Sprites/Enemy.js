@@ -25,7 +25,7 @@ export default class Enemy {
 
   shoot(scene, spriteString) {
     const laserRechargeCount = scene.updateCount
-    if(laserRechargeCount % 35 === 0) {
+    if(laserRechargeCount % 35 === 0 && this.sprite.active) {
       this.laser = scene.lasers.create(this.sprite.x, this.sprite.y + 60, spriteString)
       this.laser.scaleX = .6
       this.laser.scaleY = .6
