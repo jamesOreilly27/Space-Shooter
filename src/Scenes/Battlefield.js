@@ -39,8 +39,8 @@ export default class Battlefield extends Scene {
   update() {
     this.updateCount++
     this.player.move(this.cursors)
-    this.player.shoot(this, 'laser')
-    console.log(this.updateCount)
+    this.player.shoot(this, 'player-laser')
+    this.testEnemy.shoot(this, 'enemy-laser')
     this.testEnemy.move(this.updateCount)
     if(this.updateCount >= 200) this.updateCount = 0
   }

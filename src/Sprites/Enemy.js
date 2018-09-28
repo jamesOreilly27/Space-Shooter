@@ -1,6 +1,7 @@
 export default class Enemy {
   constructor(sprite) {
     this.sprite = sprite
+    this.laser = {}
   }
 
   move(updateCount) {
@@ -19,6 +20,14 @@ export default class Enemy {
     else {
       this.sprite.setVelocityX(-30)
       this.sprite.setVelocityY(-100)
+    }
+  }
+
+  shoot(scene, spriteString) {
+    const laserRechargeCount = scene.updateCount
+    if(laserRechargeCount % 35 === 0) {
+      this.laser = scene.lasers.create(this.sprite.x, this.sprite.y + 60, spriteString)
+      this.laser.setVelocityY(400)
     }
   }
 }
