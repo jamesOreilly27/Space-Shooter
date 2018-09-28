@@ -30,7 +30,6 @@ export default class Battlefield extends Scene {
     //Colliders
     this.physics.add.collider(this.enemies, this.lasers, destroy, null, this)
     this.physics.add.collider(this.player.sprite, this.enemies, destroy, null, this)
-    console.log(this.physics.world)
   }
 
   update() {
