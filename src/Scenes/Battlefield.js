@@ -1,6 +1,6 @@
 import Phaser, { Scene } from 'phaser'
 import { Player, Enemy } from '../Sprites'
-import { destroy } from './utils'
+import { destroy, randomCoordinateX, randomCoordinateY } from './utils'
 
 export default class Battlefield extends Scene {
   constructor() {
@@ -15,6 +15,11 @@ export default class Battlefield extends Scene {
 
   addCollider(group1, group2, callback) {
     this.physics.add.collider(group1, group2, callback, null, this)
+  }
+
+  addEnemy() {
+    console.log('FIRING')
+    new Enemy(this.enemies.create(randomCoordinateX(), randomCoordinateY(), 'enemy'))
   }
 
   preload() {
@@ -37,8 +42,6 @@ export default class Battlefield extends Scene {
     this.addCollider(this.enemies, this.lasers, destroy)
     this.addCollider(this.player.sprite, this.enemies, destroy)
     this.addCollider(this.player.sprite, this.lasers, destroy)
-
-    console.log(this.testEnemy)
   }
 
   update() {
@@ -48,5 +51,9 @@ export default class Battlefield extends Scene {
     this.testEnemy.move(this.updateCount)
     this.testEnemy.shoot(this, 'enemy-laser')
     if(this.updateCount >= 200) this.updateCount = 0
+    if(!this.updateCount % 100) {
+      console.log('FIRING')
+      this.addEnemy()
+    }
   }
 }
