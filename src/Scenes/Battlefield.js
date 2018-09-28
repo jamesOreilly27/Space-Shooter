@@ -15,7 +15,8 @@ export default class Battlefield extends Scene {
 
   preload() {
     this.load.image('player', './assets/playerShip1_green.png')
-    this.load.image('laser', './assets/laserGreen03.png')
+    this.load.image('player-laser', './assets/laserGreen03.png')
+    this.load.image('enemy-laser', './assets/laserRed10.png')
     this.load.image('enemy', './assets/enemyRed1.png')
     this.lasers = this.physics.add.group()
     this.enemies = this.physics.add.group()
