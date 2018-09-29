@@ -18,7 +18,6 @@ export default class Battlefield extends Scene {
   }
 
   addEnemy() {
-    console.log('FIRING')
     new Enemy(this.enemies.create(randomCoordinateX(), randomCoordinateY(), 'enemy'))
   }
 
@@ -33,15 +32,16 @@ export default class Battlefield extends Scene {
 
   create() {
     //Filling in Battlefield Properties
-    this.player = new Player(this.physics.add.sprite(100, 450, 'player')) 
-    this.player.sprite.setCollideWorldBounds(true)
+    this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     this.cursors = this.input.keyboard.createCursorKeys()
     this.testEnemy = new Enemy(this.enemies.create(700, 100, 'enemy'))
 
+    console.log(this.player)
+
     //Colliders
     this.addCollider(this.enemies, this.lasers, destroy)
-    this.addCollider(this.player.sprite, this.enemies, destroy)
-    this.addCollider(this.player.sprite, this.lasers, destroy)
+    this.addCollider(this.player, this.enemies, destroy)
+    this.addCollider(this.player, this.lasers, destroy)
   }
 
   update() {
@@ -52,7 +52,6 @@ export default class Battlefield extends Scene {
     this.testEnemy.shoot(this, 'enemy-laser')
     if(this.updateCount >= 200) this.updateCount = 0
     if(!this.updateCount % 100 && this.enemies.children.entries.length < 6) {
-      console.log(this.enemies)
       this.addEnemy()
     }
   }
