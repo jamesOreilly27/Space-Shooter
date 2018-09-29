@@ -51,8 +51,8 @@ export default class Battlefield extends Scene {
     this.testEnemy.move(this.updateCount)
     this.testEnemy.shoot(this, 'enemy-laser')
     if(this.updateCount >= 200) this.updateCount = 0
-    if(!this.updateCount % 100) {
-      console.log('FIRING')
+    if(!this.updateCount % 100 && this.enemies.children.entries.length < 6) {
+      console.log(this.enemies)
       this.addEnemy()
     }
   }
