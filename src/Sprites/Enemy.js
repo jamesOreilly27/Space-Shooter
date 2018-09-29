@@ -1,26 +1,29 @@
-export default class Enemy {
-  constructor(sprite) {
-    this.sprite = sprite
-    this.laser = {}
+import Phaser from 'phaser'
+
+export default class Enemy extends Phaser.GameObjects.Sprite {
+  constructor(config) {
+    super(config.scene, config.x, config.y, config.key)
+    config.scene.physics.world.enable(this)
+    config.scene.add.existing(this)
   }
 
   move(updateCount) {
-    if(this.sprite.active) {
+    if(this.body.active) {
       if(updateCount < 50) {
-        this.sprite.setVelocityX(-100)
-        this.sprite.setVelocityY(30)
+        this.body.setVelocityX(-100)
+        this.body.setVelocityY(30)
       }
       else if(updateCount < 100) {
-        this.sprite.setVelocityX(30)
-        this.sprite.setVelocityY(100)
+        this.body.setVelocityX(30)
+        this.body.setVelocityY(100)
       }
       else if(updateCount < 150) {
-        this.sprite.setVelocityX(100)
-        this.sprite.setVelocityY(-30)
+        this.body.setVelocityX(100)
+        this.body.setVelocityY(-30)
       }
       else {
-        this.sprite.setVelocityX(-30)
-        this.sprite.setVelocityY(-100)
+        this.body.setVelocityX(-30)
+        this.body.setVelocityY(-100)
       }
     }
   }

@@ -1,6 +1,6 @@
 import Phaser from 'phaser'
 
-export default class PlayerTest extends Phaser.GameObjects.Sprite {
+export default class Player extends Phaser.GameObjects.Sprite {
   constructor(config) {
     super(config.scene, config.x, config.y, config.key)
     config.scene.physics.world.enable(this)
