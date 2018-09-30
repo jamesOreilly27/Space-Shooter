@@ -34,24 +34,25 @@ export default class Battlefield extends Scene {
     //Filling in Battlefield Properties
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     this.cursors = this.input.keyboard.createCursorKeys()
-    this.testEnemy = this.enemies.add(new Enemy({ scene: this, key: 'enemy', x: 700, y: 100 }))
-    console.log(this.enemies)
+    this.testEnemy = new Enemy({ scene: this, key: 'enemy', x: 700, y: 100 })
+    this.enemies.add(this.testEnemy)
 
     //Colliders
     this.addCollider(this.enemies, this.lasers, destroy)
     this.addCollider(this.player, this.enemies, destroy)
     this.addCollider(this.player, this.lasers, destroy)
+    console.log(this.enemies)
   }
 
   update() {
     this.updateCount++
     this.player.move(this.cursors)
     this.player.shoot(this, 'player-laser')
-    // this.testEnemy.move(this.updateCount)
-    // this.testEnemy.shoot(this, 'enemy-laser')
+    this.testEnemy.move(this.updateCount)
+    this.testEnemy.shoot(this, 'enemy-laser')
     if(this.updateCount >= 200) this.updateCount = 0
     if(!this.updateCount % 100 && this.enemies.children.entries.length < 6) {
-      this.addEnemy()
+      // this.addEnemy()
     }
   }
 }

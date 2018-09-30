@@ -8,7 +8,8 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
   }
 
   move(updateCount) {
-    if(this.body.active) {
+    console.log(this)
+    if(this.active) {
       if(updateCount < 50) {
         this.body.setVelocityX(-100)
         this.body.setVelocityY(30)
@@ -30,8 +31,8 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
 
   shoot(scene, spriteString) {
     const laserRechargeCount = scene.updateCount
-    if(laserRechargeCount % 35 === 0 && this.sprite.active) {
-      this.laser = scene.lasers.create(this.sprite.x, this.sprite.y + 60, spriteString)
+    if(laserRechargeCount % 35 === 0 && this.active) {
+      this.laser = scene.lasers.create(this.x, this.y + 60, spriteString)
       this.laser.scaleX = .6
       this.laser.scaleY = .6
       this.laser.setVelocityY(400)
