@@ -1,5 +1,5 @@
 import Phaser, { Game } from 'phaser'
-import { Background, Battlefield } from './Scenes'
+import { Background, Battlefield } from './scenes'
 
 const gameConfig = {
   width: 800,

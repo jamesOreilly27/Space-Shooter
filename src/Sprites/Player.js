@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import { Laser } from '../sprites'
 
 export default class Player extends Phaser.GameObjects.Sprite {
   constructor(config) {
@@ -20,20 +21,20 @@ export default class Player extends Phaser.GameObjects.Sprite {
     }
   }
 
-  shoot(scene, spriteString) {
-    const spacebar = scene.cursors.space
-    const laserRechargeCount = scene.updateCount
+  shoot(spriteString) {
+    const spacebar = this.scene.cursors.space
+    const laserRechargeCount = this.scene.updateCount
     if(
-      spacebar.isDown &&
-      ((laserRechargeCount % 20 === 0) || scene.time.now - spacebar.timeDown < 10)
+      spacebar.isDown && 
+      ((laserRechargeCount % 20 === 0) || this.scene.time.now - spacebar.timeDown < 20)
     ) {
-      this.laser = scene.lasers.create(this.x, this.y - 60, spriteString)
-      this.laser.setVelocityY(-750)
+      this.scene.lasers.add(new Laser({ scene: this.scene, x: this.x, y: this.y -80, key: spriteString }))
     }
   }
 
   update() {
     this.move(this.scene.cursors) 
-    this.shoot(this.scene, 'player-laser')
+    this.shoot('player-laser')
+    this.scene.lasers.children.entries.forEach(laser => { laser.update() })
   }
 }

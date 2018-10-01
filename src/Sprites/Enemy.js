@@ -30,13 +30,13 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
   }
 
   shoot(scene, spriteString) {
-    const laserRechargeCount = scene.updateCount
-    if(laserRechargeCount % 35 === 0 && this.active) {
-      this.laser = scene.lasers.create(this.x, this.y + 60, spriteString)
-      this.laser.scaleX = .6
-      this.laser.scaleY = .6
-      this.laser.setVelocityY(400)
-    }
+    // const laserRechargeCount = scene.updateCount
+    // if(laserRechargeCount % 35 === 0 && this.active) {
+    //   this.laser = scene.lasers.create(this.x, this.y + 60, spriteString)
+    //   this.laser.scaleX = .6
+    //   this.laser.scaleY = .6
+    //   this.laser.setVelocityY(400)
+    // }
   } 
 
   update() {

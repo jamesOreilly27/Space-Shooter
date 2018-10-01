@@ -1,5 +1,5 @@
 import Phaser, { Scene } from 'phaser'
-import { Player, Enemy } from '../Sprites'
+import { Player, Enemy } from '../sprites'
 import { destroy, randomCoordinateX, randomCoordinateY } from './utils'
 
 export default class Battlefield extends Scene {
@@ -38,6 +38,7 @@ export default class Battlefield extends Scene {
   }
 
   update() {
+    // if(this.updateCount % 300 === 0) console.log(this.lasers)
     this.updateCount++
     this.player.update()
     this.enemies.children.entries.forEach(enemy => { enemy.update() })
