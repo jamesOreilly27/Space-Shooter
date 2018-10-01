@@ -9,6 +9,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
     this.scene.add.existing(this)
     this.body.setCollideWorldBounds(true)
   }
+  
   move(cursors) {
     if(this.active) {
       if(cursors.left.isDown) this.body.setVelocityX(-250)
