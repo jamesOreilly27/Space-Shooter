@@ -9,6 +9,8 @@ export default class EnemyLaser extends Laser {
 
   update() {
     super.update()
-    if(this.active && !this.body.velocity.y) this.body.setVelocityY(400)
+    if(this.active && !this.body.velocity.y) {
+      this.scene.physics.moveTo(this, this.scene.player.x, this.scene.player.y, 400)
+    }
   }
 }

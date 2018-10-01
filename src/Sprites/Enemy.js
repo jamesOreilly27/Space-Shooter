@@ -32,7 +32,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
 
   shoot(spriteString) {
     const laserRechargeCount = this.scene.updateCount
-    if(laserRechargeCount % 35 === 0 && this.active) {
+    if(laserRechargeCount % 60 === 0 && this.active) {
       this.scene.lasers.add(new EnemyLaser({ scene: this.scene, x: this.x, y: this.y + 80, key: spriteString }))
     }
   } 
