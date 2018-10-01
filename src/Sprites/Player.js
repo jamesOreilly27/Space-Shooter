@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import { Laser } from '../sprites'
+import { PlayerLaser } from '../sprites'
 
 export default class Player extends Phaser.GameObjects.Sprite {
   constructor(config) {
@@ -29,7 +29,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
       spacebar.isDown && 
       ((laserRechargeCount % 20 === 0) || this.scene.time.now - spacebar.timeDown < 20)
     ) {
-      this.scene.lasers.add(new Laser({ scene: this.scene, x: this.x, y: this.y -80, key: spriteString }))
+      this.scene.lasers.add(new PlayerLaser({ scene: this.scene, x: this.x, y: this.y -80, key: spriteString }))
     }
   }
 

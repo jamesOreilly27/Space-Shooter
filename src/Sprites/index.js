@@ -3,3 +3,4 @@
 export { default as Player } from './Player'
 export { default as Laser } from './Laser'
 export { default as Enemy } from './Enemy'
+export { default as PlayerLaser } from './PlayerLaser'
