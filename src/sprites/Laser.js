@@ -9,7 +9,6 @@ export default class Laser extends Phaser.GameObjects.Sprite {
   }
 
   update() {
-    if(!this.body.velocity.y) this.body.setVelocityY(-750)
     if(this.y >= 610 || this.y <= -10) this.destroy()
   }
 }

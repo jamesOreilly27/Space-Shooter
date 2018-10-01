@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import { EnemyLaser } from '../sprites'
 
 export default class Enemy extends Phaser.GameObjects.Sprite {
   constructor(config) {
@@ -29,18 +30,15 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
     }
   }
 
-  shoot(scene, spriteString) {
-    // const laserRechargeCount = scene.updateCount
-    // if(laserRechargeCount % 35 === 0 && this.active) {
-    //   this.laser = scene.lasers.create(this.x, this.y + 60, spriteString)
-    //   this.laser.scaleX = .6
-    //   this.laser.scaleY = .6
-    //   this.laser.setVelocityY(400)
-    // }
+  shoot(spriteString) {
+    const laserRechargeCount = this.scene.updateCount
+    if(laserRechargeCount % 35 === 0 && this.active) {
+      this.scene.lasers.add(new EnemyLaser({ scene: this.scene, x: this.x, y: this.y + 80, key: spriteString }))
+    }
   } 
 
   update() {
     this.move(this.scene.updateCount)
-    this.shoot(this.scene, 'enemy-laser')
+    this.shoot('enemy-laser')
   }
 }

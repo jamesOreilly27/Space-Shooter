@@ -36,6 +36,5 @@ export default class Player extends Phaser.GameObjects.Sprite {
   update() {
     this.move(this.scene.cursors) 
     this.shoot('player-laser')
-    this.scene.lasers.children.entries.forEach(laser => { laser.update() })
   }
 }
