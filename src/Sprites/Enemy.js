@@ -3,8 +3,9 @@ import Phaser from 'phaser'
 export default class Enemy extends Phaser.GameObjects.Sprite {
   constructor(config) {
     super(config.scene, config.x, config.y, config.key)
-    config.scene.physics.world.enable(this)
-    config.scene.add.existing(this)
+    this.scene = config.scene
+    this.scene.physics.world.enable(this)
+    this.scene.add.existing(this)
   }
 
   move(updateCount) {
@@ -36,5 +37,10 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
       this.laser.scaleY = .6
       this.laser.setVelocityY(400)
     }
+  } 
+
+  update() {
+    this.move(this.scene.updateCount)
+    this.shoot(this.scene, 'enemy-laser')
   }
 }

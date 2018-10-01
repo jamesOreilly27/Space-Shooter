@@ -41,8 +41,7 @@ export default class Battlefield extends Scene {
     this.updateCount++
     this.player.update()
     this.enemies.children.entries.forEach(enemy => {
-      enemy.move(this.updateCount)
-      enemy.shoot(this, 'enemy-laser')
+      enemy.update()
     })
     if(this.updateCount >= 200) this.updateCount = 0
     if(!this.updateCount % 100 && this.enemies.children.entries.length < 6) this.addEnemy()
