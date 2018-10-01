@@ -1,7 +1,7 @@
 import Phaser from 'phaser'
-import { Ship, PatrollerLaser } from '../sprites'
+import { Ship, PatrolShipLaser } from '../sprites'
 
-export default class Enemy extends Ship {
+export default class PatrolShip extends Ship {
   constructor(config) {
     super(config)
   }
@@ -30,12 +30,12 @@ export default class Enemy extends Ship {
   shoot(spriteString) {
     const laserRechargeCount = this.scene.updateCount
     if(laserRechargeCount % 60 === 0 && this.active) {
-      this.scene.lasers.add(new PatrollerLaser({ scene: this.scene, x: this.x, y: this.y + 80, key: spriteString }))
+      this.scene.lasers.add(new PatrolShipLaser({ scene: this.scene, x: this.x, y: this.y + 80, key: spriteString }))
     }
   } 
 
   update() {
     this.move(this.scene.updateCount)
-    this.shoot('patroller-laser')
+    this.shoot('patrol-ship-laser')
   }
 }

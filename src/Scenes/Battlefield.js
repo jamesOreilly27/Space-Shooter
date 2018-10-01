@@ -1,5 +1,5 @@
 import Phaser, { Scene } from 'phaser'
-import { Player, Enemy } from '../sprites'
+import { Player, PatrolShip } from '../sprites'
 import { destroy, randomCoordinateX, randomCoordinateY } from './utils'
 
 export default class Battlefield extends Scene {
@@ -13,14 +13,14 @@ export default class Battlefield extends Scene {
   }
 
   addEnemy() {
-    this.enemies.add(new Enemy({ scene: this, key: 'enemy', x: randomCoordinateX(), y: randomCoordinateY() }))
+    this.enemies.add(new PatrolShip({ scene: this, key: 'enemy', x: randomCoordinateX(), y: randomCoordinateY() }))
   }
 
   preload() {
     this.load.image('player', './assets/playerShip1_green.png')
     this.load.image('player-laser', './assets/laserGreen03.png')
-    this.load.image('patroller-laser', './assets/laserRed10.png')
-    this.load.image('patroller', './assets/enemyRed1.png')
+    this.load.image('patrol-ship-laser', './assets/laserRed10.png')
+    this.load.image('patrol-ship', './assets/enemyRed1.png')
     this.lasers = this.physics.add.group()
     this.enemies = this.physics.add.group()
   }
@@ -29,7 +29,7 @@ export default class Battlefield extends Scene {
     //Filling in Battlefield Properties
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     this.cursors = this.input.keyboard.createCursorKeys()
-    this.enemies.add(new Enemy({ scene: this, key: 'patroller', x: 700, y: 100 }))
+    this.enemies.add(new PatrolShip({ scene: this, key: 'patrol-ship', x: 700, y: 100 }))
 
     //Colliders
     this.addCollider(this.enemies, this.lasers, destroy)
