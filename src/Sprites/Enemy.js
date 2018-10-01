@@ -8,7 +8,6 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
   }
 
   move(updateCount) {
-    console.log(this)
     if(this.active) {
       if(updateCount < 50) {
         this.body.setVelocityX(-100)

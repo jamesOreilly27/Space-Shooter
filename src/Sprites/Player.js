@@ -26,7 +26,7 @@ export default class Player extends Phaser.GameObjects.Sprite {
       spacebar.isDown &&
       ((laserRechargeCount % 20 === 0) || scene.time.now - spacebar.timeDown < 10)
     ) {
-      this.laser = scene.lasers.create(this.body.x, this.body.y - 60, spriteString)
+      this.laser = scene.lasers.create(this.x, this.y - 60, spriteString)
       this.laser.setVelocityY(-750)
     }
   }
