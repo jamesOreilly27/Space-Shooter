@@ -6,11 +6,6 @@ export default class Battlefield extends Scene {
   constructor() {
     super({ key: 'Battlefield', active: true })
     this.updateCount = 0
-    this.player = {}
-    this.enemies = {}
-    this.testEnemy = {}
-    this.lasers = {}
-    this.cursors = {}
   }
 
   addCollider(group1, group2, callback) {
@@ -44,8 +39,7 @@ export default class Battlefield extends Scene {
 
   update() {
     this.updateCount++
-    this.player.move(this.cursors)
-    this.player.shoot(this, 'player-laser')
+    this.player.update()
     this.enemies.children.entries.forEach(enemy => {
       enemy.move(this.updateCount)
       enemy.shoot(this, 'enemy-laser')

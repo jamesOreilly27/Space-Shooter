@@ -3,8 +3,9 @@ import Phaser from 'phaser'
 export default class Player extends Phaser.GameObjects.Sprite {
   constructor(config) {
     super(config.scene, config.x, config.y, config.key)
-    config.scene.physics.world.enable(this)
-    config.scene.add.existing(this)
+    this.scene = config.scene
+    this.scene.physics.world.enable(this)
+    this.scene.add.existing(this)
     this.body.setCollideWorldBounds(true)
   }
   move(cursors) {
@@ -29,5 +30,10 @@ export default class Player extends Phaser.GameObjects.Sprite {
       this.laser = scene.lasers.create(this.x, this.y - 60, spriteString)
       this.laser.setVelocityY(-750)
     }
+  }
+
+  update() {
+    this.move(this.scene.cursors) 
+    this.shoot(this.scene, 'player-laser')
   }
 }
