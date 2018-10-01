@@ -8,4 +8,4 @@ export { default as Enemy } from './Enemy'
 //Lasers
 export { default as Laser } from './Laser'
 export { default as PlayerLaser } from './PlayerLaser'
-export { default as EnemyLaser } from './EnemyLaser'
+export { default as PatrollerLaser } from './PatrollerLaser'

@@ -19,8 +19,8 @@ export default class Battlefield extends Scene {
   preload() {
     this.load.image('player', './assets/playerShip1_green.png')
     this.load.image('player-laser', './assets/laserGreen03.png')
-    this.load.image('enemy-laser', './assets/laserRed10.png')
-    this.load.image('enemy', './assets/enemyRed1.png')
+    this.load.image('patroller-laser', './assets/laserRed10.png')
+    this.load.image('patroller', './assets/enemyRed1.png')
     this.lasers = this.physics.add.group()
     this.enemies = this.physics.add.group()
   }
@@ -29,7 +29,7 @@ export default class Battlefield extends Scene {
     //Filling in Battlefield Properties
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     this.cursors = this.input.keyboard.createCursorKeys()
-    this.enemies.add(new Enemy({ scene: this, key: 'enemy', x: 700, y: 100 }))
+    this.enemies.add(new Enemy({ scene: this, key: 'patroller', x: 700, y: 100 }))
 
     //Colliders
     this.addCollider(this.enemies, this.lasers, destroy)
@@ -43,6 +43,6 @@ export default class Battlefield extends Scene {
     this.enemies.children.entries.forEach(enemy => { enemy.update() })
     this.lasers.children.entries.forEach(laser => { laser.update() })
     if(this.updateCount >= 200) this.updateCount = 0
-    if(!this.updateCount % 100 && this.enemies.children.entries.length < 6) this.addEnemy()
+    // if(!this.updateCount % 100 && this.enemies.children.entries.length < 6) this.addEnemy()
   }
 }

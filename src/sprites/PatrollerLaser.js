@@ -1,6 +1,6 @@
 import { Laser } from '../sprites'
 
-export default class EnemyLaser extends Laser {
+export default class PatrollerLaser extends Laser {
   constructor(config) {
     super(config)
   }
