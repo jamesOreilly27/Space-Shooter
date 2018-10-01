@@ -8,6 +8,7 @@ export default class EnemyLaser extends Laser {
   }
 
   update() {
-    if(!this.body.velocity.y) this.body.setVelocityY(400)
+    super.update()
+    if(this.active && !this.body.velocity.y) this.body.setVelocityY(400)
   }
 }
