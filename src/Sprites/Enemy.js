@@ -1,12 +1,12 @@
 import Phaser from 'phaser'
-import { EnemyLaser } from '../sprites'
+import { Ship, EnemyLaser } from '../sprites'
 
-export default class Enemy extends Phaser.GameObjects.Sprite {
+export default class Enemy extends Ship {
   constructor(config) {
-    super(config.scene, config.x, config.y, config.key)
-    this.scene = config.scene
-    this.scene.physics.world.enable(this)
-    this.scene.add.existing(this)
+    super(config)
+    // this.scene = config.scene
+    // this.scene.physics.world.enable(this)
+    // this.scene.add.existing(this)
   }
 
   move(updateCount) {

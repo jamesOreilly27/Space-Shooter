@@ -1,12 +1,12 @@
 import Phaser from 'phaser'
-import { PlayerLaser } from '../sprites'
+import { Ship, PlayerLaser } from '../sprites'
 
-export default class Player extends Phaser.GameObjects.Sprite {
+export default class Player extends Ship {
   constructor(config) {
-    super(config.scene, config.x, config.y, config.key)
-    this.scene = config.scene
-    this.scene.physics.world.enable(this)
-    this.scene.add.existing(this)
+    super(config)
+    // this.scene = config.scene
+    // this.scene.physics.world.enable(this)
+    // this.scene.add.existing(this)
     this.body.setCollideWorldBounds(true)
   }
   
