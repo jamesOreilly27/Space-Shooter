@@ -21,6 +21,7 @@ export default class Battlefield extends Scene {
     this.load.image('player-laser', './assets/laserGreen03.png')
     this.load.image('patrol-ship-laser', './assets/laserRed10.png')
     this.load.image('patrol-ship', './assets/enemyRed1.png')
+    this.load.image('divebomber', './assets/enemyRed4.png')
     this.playerLasers = this.physics.add.group()
     this.enemyLasers = this.physics.add.group()
     this.enemies = this.physics.add.group()
@@ -30,7 +31,7 @@ export default class Battlefield extends Scene {
     //Filling in Battlefield Properties
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     this.cursors = this.input.keyboard.createCursorKeys()
-    this.addEnemy()
+    this.addPatrol()
 
     //Colliders
     this.addCollider(this.enemies, this.playerLasers, destroy)
