@@ -20,7 +20,7 @@ export default class Battlefield extends Scene {
   }
 
   addDivebomber() {
-    this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: 700, y: -10}))
+    this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: 100, y: -20}))
   }
 
   preload() {

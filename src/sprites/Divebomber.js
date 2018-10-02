@@ -7,7 +7,9 @@ export default class Divebomber extends Ship {
   }
 
   move() {
-    this.body.setVelocity(-30, 250)
+    if(this.x <= 400) this.body.setVelocityX(50)
+    else this.body.setVelocityX(-50)
+    this.body.setVelocityY(250)
   }
 
   update() {
