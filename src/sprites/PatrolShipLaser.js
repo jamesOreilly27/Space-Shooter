@@ -8,7 +8,7 @@ export default class PatrolShipLaser extends Laser {
   update() {
     super.update()
     if(this.active && !this.body.velocity.y) {
-      this.scene.physics.moveTo(this, this.scene.player.x, this.scene.player.y, 400)
+      this.scene.physics.moveTo(this, this.scene.player.x, this.scene.player.y, 150)
     }
   }
 }
