@@ -17,21 +17,21 @@ export default class Player extends Ship {
     else this.body.setVelocityY(0)
   }
 
-  shoot(spriteString) {
+  shoot() {
     const spacebar = this.scene.cursors.space
     const laserRechargeCount = this.scene.updateCount
     if(
       spacebar.isDown && 
       ((laserRechargeCount % 20 === 0) || this.scene.time.now - spacebar.timeDown < 20)
     ) {
-      this.scene.playerLasers.add(new PlayerLaser({ scene: this.scene, x: this.x, y: this.y -40, key: spriteString }))
+      this.scene.playerLasers.add(new PlayerLaser({ scene: this.scene, x: this.x, y: this.y -40, key: 'player-laser' }))
     }
   }
 
   update() {
     if(this.active) {
       this.move(this.scene.cursors) 
-      this.shoot('player-laser')
+      this.shoot()
     }
   }
 }
