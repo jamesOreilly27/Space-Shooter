@@ -19,8 +19,12 @@ export default class Battlefield extends Scene {
     this.enemies.add(new PatrolShip({ scene: this, key: 'patrol-ship', x: 810, y: 20 }))
   }
 
-  addDivebomber() {
+  //I like the stepx and stepy in the setup below
+  //TODO create a function that builds waves of divebombers in this sequence
+  addDivebombers() {
     this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: 100, y: -20}))
+    this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: 150, y: -80}))
+    this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: 200, y: -140}))
   }
 
   preload() {
@@ -40,7 +44,7 @@ export default class Battlefield extends Scene {
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     this.cursors = this.input.keyboard.createCursorKeys()
     this.addPatrol()
-    this.addDivebomber()
+    this.addDivebombers()
 
     // ***** Colliders *****
     this.addCollider(this.enemies, this.playerLasers, destroy)
