@@ -7,13 +7,13 @@ export default class Player extends Ship {
     this.body.setCollideWorldBounds(true)
   }
   
-  move(cursors) {
-    if(cursors.left.isDown) this.body.setVelocityX(-250)
-    else if(cursors.right.isDown) this.body.setVelocityX(250)
+  move() {
+    if(this.scene.cursors.left.isDown) this.body.setVelocityX(-250)
+    else if(this.scene.cursors.right.isDown) this.body.setVelocityX(250)
     else this.body.setVelocityX(0)
   
-    if(cursors.down.isDown) this.body.setVelocityY(250)
-    else if(cursors.up.isDown) this.body.setVelocityY(-250)
+    if(this.scene.cursors.down.isDown) this.body.setVelocityY(250)
+    else if(this.scene.cursors.up.isDown) this.body.setVelocityY(-250)
     else this.body.setVelocityY(0)
   }
 
