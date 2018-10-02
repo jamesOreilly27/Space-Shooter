@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import Ship from '../sprites'
+import { Ship } from '../sprites'
 
 export default class Divebomber extends Ship {
   constructor(config) {
