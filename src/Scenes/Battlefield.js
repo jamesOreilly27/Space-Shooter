@@ -1,5 +1,5 @@
 import Phaser, { Scene } from 'phaser'
-import { Player, PatrolShip } from '../sprites'
+import { Player, PatrolShip, Divebomber } from '../sprites'
 import { destroy, randomCoordinateX, randomCoordinateY } from './utils'
 
 export default class Battlefield extends Scene {
@@ -12,8 +12,19 @@ export default class Battlefield extends Scene {
     this.physics.add.collider(group1, group2, callback, null, this)
   }
 
+  //Add Enemy Functions
+  //All functions for adding enemies are currently for testing purposes
+  //Once all enemy classes are completed I will focus on exactly how/where/when I want them to appear
   addPatrol() {
     this.enemies.add(new PatrolShip({ scene: this, key: 'patrol-ship', x: 810, y: 20 }))
+  }
+
+  //I like the stepx and stepy in the setup below
+  //TODO create a function that builds waves of divebombers in this sequence
+  addDivebombers() {
+    this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: 100, y: -20}))
+    this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: 150, y: -80}))
+    this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: 200, y: -140}))
   }
 
   preload() {
@@ -21,6 +32,8 @@ export default class Battlefield extends Scene {
     this.load.image('player-laser', './assets/laserGreen03.png')
     this.load.image('patrol-ship-laser', './assets/laserRed10.png')
     this.load.image('patrol-ship', './assets/enemyRed1.png')
+    this.load.image('divebomber', './assets/enemyRed4.png')
+    this.load.image('divebomber-laser', './assets/laserRed14.png')
     this.playerLasers = this.physics.add.group()
     this.enemyLasers = this.physics.add.group()
     this.enemies = this.physics.add.group()
@@ -30,9 +43,10 @@ export default class Battlefield extends Scene {
     //Filling in Battlefield Properties
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     this.cursors = this.input.keyboard.createCursorKeys()
-    this.addEnemy()
+    this.addPatrol()
+    this.addDivebombers()
 
-    //Colliders
+    // ***** Colliders *****
     this.addCollider(this.enemies, this.playerLasers, destroy)
     this.addCollider(this.player, this.enemies, destroy)
     this.addCollider(this.player, this.enemyLasers, destroy)

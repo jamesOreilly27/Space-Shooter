@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import { killOffScreen } from './utils'
 
 export default class Laser extends Phaser.GameObjects.Sprite {
   constructor(config) {
@@ -11,6 +12,6 @@ export default class Laser extends Phaser.GameObjects.Sprite {
   }
 
   update() {
-    if(this.y >= 610 || this.y <= -10) this.destroy()
+    killOffScreen(this)
   }
 }
