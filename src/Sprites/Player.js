@@ -8,15 +8,13 @@ export default class Player extends Ship {
   }
   
   move(cursors) {
-    if(this.active) {
-      if(cursors.left.isDown) this.body.setVelocityX(-250)
-      else if(cursors.right.isDown) this.body.setVelocityX(250)
-      else this.body.setVelocityX(0)
+    if(cursors.left.isDown) this.body.setVelocityX(-250)
+    else if(cursors.right.isDown) this.body.setVelocityX(250)
+    else this.body.setVelocityX(0)
   
-      if(cursors.down.isDown) this.body.setVelocityY(250)
-      else if(cursors.up.isDown) this.body.setVelocityY(-250)
-      else this.body.setVelocityY(0)
-    }
+    if(cursors.down.isDown) this.body.setVelocityY(250)
+    else if(cursors.up.isDown) this.body.setVelocityY(-250)
+    else this.body.setVelocityY(0)
   }
 
   shoot(spriteString) {
@@ -31,7 +29,9 @@ export default class Player extends Ship {
   }
 
   update() {
-    this.move(this.scene.cursors) 
-    this.shoot('player-laser')
+    if(this.active) {
+      this.move(this.scene.cursors) 
+      this.shoot('player-laser')
+    }
   }
 }
