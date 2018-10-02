@@ -17,6 +17,8 @@ export default class Battlefield extends Scene {
   //Once all enemy classes are completed I will focus on exactly how/where/when I want them to appear
   addPatrol() {
     this.enemies.add(new PatrolShip({ scene: this, key: 'patrol-ship', x: 810, y: 20 }))
+    this.enemies.add(new PatrolShip({ scene: this, key: 'patrol-ship', x: 880, y: 20 }))
+    this.enemies.add(new PatrolShip({ scene: this, key: 'patrol-ship', x: 950, y: 20 }))
   }
 
   //I like the stepx and stepy in the setup below
