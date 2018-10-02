@@ -6,9 +6,11 @@ export default class DivebomberLaser extends Laser {
   }
 
   move() {
-    if(this.x <= 400) this.body.setVelocityX(50)
-    else this.body.setVelocityX(-50)
-    this.body.setVelocityY(400)
+    if(this.active) {
+      if(this.x <= 400) this.body.setVelocityX(50)
+      else this.body.setVelocityX(-50)
+      this.body.setVelocityY(400)
+    }
   }
 
   update() {
