@@ -4,9 +4,6 @@ import { Ship, PlayerLaser } from '../sprites'
 export default class Player extends Ship {
   constructor(config) {
     super(config)
-    // this.scene = config.scene
-    // this.scene.physics.world.enable(this)
-    // this.scene.add.existing(this)
     this.body.setCollideWorldBounds(true)
   }
   
