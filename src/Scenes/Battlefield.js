@@ -1,5 +1,5 @@
 import Phaser, { Scene } from 'phaser'
-import { Player, PatrolShip, Divebomber } from '../sprites'
+import { Player, PatrolShip, Divebomber, Chaser } from '../sprites'
 import { destroy, randomCoordinateX, randomCoordinateY } from './utils'
 
 export default class Battlefield extends Scene {
@@ -29,6 +29,10 @@ export default class Battlefield extends Scene {
     this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: 200, y: -140}))
   }
 
+  addChaser() {
+    this.enemies.add(new Chaser({ scene: this, key: 'chaser', x: 100, y: 600 }))
+  }
+
   preload() {
     this.load.image('player', './assets/playerShip1_green.png')
     this.load.image('player-laser', './assets/laserGreen03.png')
@@ -46,8 +50,9 @@ export default class Battlefield extends Scene {
     //Filling in Battlefield Properties
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     this.cursors = this.input.keyboard.createCursorKeys()
-    this.addPatrol()
-    this.addDivebombers()
+    // this.addPatrol()
+    // this.addDivebombers()
+    this.addChaser()
 
     // ***** Colliders *****
     this.addCollider(this.enemies, this.playerLasers, destroy)
