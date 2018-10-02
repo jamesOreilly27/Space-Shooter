@@ -3,7 +3,6 @@ export const destroy = (object1, object2) => {
   // object2.disableBody(true, true)
   object1.destroy()
   object2.destroy()
-  console.log(object1)
 }
 
 export const randomCoordinateX = () => ( Math.floor(Math.random() * 800) )
