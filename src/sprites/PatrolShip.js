@@ -6,31 +6,17 @@ export default class PatrolShip extends Ship {
     super(config)
   }
 
-  move(updateCount) {
+  move() {
     if(this.active) {
-      if(updateCount < 50) {
-        this.body.setVelocityX(-100)
-        this.body.setVelocityY(30)
-      }
-      else if(updateCount < 100) {
-        this.body.setVelocityX(30)
-        this.body.setVelocityY(100)
-      }
-      else if(updateCount < 150) {
-        this.body.setVelocityX(100)
-        this.body.setVelocityY(-30)
-      }
-      else {
-        this.body.setVelocityX(-30)
-        this.body.setVelocityY(-100)
-      }
+      if(this.x > 800) this.body.setVelocityX(-80)
+      else if(this.x < 10) this.body.setVelocityX(80)
     }
   }
 
   shoot(spriteString) {
     const laserRechargeCount = this.scene.updateCount
-    if(laserRechargeCount % 60 === 0 && this.active) {
-      this.scene.lasers.add(new PatrolShipLaser({ scene: this.scene, x: this.x, y: this.y + 80, key: spriteString }))
+    if(laserRechargeCount % 100 === 0 && this.active) {
+      this.scene.lasers.add(new PatrolShipLaser({ scene: this.scene, x: this.x, y: this.y + 40, key: spriteString }))
     }
   } 
 

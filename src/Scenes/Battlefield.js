@@ -13,7 +13,7 @@ export default class Battlefield extends Scene {
   }
 
   addEnemy() {
-    this.enemies.add(new PatrolShip({ scene: this, key: 'enemy', x: randomCoordinateX(), y: randomCoordinateY() }))
+    this.enemies.add(new PatrolShip({ scene: this, key: 'patrol-ship', x: 810, y: 20 }))
   }
 
   preload() {
@@ -29,7 +29,7 @@ export default class Battlefield extends Scene {
     //Filling in Battlefield Properties
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     this.cursors = this.input.keyboard.createCursorKeys()
-    this.enemies.add(new PatrolShip({ scene: this, key: 'patrol-ship', x: 700, y: 100 }))
+    this.addEnemy()
 
     //Colliders
     this.addCollider(this.enemies, this.lasers, destroy)
