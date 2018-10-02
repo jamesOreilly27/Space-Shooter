@@ -29,7 +29,7 @@ export default class Player extends Ship {
       spacebar.isDown && 
       ((laserRechargeCount % 20 === 0) || this.scene.time.now - spacebar.timeDown < 20)
     ) {
-      this.scene.lasers.add(new PlayerLaser({ scene: this.scene, x: this.x, y: this.y -80, key: spriteString }))
+      this.scene.playerLasers.add(new PlayerLaser({ scene: this.scene, x: this.x, y: this.y -40, key: spriteString }))
     }
   }
 

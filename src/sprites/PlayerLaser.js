@@ -7,6 +7,6 @@ export default class PlayerLaser extends Laser {
 
   update() {
     super.update()
-    if(this.active && !this.body.velocity.y) this.body.setVelocityY(-750)
+    if(this.active && !this.body.velocity.y) this.body.setVelocityY(-600)
   }
 }
