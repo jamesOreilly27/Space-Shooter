@@ -12,7 +12,7 @@ export default class Battlefield extends Scene {
     this.physics.add.collider(group1, group2, callback, null, this)
   }
 
-  addEnemy() {
+  addPatrol() {
     this.enemies.add(new PatrolShip({ scene: this, key: 'patrol-ship', x: 810, y: 20 }))
   }
 
