@@ -1,5 +1,5 @@
 import Phaser, { Scene } from 'phaser'
-import { Player, PatrolShip } from '../sprites'
+import { Player, PatrolShip, Divebomber } from '../sprites'
 import { destroy, randomCoordinateX, randomCoordinateY } from './utils'
 
 export default class Battlefield extends Scene {
@@ -12,8 +12,15 @@ export default class Battlefield extends Scene {
     this.physics.add.collider(group1, group2, callback, null, this)
   }
 
+  //Add Enemy Functions
+  //All functions for adding enemies are currently for testing purposes
+  //Once all enemy classes are completed I will focus on exactly how/where/when I want them to appear
   addPatrol() {
     this.enemies.add(new PatrolShip({ scene: this, key: 'patrol-ship', x: 810, y: 20 }))
+  }
+
+  addDivebomber() {
+    this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: 700, y: -10}))
   }
 
   preload() {
@@ -32,8 +39,9 @@ export default class Battlefield extends Scene {
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     this.cursors = this.input.keyboard.createCursorKeys()
     this.addPatrol()
+    this.addDivebomber()
 
-    //Colliders
+    // ***** Colliders *****
     this.addCollider(this.enemies, this.playerLasers, destroy)
     this.addCollider(this.player, this.enemies, destroy)
     this.addCollider(this.player, this.enemyLasers, destroy)

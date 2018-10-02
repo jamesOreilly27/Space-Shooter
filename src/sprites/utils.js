@@ -1,5 +1,5 @@
 export const killOffScreen = sprite => {
-  if(sprite.y >= 610 || sprite.y <= -10 || sprite.x >= 810 || sprite.x <= -10) {
+  if(sprite.y >= 630 || sprite.y <= -30 || sprite.x >= 830 || sprite.x <= -30) {
     sprite.destroy()
   }
 }
