@@ -5,11 +5,12 @@ export default class Divebomber extends Ship {
   constructor(config) {
     super(config)
     this.shot = false
+    this.left = this.x <=400
   }
 
   move() {
     if(this.active) {
-      if(this.x <= 400) this.body.setVelocityX(50)
+      if(this.left) this.body.setVelocityX(50)
       else this.body.setVelocityX(-50)
       this.body.setVelocityY(250)
     }
