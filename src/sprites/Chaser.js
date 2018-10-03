@@ -14,10 +14,6 @@ export default class Chaser extends Ship {
     }
   }
 
-  shoot() {
-
-  }
-
   update() {
     super.update()
     this.move()
