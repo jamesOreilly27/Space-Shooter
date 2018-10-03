@@ -24,13 +24,21 @@ export default class Battlefield extends Scene {
   //I like the stepx and stepy in the setup below
   //TODO create a function that builds waves of divebombers in this sequence
   addDivebombers() {
-    this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: 100, y: -20}))
-    this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: 150, y: -80}))
-    this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: 200, y: -140}))
+    const randomStart = randomCoordinateX()
+    this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: randomStart, y: -20}))
+    this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: randomStart + 50, y: -80}))
+    this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: randomStart + 100, y: -140}))
   }
 
   addChaser() {
-    this.enemies.add(new Chaser({ scene: this, key: 'chaser', x: 100, y: 600 }))
+    this.enemies.add(new Chaser({ scene: this, key: 'chaser', x: this.player.x, y: 600 }))
+  }
+
+  addEnemies() {
+    const randomNum = Math.floor(Math.random() * 3)
+    if(randomNum === 0) this.addPatrol()
+    else if(randomNum === 1) this.addDivebombers()
+    else this.addChaser()
   }
 
   preload() {
@@ -50,8 +58,8 @@ export default class Battlefield extends Scene {
     //Filling in Battlefield Properties
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     this.cursors = this.input.keyboard.createCursorKeys()
-    // this.addPatrol()
-    // this.addDivebombers()
+    this.addPatrol()
+    this.addDivebombers()
     this.addChaser()
 
     // ***** Colliders *****
@@ -66,6 +74,7 @@ export default class Battlefield extends Scene {
     this.enemies.children.entries.forEach(enemy => { enemy.update() })
     this.playerLasers.children.entries.forEach(laser => { laser.update() })
     this.enemyLasers.children.entries.forEach(laser => { laser.update() })
+    if(this.updateCount % 199 === 0) this.addEnemies()
     if(this.updateCount >= 200) this.updateCount = 0
   }
 }
