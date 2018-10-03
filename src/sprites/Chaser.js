@@ -9,7 +9,9 @@ export default class Chaser extends Ship {
   }
 
   move() {
-
+    if(this.active) {
+      this.scene.physics.moveTo(this, this.scene.player.x, this.scene.player.y, 150)
+    }
   }
 
   shoot() {
@@ -18,5 +20,6 @@ export default class Chaser extends Ship {
 
   update() {
     super.update()
+    this.move()
   }
 }
