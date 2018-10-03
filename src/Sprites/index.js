@@ -3,6 +3,7 @@ export { default as Ship } from './Ship'
 export { default as Player } from './Player'
 export { default as PatrolShip } from './PatrolShip'
 export { default as Divebomber } from './Divebomber'
+export { default as Chaser } from './Chaser'
 
 //Lasers
 export { default as Laser } from './Laser'
