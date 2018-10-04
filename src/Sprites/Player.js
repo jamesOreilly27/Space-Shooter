@@ -13,7 +13,12 @@ export default class Player extends Ship {
     else if(this.shieldLevel === 1) return 'silver-shield'
     else return 'gold-shield'
   }
-  
+   
+  hasShield() {
+     if(this.shieldLevel > 0) return true
+     return false
+  }
+
   move() {
     if(this.scene.cursors.left.isDown) this.body.setVelocityX(-250)
     else if(this.scene.cursors.right.isDown) this.body.setVelocityX(250)
