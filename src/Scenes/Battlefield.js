@@ -1,5 +1,5 @@
 import Phaser, { Scene } from 'phaser'
-import { Player, PatrolShip, Divebomber, Chaser } from '../sprites'
+import { Player, PatrolShip, Divebomber, Chaser, ShieldPowerup } from '../sprites'
 import { destroy, randomCoordinateX, randomCoordinateY } from './utils'
 
 export default class Battlefield extends Scene {
@@ -65,12 +65,14 @@ export default class Battlefield extends Scene {
     this.playerLasers = this.physics.add.group()
     this.enemyLasers = this.physics.add.group()
     this.enemies = this.physics.add.group()
+    this.powerups = this.physics.add.group()
   }
 
   create() {
     //Filling in Battlefield Properties
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     this.cursors = this.input.keyboard.createCursorKeys()
+    this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: 'bronze-shield'}))
     // this.addPatrol()
     // this.addDivebombers()
     // this.addChaser()

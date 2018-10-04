@@ -6,6 +6,8 @@ export default class Powerup extends Phaser.GameObjects.Sprite {
     this.scene = config.scene
     this.scene.physics.world.enable(this)
     this.scene.add.existing(this)
+    this.scaleX = .75
+    this.scaleY = .75
   }
 
   update() {
