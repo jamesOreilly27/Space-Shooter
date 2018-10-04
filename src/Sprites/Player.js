@@ -4,6 +4,7 @@ import { Ship, PlayerLaser } from '../sprites'
 export default class Player extends Ship {
   constructor(config) {
     super(config)
+    this.shieldLevel = 0
     this.body.setCollideWorldBounds(true)
   }
   
