@@ -62,8 +62,8 @@ export default class Battlefield extends Scene {
     this.load.image('silver-shield', './assets/shield_silver.png')
     this.load.image('gold-shield', './assets/shield_gold.png')
     this.load.image('shield1', './assets/shield1.png')
-    this.load.image('shield1', './assets/shield2.png')
-    this.load.image('shield1', './assets/shield3.png')
+    this.load.image('shield2', './assets/shield2.png')
+    this.load.image('shield3', './assets/shield3.png')
 
     this.playerLasers = this.physics.add.group()
     this.enemyLasers = this.physics.add.group()
@@ -96,7 +96,7 @@ export default class Battlefield extends Scene {
     this.enemyLasers.children.entries.forEach(laser => { laser.update() })
     this.shields.children.entries.forEach(shield => { shield.update() })
     // if(this.updateCount % 199 === 0) this.addEnemies()
-    // if(this.updateCount % 199 === 0) this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: this.player.getShieldPowerupSprite() }))
+    if(this.updateCount % 199 === 0) this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: this.player.getShieldPowerupSprite() }))
     if(this.updateCount >= 200) this.updateCount = 0
   }
 }

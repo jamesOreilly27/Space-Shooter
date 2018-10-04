@@ -22,7 +22,7 @@ export default class Player extends Ship {
   getShieldSprite() {
     if(this.shieldLevel === 1) return 'shield1'
     else if(this.shieldLevel === 2) return 'shield2'
-    else if(this.shieldLebel === 3) return 'shield3'
+    else if(this.shieldLevel === 3) return 'shield3'
   }
 
   move() {
