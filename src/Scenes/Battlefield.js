@@ -69,6 +69,7 @@ export default class Battlefield extends Scene {
     this.enemyLasers = this.physics.add.group()
     this.enemies = this.physics.add.group()
     this.powerups = this.physics.add.group()
+    this.shields = this.physics.add.group()
   }
 
   create() {
@@ -93,8 +94,9 @@ export default class Battlefield extends Scene {
     this.enemies.children.entries.forEach(enemy => { enemy.update() })
     this.playerLasers.children.entries.forEach(laser => { laser.update() })
     this.enemyLasers.children.entries.forEach(laser => { laser.update() })
+    this.shields.children.entries.forEach(shield => { shield.update() })
     // if(this.updateCount % 199 === 0) this.addEnemies()
-    if(this.updateCount % 199 === 0) this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: this.player.getShieldPowerupSprite() }))
+    // if(this.updateCount % 199 === 0) this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: this.player.getShieldPowerupSprite() }))
     if(this.updateCount >= 200) this.updateCount = 0
   }
 }

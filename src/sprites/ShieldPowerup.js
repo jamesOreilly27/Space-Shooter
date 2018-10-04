@@ -1,4 +1,4 @@
-import { Powerup } from '../sprites'
+import { Powerup, Shield } from '../sprites'
 
 export default class ShieldPowerup extends Powerup {
   constructor(config) {
@@ -6,6 +6,8 @@ export default class ShieldPowerup extends Powerup {
   }
 
   handleCollision() {
-    this.scene.player.shieldLevel++
+    const player = this.scene.player
+    player.shieldLevel++
+    this.scene.shields.add(new Shield({scene: this.scene, x: player.x, y: player.y, key: player.getShieldSprite() }))
   }
 }
