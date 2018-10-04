@@ -6,6 +6,8 @@ export default class Shield extends Phaser.GameObjects.Sprite {
     this.scene = config.scene
     this.scene.physics.world.enable(this)
     this.scene.add.existing(this)
+    this.scaleX = .7
+    this.scaleY = .7
   }
 
   move() {
