@@ -7,6 +7,12 @@ export default class Player extends Ship {
     this.shieldLevel = 0
     this.body.setCollideWorldBounds(true)
   }
+
+  getShieldPowerupSprite() {
+    if(this.shieldLevel === 0) return 'bronze-shield'
+    else if(this.shieldLevel === 1) return 'silver-shield'
+    else return 'gold-shield'
+  }
   
   move() {
     if(this.scene.cursors.left.isDown) this.body.setVelocityX(-250)
