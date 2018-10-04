@@ -1,6 +1,6 @@
 import Phaser, { Scene } from 'phaser'
 import { Player, PatrolShip, Divebomber, Chaser, ShieldPowerup } from '../sprites'
-import { destroy, randomCoordinateX, randomCoordinateY } from './utils'
+import { destroy, randomCoordinateX, randomCoordinateY, powerup } from './utils'
 
 export default class Battlefield extends Scene {
   constructor() {
@@ -81,6 +81,7 @@ export default class Battlefield extends Scene {
     this.addCollider(this.enemies, this.playerLasers, destroy)
     this.addCollider(this.player, this.enemies, destroy)
     this.addCollider(this.player, this.enemyLasers, destroy)
+    this.addCollider(this.player, this.powerups, powerup)
   }
 
   update() {
