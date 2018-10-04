@@ -14,3 +14,4 @@ export { default as DivebomberLaser } from './DivebomberLaser'
 //Powerups
 export { default as Powerup } from './Powerup'
 export { default as ShieldPowerup } from './ShieldPowerup'
+export { default as Shield } from './Shield'
