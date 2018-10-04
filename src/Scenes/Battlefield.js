@@ -72,7 +72,7 @@ export default class Battlefield extends Scene {
     //Filling in Battlefield Properties
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     this.cursors = this.input.keyboard.createCursorKeys()
-    this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: 'bronze-shield'}))
+    this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: this.player.getShieldPowerupSprite() }))
     // this.addPatrol()
     // this.addDivebombers()
     // this.addChaser()
@@ -83,7 +83,7 @@ export default class Battlefield extends Scene {
     this.addCollider(this.player, this.enemyLasers, destroy)
     this.addCollider(this.player, this.powerups, powerup)
   }
-
+  
   update() {
     this.updateCount++
     this.player.update()
@@ -91,6 +91,7 @@ export default class Battlefield extends Scene {
     this.playerLasers.children.entries.forEach(laser => { laser.update() })
     this.enemyLasers.children.entries.forEach(laser => { laser.update() })
     // if(this.updateCount % 199 === 0) this.addEnemies()
+    if(this.updateCount % 199 === 0) this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: this.player.getShieldPowerupSprite() }))
     if(this.updateCount >= 200) this.updateCount = 0
   }
 }

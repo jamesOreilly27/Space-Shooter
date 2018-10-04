@@ -6,6 +6,6 @@ export default class ShieldPowerup extends Powerup {
   }
 
   handleCollision() {
-    console.log('TESTING')
+    this.scene.player.shieldLevel++
   }
 }
