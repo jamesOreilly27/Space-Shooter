@@ -4,9 +4,27 @@ import { Ship, PlayerLaser } from '../sprites'
 export default class Player extends Ship {
   constructor(config) {
     super(config)
+    this.shieldLevel = 0
     this.body.setCollideWorldBounds(true)
   }
-  
+
+  getShieldPowerupSprite() {
+    if(this.shieldLevel === 0) return 'bronze-shield'
+    else if(this.shieldLevel === 1) return 'silver-shield'
+    else return 'gold-shield'
+  }
+   
+  hasShield() {
+     if(this.shieldLevel > 0) return true
+     return false
+  }
+
+  getShieldSprite() {
+    if(this.shieldLevel === 1) return 'shield1'
+    else if(this.shieldLevel === 2) return 'shield2'
+    else if(this.shieldLevel === 3) return 'shield3'
+  }
+
   move() {
     if(this.scene.cursors.left.isDown) this.body.setVelocityX(-250)
     else if(this.scene.cursors.right.isDown) this.body.setVelocityX(250)
