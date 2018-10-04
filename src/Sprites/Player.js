@@ -19,6 +19,12 @@ export default class Player extends Ship {
      return false
   }
 
+  getShieldSprite() {
+    if(this.shieldLevel === 1) return 'shield1'
+    else if(this.shieldLevel === 2) return 'shield2'
+    else if(this.shieldLebel === 3) return 'shield3'
+  }
+
   move() {
     if(this.scene.cursors.left.isDown) this.body.setVelocityX(-250)
     else if(this.scene.cursors.right.isDown) this.body.setVelocityX(250)
