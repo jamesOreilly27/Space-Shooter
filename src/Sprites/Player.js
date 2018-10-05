@@ -26,7 +26,7 @@ export default class Player extends Ship {
   }
 
   createShield(shieldStr) {
-    return new Shield({ scene: this.scene, x: this.x, y: this.y, key: shieldStr })
+    this.scene.shields.add(new Shield({ scene: this.scene, x: this.x, y: this.y, key: shieldStr }))
   }
 
   move() {
@@ -51,6 +51,7 @@ export default class Player extends Ship {
   }
 
   updateShield() {
+    console.log(this.scene.shields)
     if(this.scene.shields.children.entries.length === 0) {
       this.createShield(this.getShieldSprite())
     }

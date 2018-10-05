@@ -3,6 +3,11 @@ export const destroy = (object1, object2) => {
   object2.destroy()
 }
 
+export const shieldBlock = (enemy, shield) => {
+  shield.handleCollision()
+  destroy(enemy, shield)
+}
+
 export const randomCoordinateX = () => ( Math.floor(Math.random() * 800) )
 
 export const randomCoordinateY = () => ( Math.floor(Math.random() * 300) )

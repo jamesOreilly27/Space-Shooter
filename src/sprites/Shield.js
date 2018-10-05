@@ -13,7 +13,6 @@ export default class Shield extends Phaser.GameObjects.Sprite {
   move() {
     //first if statement will check if the shield has hit the left or right side of the game area
     if(this.x > 41.6 && this.x < 760) {
-      console.log(this.y)
       if(this.scene.cursors.left.isDown) this.body.setVelocityX(-250)
       else if(this.scene.cursors.right.isDown) this.body.setVelocityX(250)
       else this.body.setVelocityX(0)
@@ -44,7 +43,7 @@ export default class Shield extends Phaser.GameObjects.Sprite {
   }
 
   handleCollision() {
-
+    this.scene.player.shieldLevel--
   }
 
   update() {
