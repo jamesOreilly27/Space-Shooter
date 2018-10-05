@@ -11,9 +11,21 @@ export default class Shield extends Phaser.GameObjects.Sprite {
   }
 
   move() {
-    if(this.scene.cursors.left.isDown) this.body.setVelocityX(-250)
-    else if(this.scene.cursors.right.isDown) this.body.setVelocityX(250)
-    else this.body.setVelocityX(0)
+    //first if statement will check if the shield has hit the left or right side of the screen
+    if(this.x > 41.6 && this.x < 760) {
+      console.log(this.x)
+      if(this.scene.cursors.left.isDown) this.body.setVelocityX(-250)
+      else if(this.scene.cursors.right.isDown) this.body.setVelocityX(250)
+      else this.body.setVelocityX(0)
+    } 
+    else if(this.x > 41.6 && this.x >= 760) {
+      if(this.scene.cursors.left.isDown) this.body.setVelocityX(-250)
+      else this.body.setVelocityX(0)
+    } 
+    else if(this.x <= 41.6 && this.x < 760) {
+      if(this.scene.cursors.right.isDown) this.body.setVelocityX(250)
+      else this.body.setVelocityX(0)
+    }
   
     if(this.scene.cursors.down.isDown) this.body.setVelocityY(250)
     else if(this.scene.cursors.up.isDown) this.body.setVelocityY(-250)
@@ -26,5 +38,6 @@ export default class Shield extends Phaser.GameObjects.Sprite {
 
   update() {
     this.move()
+    // if(!this.body.collideWorldBounds) this.body.setCollideWorldBounds(true)
   }
 }

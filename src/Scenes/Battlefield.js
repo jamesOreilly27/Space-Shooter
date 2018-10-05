@@ -86,6 +86,7 @@ export default class Battlefield extends Scene {
     this.addCollider(this.player, this.enemies, destroy)
     this.addCollider(this.player, this.enemyLasers, destroy)
     this.addCollider(this.player, this.powerups, powerup)
+    this.addCollider(this.enemies, this.shield, )
   }
   
   update() {
