@@ -11,9 +11,9 @@ export default class Shield extends Phaser.GameObjects.Sprite {
   }
 
   move() {
-    //first if statement will check if the shield has hit the left or right side of the screen
+    //first if statement will check if the shield has hit the left or right side of the game area
     if(this.x > 41.6 && this.x < 760) {
-      console.log(this.x)
+      console.log(this.y)
       if(this.scene.cursors.left.isDown) this.body.setVelocityX(-250)
       else if(this.scene.cursors.right.isDown) this.body.setVelocityX(250)
       else this.body.setVelocityX(0)
@@ -27,9 +27,20 @@ export default class Shield extends Phaser.GameObjects.Sprite {
       else this.body.setVelocityX(0)
     }
   
-    if(this.scene.cursors.down.isDown) this.body.setVelocityY(250)
-    else if(this.scene.cursors.up.isDown) this.body.setVelocityY(-250)
-    else this.body.setVelocityY(0)
+    //this if statement will test if the shield has hit the top or the bottom of the game area
+    if(this.y > 29.16 && this.y < 568.2) {
+      if(this.scene.cursors.down.isDown) this.body.setVelocityY(250)
+      else if(this.scene.cursors.up.isDown) this.body.setVelocityY(-250)
+      else this.body.setVelocityY(0)
+    }
+    else if(this.y > 29.16 && this.y >= 568.2) {
+      if(this.scene.cursors.up.isDown) this.body.setVelocityY(-250)
+      else this.body.setVelocityY(0)
+    }
+    else if(this.y <= 29.16 && this.y < 568.2) {
+      if(this.scene.cursors.down.isDown) this.body.setVelocityY(250)
+      else this.body.setVelocityY(0)
+    }
   }
 
   handleCollision() {
