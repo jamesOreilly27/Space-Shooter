@@ -51,17 +51,16 @@ export default class Player extends Ship {
   }
 
   updateShield() {
-    console.log(this.scene.shields)
-    if(this.scene.shields.children.entries.length === 0) {
-      this.createShield(this.getShieldSprite())
-    }
+    this.createShield(this.getShieldSprite())
   }
 
   update() {
     if(this.active) {
       this.move(this.scene.cursors) 
       this.shoot()
-      this.updateShield()
+      if(this.scene.shields.children.entries.length === 0) {
+        this.updateShield()
+      }
     }
   }
 }
