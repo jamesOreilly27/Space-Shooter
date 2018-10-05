@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import { Ship, PlayerLaser } from '../sprites'
+import { Ship, PlayerLaser, Shield } from '../sprites'
 
 export default class Player extends Ship {
   constructor(config) {
@@ -25,6 +25,10 @@ export default class Player extends Ship {
     else if(this.shieldLevel === 3) return 'shield3'
   }
 
+  createShield(shieldStr) {
+    return new Shield({ scene: this.scene, x: this.x, y: this.y, key: shieldStr })
+  }
+
   move() {
     if(this.scene.cursors.left.isDown) this.body.setVelocityX(-250)
     else if(this.scene.cursors.right.isDown) this.body.setVelocityX(250)
@@ -46,10 +50,17 @@ export default class Player extends Ship {
     }
   }
 
+  updateShield() {
+    if(this.scene.shields.children.entries.length === 0) {
+      this.createShield(this.getShieldSprite())
+    }
+  }
+
   update() {
     if(this.active) {
       this.move(this.scene.cursors) 
       this.shoot()
+      this.updateShield()
     }
   }
 }
