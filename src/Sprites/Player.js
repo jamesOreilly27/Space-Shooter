@@ -13,11 +13,6 @@ export default class Player extends Ship {
     else if(this.shieldLevel === 1) return 'silver-shield'
     else return 'gold-shield'
   }
-   
-  hasShield() {
-     if(this.shieldLevel > 0) return true
-     return false
-  }
 
   getShieldSprite() {
     if(this.shieldLevel === 1) return 'shield1'
