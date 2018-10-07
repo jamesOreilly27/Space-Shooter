@@ -1,6 +1,6 @@
 import Phaser, { Scene } from 'phaser'
-import { Player, PatrolShip, Divebomber, Chaser, ShieldPowerup } from '../sprites'
-import { destroy, randomCoordinateX, randomCoordinateY, powerup, shieldBlock } from './utils'
+import { Player, PatrolShip, Divebomber, Chaser, ShieldPowerup, LaserPowerup } from '../sprites'
+import { destroy, randomCoordinateX, randomCoordinateY, powerup, shieldBlock, laserCollision } from './utils'
 
 export default class Battlefield extends Scene {
   constructor() {
@@ -45,6 +45,7 @@ export default class Battlefield extends Scene {
     // *************** player ***************
     this.load.image('player', './assets/playerShip1_green.png')
     this.load.image('player-laser', './assets/laserGreen03.png')
+    this.load.image('player-laser2', './assets/LaserGreen10.png')
 
     // *************** patrol ship ***************
     this.load.image('patrol-ship-laser', './assets/laserRed10.png')
@@ -65,6 +66,9 @@ export default class Battlefield extends Scene {
     this.load.image('shield2', './assets/shield2.png')
     this.load.image('shield3', './assets/shield3.png')
 
+    // *************** laser power up ***************
+    this.load.image('gun-upgrade', './assets/gun10.png')
+
     this.playerLasers = this.physics.add.group()
     this.enemyLasers = this.physics.add.group()
     this.enemies = this.physics.add.group()
@@ -77,9 +81,10 @@ export default class Battlefield extends Scene {
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     this.cursors = this.input.keyboard.createCursorKeys()
     this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: this.player.getShieldPowerupSprite() }))
-    // this.addPatrol()
-    // this.addDivebombers()
-    // this.addChaser()
+    this.powerups.add(new LaserPowerup({ scene: this, x: 200, y: 300, key: 'gun-upgrade' }))
+    this.addPatrol()
+    this.addDivebombers()
+    this.addChaser()
 
     // ***** Colliders *****
     this.addCollider(this.enemies, this.playerLasers, destroy)
@@ -88,17 +93,21 @@ export default class Battlefield extends Scene {
     this.addCollider(this.player, this.powerups, powerup)
     this.addCollider(this.enemies, this.shields, shieldBlock)
     this.addCollider(this.enemyLasers, this.shields, shieldBlock)
+    this.addCollider(this.player, this.powerups, powerup)
   }
   
   update() {
     this.updateCount++
     this.player.update()
+    this.physics.add.collider(this.playerLasers, this.enemyLasers, laserCollision, this.player.isLaserMaxed, this)
     this.enemies.children.entries.forEach(enemy => { enemy.update() })
     this.playerLasers.children.entries.forEach(laser => { laser.update() })
     this.enemyLasers.children.entries.forEach(laser => { laser.update() })
     this.shields.children.entries.forEach(shield => { shield.update() })
-    // if(this.updateCount % 199 === 0) this.addEnemies()
+    if(this.updateCount % 199 === 0) this.powerups.add(new LaserPowerup({ scene: this, x: 200, y: 300, key: 'gun-upgrade' }))
+    if(this.updateCount % 199 === 0) this.addEnemies()
     if(this.updateCount % 199 === 0) this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: this.player.getShieldPowerupSprite() }))
+    console.log(this.player.isLaserMaxed())
     if(this.updateCount >= 200) this.updateCount = 0
   }
 }

@@ -8,6 +8,11 @@ export const shieldBlock = (enemy, shield) => {
   destroy(enemy, shield)
 }
 
+export const laserCollision = (playerLaser, enemyLaser) => {
+  enemyLaser.destroy()
+  playerLaser.body.setVelocityY(-600)
+}
+
 export const randomCoordinateX = () => ( Math.floor(Math.random() * 800) )
 
 export const randomCoordinateY = () => ( Math.floor(Math.random() * 300) )
