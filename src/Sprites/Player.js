@@ -56,7 +56,7 @@ export default class Player extends Ship {
 
   update() {
     if(this.active) {
-      this.move(this.scene.cursors) 
+      this.move() 
       this.shoot()
       if(this.scene.shields.children.entries.length === 0) {
         this.updateShield()
