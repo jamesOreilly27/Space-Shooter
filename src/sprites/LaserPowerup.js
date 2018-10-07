@@ -7,6 +7,6 @@ export default class LaserPowerup extends Powerup {
   }
 
   handleCollision() {
-    
+    if(this.scene.player.laserLevel < 3) this.scene.player.laserLevel++
   }
 }
