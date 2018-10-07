@@ -65,6 +65,9 @@ export default class Battlefield extends Scene {
     this.load.image('shield2', './assets/shield2.png')
     this.load.image('shield3', './assets/shield3.png')
 
+    // *************** laser power up ***************
+    this.load.image('gun-upgrade', './assets/gun10.png')
+
     this.playerLasers = this.physics.add.group()
     this.enemyLasers = this.physics.add.group()
     this.enemies = this.physics.add.group()
