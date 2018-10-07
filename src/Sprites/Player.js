@@ -21,6 +21,12 @@ export default class Player extends Ship {
     else if(this.shieldLevel === 3) return 'shield3'
   }
 
+  getLaserSprite() {
+    if(this.laserLevel === 1) return 'player-laser'
+    else if(this.laserLevel === 2) return 'player-laser2'
+    else if(this.laserLevel === 3) return 'player-laser3'
+  }
+
   createShield(shieldStr) {
     this.scene.shields.add(new Shield({ scene: this.scene, x: this.x, y: this.y, key: shieldStr }))
   }
@@ -38,11 +44,9 @@ export default class Player extends Ship {
   shoot() {
     const spacebar = this.scene.cursors.space
     const laserRechargeCount = this.scene.updateCount
-    if(
-      spacebar.isDown && 
-      ((laserRechargeCount % 20 === 0) || this.scene.time.now - spacebar.timeDown < 20)
-    ) {
-      this.scene.playerLasers.add(new PlayerLaser({ scene: this.scene, x: this.x, y: this.y -40, key: 'player-laser' }))
+    if(spacebar.isDown && 
+      ((laserRechargeCount % 20 === 0) || this.scene.time.now - spacebar.timeDown < 20)) {
+        this.scene.playerLasers.add(new PlayerLaser({ scene: this.scene, x: this.x, y: this.y -40, key: 'player-laser' }))
     }
   }
 
