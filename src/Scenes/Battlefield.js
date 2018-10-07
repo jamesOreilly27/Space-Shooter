@@ -94,12 +94,12 @@ export default class Battlefield extends Scene {
     this.addCollider(this.enemies, this.shields, shieldBlock)
     this.addCollider(this.enemyLasers, this.shields, shieldBlock)
     this.addCollider(this.player, this.powerups, powerup)
-    this.addCollider(this.playerLasers, this.enemyLasers, laserCollision)
   }
   
   update() {
     this.updateCount++
     this.player.update()
+    this.physics.add.collider(this.playerLasers, this.enemyLasers, laserCollision, this.player.isLaserMaxed, this)
     this.enemies.children.entries.forEach(enemy => { enemy.update() })
     this.playerLasers.children.entries.forEach(laser => { laser.update() })
     this.enemyLasers.children.entries.forEach(laser => { laser.update() })
@@ -107,6 +107,7 @@ export default class Battlefield extends Scene {
     if(this.updateCount % 199 === 0) this.powerups.add(new LaserPowerup({ scene: this, x: 200, y: 300, key: 'gun-upgrade' }))
     if(this.updateCount % 199 === 0) this.addEnemies()
     if(this.updateCount % 199 === 0) this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: this.player.getShieldPowerupSprite() }))
+    console.log(this.player.isLaserMaxed())
     if(this.updateCount >= 200) this.updateCount = 0
   }
 }

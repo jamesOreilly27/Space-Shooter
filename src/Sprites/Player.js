@@ -30,6 +30,11 @@ export default class Player extends Ship {
     this.scene.shields.add(new Shield({ scene: this.scene, x: this.x, y: this.y, key: shieldStr }))
   }
 
+  isLaserMaxed() {
+    return true
+    return this.laserLevel === 3
+  }
+
   move() {
     if(this.scene.cursors.left.isDown) this.body.setVelocityX(-250)
     else if(this.scene.cursors.right.isDown) this.body.setVelocityX(250)
