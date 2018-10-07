@@ -5,6 +5,7 @@ export default class Player extends Ship {
   constructor(config) {
     super(config)
     this.shieldLevel = 0
+    this.laserLevel = 1
     this.body.setCollideWorldBounds(true)
   }
 
