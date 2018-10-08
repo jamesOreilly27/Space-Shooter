@@ -9,7 +9,7 @@ export default class Battlefield extends Scene {
   }
 
   addCollider(group1, group2, callback) {
-    this.physics.add.collider(group1, group2, callback, null, this)
+    return this.physics.add.collider(group1, group2, callback, null, this)
   }
 
   //Add Enemy Functions
@@ -21,10 +21,10 @@ export default class Battlefield extends Scene {
     this.enemies.add(new PatrolShip({ scene: this, key: 'patrol-ship', x: 950, y: 20 }))
   }
 
-  //I like the stepx and stepy in the setup below
   //TODO create a function that builds waves of divebombers in this sequence
   addDivebombers() {
     const randomStart = randomCoordinateX()
+    //I like the stepx and stepy in the setup below
     this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: randomStart, y: -20}))
     this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: randomStart + 50, y: -80}))
     this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: randomStart + 100, y: -140}))
@@ -80,6 +80,8 @@ export default class Battlefield extends Scene {
     //Filling in Battlefield Properties
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     this.cursors = this.input.keyboard.createCursorKeys()
+    this.laserCollide = this.addCollider(this.playerLasers, this.enemyLasers, laserCollision)
+    this.laserCollide.active = false;
     this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: this.player.getShieldPowerupSprite() }))
     this.powerups.add(new LaserPowerup({ scene: this, x: 200, y: 300, key: 'gun-upgrade' }))
     this.addPatrol()
@@ -99,7 +101,6 @@ export default class Battlefield extends Scene {
   update() {
     this.updateCount++
     this.player.update()
-    this.physics.add.collider(this.playerLasers, this.enemyLasers, laserCollision, this.player.isLaserMaxed, this)
     this.enemies.children.entries.forEach(enemy => { enemy.update() })
     this.playerLasers.children.entries.forEach(laser => { laser.update() })
     this.enemyLasers.children.entries.forEach(laser => { laser.update() })
@@ -107,7 +108,6 @@ export default class Battlefield extends Scene {
     if(this.updateCount % 199 === 0) this.powerups.add(new LaserPowerup({ scene: this, x: 200, y: 300, key: 'gun-upgrade' }))
     if(this.updateCount % 199 === 0) this.addEnemies()
     if(this.updateCount % 199 === 0) this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: this.player.getShieldPowerupSprite() }))
-    console.log(this.player.isLaserMaxed())
     if(this.updateCount >= 200) this.updateCount = 0
   }
 }
