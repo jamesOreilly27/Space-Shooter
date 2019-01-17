@@ -1,5 +1,5 @@
 import Phaser, { Scene } from 'phaser'
-import { Player, PatrolShip, Divebomber, Chaser, ShieldPowerup, LaserPowerup } from '../sprites'
+import { Player, PatrolShip, Divebomber, Chaser, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
 import { destroy, randomCoordinateX, randomCoordinateY, powerup, shieldBlock, laserCollision } from './utils'
 
 export default class Battlefield extends Scene {
@@ -78,6 +78,7 @@ export default class Battlefield extends Scene {
     this.enemies = this.physics.add.group()
     this.powerups = this.physics.add.group()
     this.shields = this.physics.add.group()
+    this.meteors = this.physics.add.group()
   }
 
   create() {
@@ -86,8 +87,9 @@ export default class Battlefield extends Scene {
     this.cursors = this.input.keyboard.createCursorKeys()
     this.laserCollide = this.addCollider(this.playerLasers, this.enemyLasers, laserCollision)
     this.laserCollide.active = false;
-    this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: this.player.getShieldPowerupSprite() }))
-    this.powerups.add(new LaserPowerup({ scene: this, x: 200, y: 300, key: 'gun-upgrade' }))
+    this.meteors.add(new Meteor({ scene: this, x: 400, y: 300, key: 'big-meteor'}))
+    // this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: this.player.getShieldPowerupSprite() }))
+    // this.powerups.add(new LaserPowerup({ scene: this, x: 200, y: 300, key: 'gun-upgrade' }))
     this.addPatrol()
     this.addDivebombers()
     this.addChaser()
