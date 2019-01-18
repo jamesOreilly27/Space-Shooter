@@ -72,6 +72,8 @@ export default class Battlefield extends Scene {
     // *************** Meteors **********************
     this.load.image('big-meteor', './assets/meteorBrown_big1.png')
     this.load.image('med-meteor', './assets/meteorBrown_med3.png')
+    this.load.image('meteor-piece', './assests/meteorBrown_tiny1.png')
+    this.load.image('sm-meteor', './assets/meteorBrown_small1.png')
 
     this.playerLasers = this.physics.add.group()
     this.enemyLasers = this.physics.add.group()
@@ -87,7 +89,7 @@ export default class Battlefield extends Scene {
     this.cursors = this.input.keyboard.createCursorKeys()
     this.laserCollide = this.addCollider(this.playerLasers, this.enemyLasers, laserCollision)
     this.laserCollide.active = false;
-    this.meteors.add(new Meteor({ scene: this, x: 400, y: 300, key: 'big-meteor'}))
+    this.meteors.add(new Meteor({ scene: this, x: 400, y: 300, key: 'med-meteor'}))
     // this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: this.player.getShieldPowerupSprite() }))
     // this.powerups.add(new LaserPowerup({ scene: this, x: 200, y: 300, key: 'gun-upgrade' }))
     this.addPatrol()
