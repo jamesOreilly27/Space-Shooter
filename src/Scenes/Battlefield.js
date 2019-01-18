@@ -1,6 +1,6 @@
 import Phaser, { Scene } from 'phaser'
 import { Player, PatrolShip, Divebomber, Chaser, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
-import { destroy, randomCoordinateX, randomCoordinateY, powerup, shieldBlock, laserCollision } from './utils'
+import { destroy, randomCoordinateX, randomCoordinateY, powerup, shieldBlock, laserCollision, meteorDestroy } from './utils'
 
 export default class Battlefield extends Scene {
   constructor() {
@@ -102,6 +102,7 @@ export default class Battlefield extends Scene {
     this.addCollider(this.enemies, this.shields, shieldBlock)
     this.addCollider(this.enemyLasers, this.shields, shieldBlock)
     this.addCollider(this.player, this.powerups, powerup)
+    this.addCollider(this.playerLasers, this.meteors, meteorDestroy)
   }
   
   update() {
@@ -111,9 +112,10 @@ export default class Battlefield extends Scene {
     this.playerLasers.children.entries.forEach(laser => { laser.update() })
     this.enemyLasers.children.entries.forEach(laser => { laser.update() })
     this.shields.children.entries.forEach(shield => { shield.update() })
-    if(this.updateCount % 199 === 0) this.powerups.add(new LaserPowerup({ scene: this, x: 200, y: 300, key: 'gun-upgrade' }))
+    this.meteors.children.entries.forEach(meteor => { meteor.update() })
+    // if(this.updateCount % 199 === 0) this.powerups.add(new LaserPowerup({ scene: this, x: 200, y: 300, key: 'gun-upgrade' }))
     if(this.updateCount % 199 === 0) this.addEnemies()
-    if(this.updateCount % 199 === 0) this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: this.player.getShieldPowerupSprite() }))
+    // if(this.updateCount % 199 === 0) this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: this.player.getShieldPowerupSprite() }))
     if(this.updateCount >= 200) this.updateCount = 0
   }
 }

@@ -13,6 +13,11 @@ export const laserCollision = (playerLaser, enemyLaser) => {
   playerLaser.body.setVelocityY(-600)
 }
 
+export const meteorDestroy = (laser, meteor) => {
+  laser.destroy()
+  meteor.drop()
+}
+
 export const randomCoordinateX = () => ( Math.floor(Math.random() * 800) )
 
 export const randomCoordinateY = () => ( Math.floor(Math.random() * 300) )
