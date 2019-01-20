@@ -82,6 +82,7 @@ export default class Battlefield extends Scene {
     // ************** Wreckage *******************
     this.load.image('fire', './assets/fire00.png')
     this.load.image('fire2', './assets/fire10.png')
+    this.load.spritesheet('explosion', './assets/explosion.png')
 
     this.playerLasers = this.physics.add.group()
     this.enemyLasers = this.physics.add.group()
