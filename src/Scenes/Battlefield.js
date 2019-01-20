@@ -78,6 +78,10 @@ export default class Battlefield extends Scene {
     this.load.image('meteor-piece', './assets/meteorBrown_tiny1.png')
     this.load.image('sm-meteor', './assets/meteorBrown_small1.png')
 
+    // ************** Wreckage *******************
+    this.load.image('fire', './assets/fire00.png')
+    this.load.image('fire2', './assets/fire10.png')
+    
     this.playerLasers = this.physics.add.group()
     this.enemyLasers = this.physics.add.group()
     this.enemies = this.physics.add.group()
