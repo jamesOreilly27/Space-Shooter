@@ -1,6 +1,6 @@
 import Phaser, { Scene } from 'phaser'
 import { Player, PatrolShip, Divebomber, Chaser, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
-import { destroy, randomCoordinateX, randomCoordinateY, powerup, shieldBlock, laserCollision, meteorDestroy } from './utils'
+import { destroy, enemyDestroy, randomCoordinateX, randomCoordinateY, powerup, shieldBlock, laserCollision, meteorDestroy } from './utils'
 
 export default class Battlefield extends Scene {
   constructor() {
@@ -38,10 +38,11 @@ export default class Battlefield extends Scene {
   }
 
   addEnemies() {
-    const randomNum = Math.floor(Math.random() * 3)
-    if(randomNum === 0) this.addPatrol()
-    else if(randomNum === 1) this.addDivebombers()
-    else this.addChaser()
+    // const randomNum = Math.floor(Math.random() * 3)
+    // if(randomNum === 0) this.addPatrol()
+    // else if(randomNum === 1) this.addDivebombers()
+    // else this.addChaser()
+    this.addPatrol()
   }
 
   preload() {
@@ -101,11 +102,11 @@ export default class Battlefield extends Scene {
     // this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: this.player.getShieldPowerupSprite() }))
     // this.powerups.add(new LaserPowerup({ scene: this, x: 200, y: 300, key: 'gun-upgrade' }))
     this.addPatrol()
-    this.addDivebombers(3)
-    this.addChaser()
+    // this.addDivebombers(3)
+    // this.addChaser()
 
     // ***** Colliders *****
-    this.addCollider(this.enemies, this.playerLasers, destroy)
+    this.addCollider(this.enemies, this.playerLasers, enemyDestroy)
     this.addCollider(this.player, this.enemies, destroy)
     this.addCollider(this.player, this.enemyLasers, destroy)
     this.addCollider(this.player, this.powerups, powerup)
@@ -122,7 +123,7 @@ export default class Battlefield extends Scene {
     this.playerLasers.children.entries.forEach(laser => { laser.update() })
     this.enemyLasers.children.entries.forEach(laser => { laser.update() })
     this.shields.children.entries.forEach(shield => { shield.update() })
-    if(this.updateCount % 75 === 0) this.addEnemies()
+    if(this.updateCount % 199 === 0) this.addEnemies()
     // if(this.updateCount % 100 === 0) this.addDivebombers(1)
     if(this.updateCount >= 200) this.updateCount = 0
   }
