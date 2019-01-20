@@ -38,10 +38,10 @@ export default class Battlefield extends Scene {
   }
 
   addEnemies() {
-    // const randomNum = Math.floor(Math.random() * 3)
-    // if(randomNum === 0) this.addPatrol()
-    // else if(randomNum === 1) this.addDivebombers()
-    // else this.addChaser()
+    const randomNum = Math.floor(Math.random() * 3)
+    if(randomNum === 0) this.addPatrol()
+    else if(randomNum === 1) this.addDivebombers()
+    else this.addChaser()
     this.addPatrol()
   }
 
@@ -82,7 +82,7 @@ export default class Battlefield extends Scene {
     // ************** Wreckage *******************
     this.load.image('fire', './assets/fire00.png')
     this.load.image('fire2', './assets/fire10.png')
-    this.load.spritesheet('explosion', './assets/explosion.png')
+    this.load.spritesheet('explosion', './assets/explosion.png', { frameWidth: 32, frameHeight: 48, endFrame: 5 })
 
     this.playerLasers = this.physics.add.group()
     this.enemyLasers = this.physics.add.group()
@@ -103,18 +103,27 @@ export default class Battlefield extends Scene {
     // this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: this.player.getShieldPowerupSprite() }))
     // this.powerups.add(new LaserPowerup({ scene: this, x: 200, y: 300, key: 'gun-upgrade' }))
     this.addPatrol()
-    // this.addDivebombers(3)
-    // this.addChaser()
+    this.addDivebombers(3)
+    this.addChaser()
 
     // ***** Colliders *****
     this.addCollider(this.enemies, this.playerLasers, enemyDestroy)
-    this.addCollider(this.player, this.enemies, destroy)
-    this.addCollider(this.player, this.enemyLasers, destroy)
+    this.addCollider(this.player, this.enemies, enemyDestroy)
+    this.addCollider(this.player, this.enemyLasers, enemyDestroy)
     this.addCollider(this.player, this.powerups, powerup)
     this.addCollider(this.enemies, this.shields, shieldBlock)
     this.addCollider(this.enemyLasers, this.shields, shieldBlock)
     this.addCollider(this.player, this.powerups, powerup)
     this.addCollider(this.playerLasers, this.meteors, meteorDestroy)
+
+    /***** Animations *****/
+    this.anims.create({
+      key: 'explode',
+      frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 5, first: 5 }),
+      frameRate: 20,
+      repeat: 0,
+      hideOnComplete: true
+    })
   }
   
   update() {
