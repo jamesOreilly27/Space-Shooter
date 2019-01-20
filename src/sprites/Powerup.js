@@ -6,8 +6,18 @@ export default class Powerup extends Phaser.GameObjects.Sprite {
     this.scene = config.scene
     this.scene.physics.world.enable(this)
     this.scene.add.existing(this)
-    this.scaleX = .75
-    this.scaleY = .75
+    this.scaleX = .50
+    this.scaleY = .50
+    this.scene.tweens.add({
+      targets: this,
+      props: {
+        x: { value: config.x + 12, ease: 'Sine.easeInOut' },
+        y: { value: config.y + 12, ease: 'Sine.easeInOut' }
+      },
+      duration: 1000,
+      yoyo: true,
+      repeat: -1
+    })
   }
 
   update() {
