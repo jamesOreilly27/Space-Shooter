@@ -21,13 +21,16 @@ export default class Battlefield extends Scene {
     this.enemies.add(new PatrolShip({ scene: this, key: 'patrol-ship', x: 950, y: 20 }))
   }
 
-  //TODO create a function that builds waves of divebombers in this sequence
-  addDivebombers() {
+  addDivebombers(count) {
     const randomStart = randomCoordinateX()
-    //I like the stepx and stepy in the setup below
-    this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: randomStart, y: -20}))
-    this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: randomStart + 50, y: -80}))
-    this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: randomStart + 100, y: -140}))
+    const coordinates = [
+      { x: 0, y: -20 },
+      { x: 50, y: -80 },
+      { x: 100, y: -140 }
+    ]
+    for(let i = 0; i < count; i++) {
+      this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: (randomStart + coordinates[i].x), y: coordinates[i].y }))
+    }
   }
 
   addChaser() {
@@ -93,7 +96,7 @@ export default class Battlefield extends Scene {
     // this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: this.player.getShieldPowerupSprite() }))
     // this.powerups.add(new LaserPowerup({ scene: this, x: 200, y: 300, key: 'gun-upgrade' }))
     this.addPatrol()
-    this.addDivebombers()
+    this.addDivebombers(3)
     this.addChaser()
 
     // ***** Colliders *****
@@ -114,9 +117,8 @@ export default class Battlefield extends Scene {
     this.playerLasers.children.entries.forEach(laser => { laser.update() })
     this.enemyLasers.children.entries.forEach(laser => { laser.update() })
     this.shields.children.entries.forEach(shield => { shield.update() })
-    // if(this.updateCount % 199 === 0) this.powerups.add(new LaserPowerup({ scene: this, x: 200, y: 300, key: 'gun-upgrade' }))
-    if(this.updateCount % 199 === 0) this.addEnemies()
-    // if(this.updateCount % 199 === 0) this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: this.player.getShieldPowerupSprite() }))
+    if(this.updateCount % 75 === 0) this.addEnemies()
+    // if(this.updateCount % 100 === 0) this.addDivebombers(1)
     if(this.updateCount >= 200) this.updateCount = 0
   }
 }
