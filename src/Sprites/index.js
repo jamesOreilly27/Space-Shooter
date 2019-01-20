@@ -19,3 +19,6 @@ export { default as Shield } from './Shield'
 
 //Meteors
 export { default as Meteor } from './Meteor'
+
+//Wreckage
+export { default as Wreckage } from './Wreckage'

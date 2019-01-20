@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import { LaserPowerup, ShieldPowerup } from '../sprites'
+import { LaserPowerup, ShieldPowerup, Wreckage } from '../sprites'
 
 export default class Meteor extends Phaser.GameObjects.Sprite {
   constructor(config) {
@@ -31,21 +31,21 @@ export default class Meteor extends Phaser.GameObjects.Sprite {
   //Propel Fragments in different dirrections by adding a tween to each meteor-piece
   propelFragments() {
     let counter = 0
-    this.scene.meteors.children.entries.forEach(meteor => {
+    this.scene.wreckage.children.entries.forEach(fragment => {
       if(counter === 0) {
-        this.createMeteorTween(meteor, 20, 20)
+        this.createMeteorTween(fragment, 20, 20)
         counter++
       } 
       else if(counter === 1) {
-        this.createMeteorTween(meteor, -20, 20)
+        this.createMeteorTween(fragment, -20, 20)
         counter++
       } 
       else if(counter === 2) {
-        this.createMeteorTween(meteor, -20, -20)
+        this.createMeteorTween(fragment, -20, -20)
         counter++
       }
       else if(counter === 3) {
-        this.createMeteorTween(meteor, 20, -20)
+        this.createMeteorTween(fragment, 20, -20)
         counter = 0
       }
     })
@@ -55,7 +55,7 @@ export default class Meteor extends Phaser.GameObjects.Sprite {
   genereateFourFragments() {
     const initial = this.scene.time.now
     for(let i = 0; i < 4; i++) {
-      this.scene.meteors.add(new Meteor({ scene: this.scene, x: this.x, y: this.y, key: 'meteor-piece' }))
+      this.scene.wreckage.add(new Wreckage({ scene: this.scene, x: this.x, y: this.y, key: 'meteor-piece' }))
     }
     this.propelFragments()
   }
