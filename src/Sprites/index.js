@@ -22,3 +22,4 @@ export { default as Meteor } from './Meteor'
 
 //Wreckage
 export { default as Wreckage } from './Wreckage'
+export { default as Explosion } from './Explosion'
