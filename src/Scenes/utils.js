@@ -10,7 +10,7 @@ const images = [
   { key: 'divebomber', path: 'enemyRed4' },
   { key: 'divebomber-laser', path: 'laserRed14' },
   { key: 'chaser', path: 'enemyBlack2' },
-  { key: 'fighter', path: 'enemyRed3'},
+  { key: 'fighter', path: 'enemyRed2'},
   { key: 'bronze-shield', path: 'shield_bronze' },
   { key: 'silver-shield', path: 'shield_silver' },
   { key: 'gold-shield', path: 'shield_gold' },
