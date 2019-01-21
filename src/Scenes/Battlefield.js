@@ -1,6 +1,6 @@
 import Phaser, { Scene } from 'phaser'
 import { Player, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
-import { destroy, powerup, shieldBlock, laserCollision, meteorDestroy, battlefieldImageLoad } from './utils'
+import { enemyDestroy, destroy, powerup, shieldBlock, laserCollision, meteorDestroy, battlefieldImageLoad } from './utils'
 import { addPatrol, addDivebombers, addChaser, addRandomEnemy } from './utils/enemies'
 
 export default class Battlefield extends Scene {
@@ -16,6 +16,7 @@ export default class Battlefield extends Scene {
   preload() {
     /***** Preload all images *****/
     battlefieldImageLoad(this)
+    this.load.spritesheet('explosion', './assets/explosion.png', { frameWidth: 32, frameHeight: 48, endFrame: 5 })
 
     /***** Add the needed Physics Groups *****/
     this.playerLasers = this.physics.add.group()
@@ -41,14 +42,23 @@ export default class Battlefield extends Scene {
     addRandomEnemy(this)
 
     // ***** Colliders *****
-    this.addCollider(this.enemies, this.playerLasers, destroy)
-    this.addCollider(this.player, this.enemies, destroy)
-    this.addCollider(this.player, this.enemyLasers, destroy)
+    this.addCollider(this.enemies, this.playerLasers, enemyDestroy)
+    this.addCollider(this.player, this.enemies, enemyDestroy)
+    this.addCollider(this.player, this.enemyLasers, enemyDestroy)
     this.addCollider(this.player, this.powerups, powerup)
     this.addCollider(this.enemies, this.shields, shieldBlock)
     this.addCollider(this.enemyLasers, this.shields, shieldBlock)
     this.addCollider(this.player, this.powerups, powerup)
     this.addCollider(this.playerLasers, this.meteors, meteorDestroy)
+
+    /***** Animations *****/
+    this.anims.create({
+      key: 'explode',
+      frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 5, first: 5 }),
+      frameRate: 20,
+      repeat: 0,
+      hideOnComplete: true
+    })
   }
   
   update() {
@@ -58,8 +68,6 @@ export default class Battlefield extends Scene {
     this.playerLasers.children.entries.forEach(laser => { laser.update() })
     this.enemyLasers.children.entries.forEach(laser => { laser.update() })
     this.shields.children.entries.forEach(shield => { shield.update() })
-    // if(this.updateCount % 75 === 0) this.addEnemies()
-    // if(this.updateCount % 100 === 0) this.addDivebombers(1)
     if(this.updateCount >= 200) this.updateCount = 0
   }
 }

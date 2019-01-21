@@ -23,7 +23,13 @@ export default class PatrolShip extends Ship {
     if(laserRechargeCount % 100 === 0 && this.active) {
       this.scene.enemyLasers.add(new PatrolShipLaser({ scene: this.scene, x: this.x, y: this.y + 40, key: spriteStr }))
     }
-  } 
+  }
+
+  // explode() {
+  //   const explosion = this.scene.physics.add.sprite(this.x, this.y, 'explosion')
+  //   explosion.play('explode')
+  //   this.destroy()
+  // }
 
   update() {
     this.move(this.scene.updateCount)
