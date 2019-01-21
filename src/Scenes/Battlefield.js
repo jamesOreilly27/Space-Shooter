@@ -1,6 +1,7 @@
 import Phaser, { Scene } from 'phaser'
 import { Player, Chaser, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
-import { destroy, powerup, shieldBlock, laserCollision, meteorDestroy, battlefieldImageLoad, addPatrol, addDivebombers } from './utils'
+import { destroy, powerup, shieldBlock, laserCollision, meteorDestroy, battlefieldImageLoad } from './utils'
+import { addPatrol, addDivebombers } from './utils/enemies'
 
 export default class Battlefield extends Scene {
   constructor() {
