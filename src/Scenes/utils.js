@@ -1,5 +1,4 @@
-import { PatrolShip } from '../sprites'
-
+import { PatrolShip, Divebomber } from '../sprites'
 
 /***** Preload Images Utils *****/
 
@@ -79,5 +78,12 @@ export const addPatrol = (scene, quantity) => {
   const randomX = randomCoordinateX()
   for(let i = 0; i < quantity; i++) {
     addEnemy(scene, PatrolShip, 'patrol-ship', randomX + (70 * i), 20)
+  }
+}
+
+export const addDivebombers = (scene, quantity) => {
+  const randomX = randomCoordinateX()
+  for(let i = 0; i < quantity; i++) {
+    addEnemy(scene, Divebomber, 'divebomber', randomX + (50 * i), (-20 - (60 * i)))
   }
 }

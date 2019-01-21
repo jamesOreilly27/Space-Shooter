@@ -1,6 +1,6 @@
 import Phaser, { Scene } from 'phaser'
-import { Player, Divebomber, Chaser, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
-import { destroy, randomCoordinateX, randomCoordinateY, powerup, shieldBlock, laserCollision, meteorDestroy, battlefieldImageLoad, addPatrol } from './utils'
+import { Player, Chaser, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
+import { destroy, randomCoordinateX, randomCoordinateY, powerup, shieldBlock, laserCollision, meteorDestroy, battlefieldImageLoad, addPatrol, addDivebombers } from './utils'
 
 export default class Battlefield extends Scene {
   constructor() {
@@ -10,21 +10,6 @@ export default class Battlefield extends Scene {
 
   addCollider(group1, group2, callback) {
     return this.physics.add.collider(group1, group2, callback, null, this)
-  }
-
-  //Add Enemy Functions
-  //All functions for adding enemies are currently for testing purposes
-  //Once all enemy classes are completed I will focus on exactly how/where/when I want them to appear
-  addDivebombers(count) {
-    const randomStart = randomCoordinateX()
-    const coordinates = [
-      { x: 0, y: -20 },
-      { x: 50, y: -80 },
-      { x: 100, y: -140 }
-    ]
-    for(let i = 0; i < count; i++) {
-      this.enemies.add(new Divebomber({ scene: this, key: 'divebomber', x: (randomStart + coordinates[i].x), y: coordinates[i].y }))
-    }
   }
 
   addChaser() {
@@ -59,9 +44,9 @@ export default class Battlefield extends Scene {
     this.laserCollide = this.addCollider(this.playerLasers, this.enemyLasers, laserCollision)
     this.laserCollide.active = false;
     this.meteors.add(new Meteor({ scene: this, x: 400, y: 300, key: 'med-meteor'}))
-    
+
     addPatrol(this, 3)
-    // this.addDivebombers(3)
+    addDivebombers(this, 3)
     // this.addChaser()
 
     // ***** Colliders *****
