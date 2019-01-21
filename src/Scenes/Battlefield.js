@@ -1,7 +1,7 @@
 import Phaser, { Scene } from 'phaser'
-import { Player, Chaser, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
+import { Player, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
 import { destroy, powerup, shieldBlock, laserCollision, meteorDestroy, battlefieldImageLoad } from './utils'
-import { addPatrol, addDivebombers } from './utils/enemies'
+import { addPatrol, addDivebombers, addChaser } from './utils/enemies'
 
 export default class Battlefield extends Scene {
   constructor() {
@@ -11,10 +11,6 @@ export default class Battlefield extends Scene {
 
   addCollider(group1, group2, callback) {
     return this.physics.add.collider(group1, group2, callback, null, this)
-  }
-
-  addChaser() {
-    this.enemies.add(new Chaser({ scene: this, key: 'chaser', x: this.player.x, y: 600 }))
   }
 
   addEnemies() {
@@ -48,7 +44,7 @@ export default class Battlefield extends Scene {
 
     addPatrol(this, 3)
     addDivebombers(this, 3)
-    // this.addChaser()
+    addChaser(this)
 
     // ***** Colliders *****
     this.addCollider(this.enemies, this.playerLasers, destroy)

@@ -1,4 +1,4 @@
-import { PatrolShip, Divebomber } from '../../sprites'
+import { PatrolShip, Divebomber, Chaser } from '../../sprites'
 export const randomCoordinateX = () => ( Math.floor(Math.random() * 800) )
 
 export const randomCoordinateY = () => ( Math.floor(Math.random() * 300) )
@@ -20,4 +20,8 @@ export const addDivebombers = (scene, quantity) => {
   for(let i = 0; i < quantity; i++) {
     addEnemy(scene, Divebomber, 'divebomber', randomX + (50 * i), (-20 - (60 * i)))
   }
+}
+
+export const addChaser = scene => {
+  addEnemy(scene, Chaser, 'chaser', scene.player.x, 600)
 }
