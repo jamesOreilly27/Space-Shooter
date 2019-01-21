@@ -25,3 +25,10 @@ export const addDivebombers = (scene, quantity) => {
 export const addChaser = scene => {
   addEnemy(scene, Chaser, 'chaser', scene.player.x, 600)
 }
+
+export const addRandomEnemy = scene => {
+  const randNum = Math.floor(Math.random() * 3)
+  if(randNum === 0) addPatrol(scene, 1)
+  else if(randNum === 1) addDivebombers(scene, 1)
+  else addChaser(scene)
+}

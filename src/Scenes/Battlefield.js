@@ -1,7 +1,7 @@
 import Phaser, { Scene } from 'phaser'
 import { Player, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
 import { destroy, powerup, shieldBlock, laserCollision, meteorDestroy, battlefieldImageLoad } from './utils'
-import { addPatrol, addDivebombers, addChaser } from './utils/enemies'
+import { addPatrol, addDivebombers, addChaser, addRandomEnemy } from './utils/enemies'
 
 export default class Battlefield extends Scene {
   constructor() {
@@ -11,13 +11,6 @@ export default class Battlefield extends Scene {
 
   addCollider(group1, group2, callback) {
     return this.physics.add.collider(group1, group2, callback, null, this)
-  }
-
-  addEnemies() {
-    const randomNum = Math.floor(Math.random() * 3)
-    if(randomNum === 0) this.addPatrol()
-    else if(randomNum === 1) this.addDivebombers()
-    else this.addChaser()
   }
 
   preload() {
@@ -45,6 +38,7 @@ export default class Battlefield extends Scene {
     addPatrol(this, 3)
     addDivebombers(this, 3)
     addChaser(this)
+    addRandomEnemy(this)
 
     // ***** Colliders *****
     this.addCollider(this.enemies, this.playerLasers, destroy)
