@@ -1,3 +1,6 @@
+/***** Preload Images Utils *****/
+
+//Add any images needed for the game to this array and they will automatically be added to the preload function in the Battlefield Scene
 const images = [
   { key: 'player', path: 'playerShip1_green' },
   { key: 'player-laser', path: 'laserGreen03' },
@@ -19,7 +22,21 @@ const images = [
   { key: 'meteor-piece', path: 'meteorBrown_tiny1' }
 ]
 
+//image load will only load .png files from the assets folder
+export const imageLoad = (scene, key, path) => {
+  scene.load.image(key, `./assets/${path}.png`)
+}
 
+//Run imageLoad function for everything in the images array
+//This function is exported to Battlefield scene and runs in the preload method
+export const battlefieldImageLoad = scene => {
+  images.forEach(image => {
+    imageLoad(scene, image.key, image.path)
+  })
+}
+
+
+/***** Destroy Utils *****/
 export const destroy = (object1, object2) => {
   object1.destroy()
   object2.destroy()
@@ -40,21 +57,12 @@ export const meteorDestroy = (laser, meteor) => {
   meteor.drop()
 }
 
-export const randomCoordinateX = () => ( Math.floor(Math.random() * 800) )
-
-export const randomCoordinateY = () => ( Math.floor(Math.random() * 300) )
-
 export const powerup = (player, powerup) => {
   powerup.handleCollision()
   powerup.destroy()
 }
 
-export const imageLoad = (scene, key, path) => {
-  scene.load.image(key, `./assets/${path}.png`)
-}
+/***** Creating Enemies Utils *****/
+export const randomCoordinateX = () => ( Math.floor(Math.random() * 800) )
 
-export const battlefieldImageLoad = scene => {
-  images.forEach(image => {
-    imageLoad(scene, image.key, image.path)
-  })
-}
+export const randomCoordinateY = () => ( Math.floor(Math.random() * 300) )
