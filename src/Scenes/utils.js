@@ -1,5 +1,3 @@
-import { PatrolShip, Divebomber } from '../sprites'
-
 /***** Preload Images Utils *****/
 
 //Add any images needed for the game to this array and they will automatically be added to the preload function in the Battlefield Scene
