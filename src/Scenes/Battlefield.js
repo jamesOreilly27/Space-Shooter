@@ -1,6 +1,6 @@
 import Phaser, { Scene } from 'phaser'
-import { Player, PatrolShip, Divebomber, Chaser, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
-import { destroy, randomCoordinateX, randomCoordinateY, powerup, shieldBlock, laserCollision, meteorDestroy, battlefieldImageLoad } from './utils'
+import { Player, Divebomber, Chaser, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
+import { destroy, randomCoordinateX, randomCoordinateY, powerup, shieldBlock, laserCollision, meteorDestroy, battlefieldImageLoad, addPatrol } from './utils'
 
 export default class Battlefield extends Scene {
   constructor() {
@@ -15,12 +15,6 @@ export default class Battlefield extends Scene {
   //Add Enemy Functions
   //All functions for adding enemies are currently for testing purposes
   //Once all enemy classes are completed I will focus on exactly how/where/when I want them to appear
-  addPatrol() {
-    this.enemies.add(new PatrolShip({ scene: this, key: 'patrol-ship', x: 810, y: 20 }))
-    this.enemies.add(new PatrolShip({ scene: this, key: 'patrol-ship', x: 880, y: 20 }))
-    this.enemies.add(new PatrolShip({ scene: this, key: 'patrol-ship', x: 950, y: 20 }))
-  }
-
   addDivebombers(count) {
     const randomStart = randomCoordinateX()
     const coordinates = [
@@ -65,11 +59,10 @@ export default class Battlefield extends Scene {
     this.laserCollide = this.addCollider(this.playerLasers, this.enemyLasers, laserCollision)
     this.laserCollide.active = false;
     this.meteors.add(new Meteor({ scene: this, x: 400, y: 300, key: 'med-meteor'}))
-    // this.powerups.add(new ShieldPowerup({ scene: this, x: 400, y: 300, key: this.player.getShieldPowerupSprite() }))
-    // this.powerups.add(new LaserPowerup({ scene: this, x: 200, y: 300, key: 'gun-upgrade' }))
-    this.addPatrol()
-    this.addDivebombers(3)
-    this.addChaser()
+    
+    addPatrol(this, 3)
+    // this.addDivebombers(3)
+    // this.addChaser()
 
     // ***** Colliders *****
     this.addCollider(this.enemies, this.playerLasers, destroy)
@@ -89,7 +82,7 @@ export default class Battlefield extends Scene {
     this.playerLasers.children.entries.forEach(laser => { laser.update() })
     this.enemyLasers.children.entries.forEach(laser => { laser.update() })
     this.shields.children.entries.forEach(shield => { shield.update() })
-    if(this.updateCount % 75 === 0) this.addEnemies()
+    // if(this.updateCount % 75 === 0) this.addEnemies()
     // if(this.updateCount % 100 === 0) this.addDivebombers(1)
     if(this.updateCount >= 200) this.updateCount = 0
   }

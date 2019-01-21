@@ -1,3 +1,6 @@
+import { PatrolShip } from '../sprites'
+
+
 /***** Preload Images Utils *****/
 
 //Add any images needed for the game to this array and they will automatically be added to the preload function in the Battlefield Scene
@@ -66,3 +69,15 @@ export const powerup = (player, powerup) => {
 export const randomCoordinateX = () => ( Math.floor(Math.random() * 800) )
 
 export const randomCoordinateY = () => ( Math.floor(Math.random() * 300) )
+
+export const addEnemy = (scene, enemyClass, key, x, y) => {
+  scene.enemies.add(new enemyClass({ scene, key, x, y }))
+}
+
+//Add Patrol ships in quantities up to 3 ships
+export const addPatrol = (scene, quantity) => {
+  const randomX = randomCoordinateX()
+  for(let i = 0; i < quantity; i++) {
+    addEnemy(scene, PatrolShip, 'patrol-ship', randomX + (70 * i), 20)
+  }
+}
