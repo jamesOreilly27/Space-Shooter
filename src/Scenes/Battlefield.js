@@ -62,13 +62,13 @@ export default class Battlefield extends Scene {
     })
   }
   
-  update() {
+  update(time, delta) {
     this.updateCount++
-    this.player.update()
-    this.enemies.children.entries.forEach(enemy => { enemy.update() })
-    this.playerLasers.children.entries.forEach(laser => { laser.update() })
-    this.enemyLasers.children.entries.forEach(laser => { laser.update() })
-    this.shields.children.entries.forEach(shield => { shield.update() })
+    this.player.update(time, delta)
+    this.enemies.children.entries.forEach(enemy => { enemy.update(time, delta) })
+    this.playerLasers.children.entries.forEach(laser => { laser.update(time, delta) })
+    this.enemyLasers.children.entries.forEach(laser => { laser.update(time, delta) })
+    this.shields.children.entries.forEach(shield => { shield.update(time, delta) })
     if(this.updateCount >= 200) this.updateCount = 0
   }
 }
