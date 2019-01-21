@@ -1,6 +1,6 @@
 import Phaser, { Scene } from 'phaser'
 import { Player, PatrolShip, Divebomber, Chaser, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
-import { destroy, randomCoordinateX, randomCoordinateY, powerup, shieldBlock, laserCollision, meteorDestroy } from './utils'
+import { destroy, randomCoordinateX, randomCoordinateY, powerup, shieldBlock, laserCollision, meteorDestroy, battlefieldImageLoad } from './utils'
 
 export default class Battlefield extends Scene {
   constructor() {
@@ -45,43 +45,10 @@ export default class Battlefield extends Scene {
   }
 
   preload() {
-    // *************** player ***************
-    this.load.image('player', './assets/playerShip1_green.png')
-    this.load.image('player-laser', './assets/laserGreen03.png')
-    this.load.image('player-laser2', './assets/LaserGreen10.png')
+    /***** Preload all images *****/
+    battlefieldImageLoad(this)
 
-    // *************** patrol ship ***************
-    this.load.image('patrol-ship-laser', './assets/laserRed10.png')
-    this.load.image('patrol-ship', './assets/enemyRed1.png')
-
-    // *************** divebomber ***************
-    this.load.image('divebomber', './assets/enemyRed4.png')
-    this.load.image('divebomber-laser', './assets/laserRed14.png')
-
-    // *************** chaser ***************
-    this.load.image('chaser', './assets/enemyBlack2.png')
-
-    // *************** shield power up ***************
-    this.load.image('bronze-shield', './assets/shield_bronze.png')
-    this.load.image('silver-shield', './assets/shield_silver.png')
-    this.load.image('gold-shield', './assets/shield_gold.png')
-    this.load.image('shield1', './assets/shield1.png')
-    this.load.image('shield2', './assets/shield2.png')
-    this.load.image('shield3', './assets/shield3.png')
-
-    // *************** laser power up ***************
-    this.load.image('gun-upgrade', './assets/gun10.png')
-
-    // *************** Meteors **********************
-    this.load.image('big-meteor', './assets/meteorBrown_big1.png')
-    this.load.image('med-meteor', './assets/meteorBrown_med3.png')
-    this.load.image('meteor-piece', './assets/meteorBrown_tiny1.png')
-    this.load.image('sm-meteor', './assets/meteorBrown_small1.png')
-
-    // ************** Wreckage *******************
-    this.load.image('fire', './assets/fire00.png')
-    this.load.image('fire2', './assets/fire10.png')
-
+    /***** Add the needed Physics Groups *****/
     this.playerLasers = this.physics.add.group()
     this.enemyLasers = this.physics.add.group()
     this.enemies = this.physics.add.group()
