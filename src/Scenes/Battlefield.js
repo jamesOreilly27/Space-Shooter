@@ -38,12 +38,6 @@ export default class Battlefield extends Scene {
     this.laserCollide.active = false;
     this.meteors.add(new Meteor({ scene: this, x: 400, y: 300, key: 'med-meteor'}))
 
-    // addPatrol(this, 3)
-    // addDivebombers(this, 3)
-    // addChaser(this)
-    // addFighter(this)
-    // addRandomEnemy(this)
-
     // ***** Colliders *****
     this.addCollider(this.enemies, this.playerLasers, enemyDestroy)
     this.addCollider(this.player, this.enemies, enemyDestroy)
