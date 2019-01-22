@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import { PatrolShip, Divebomber, Chaser, Fighter } from '../../sprites'
-export const randomCoordinateX = () => ( Math.floor(Math.random() * 800) )
+
+export const randomCoordinateX = () => ( Math.floor(Math.random() * 600) )
 
 export const randomCoordinateY = () => ( Math.floor(Math.random() * 300) )
 
@@ -29,21 +30,24 @@ export const addChaser = scene => {
 
 export const addFighter = scene => {
   const randomX = randomCoordinateX()
-  const path = new Phaser.Curves.Path(randomX, 100)
-  for(let i = 0; i < 20; i ++) {
+  const path = new Phaser.Curves.Path(randomX, 75)
+  for(let i = 0; i < 100; i ++) {
     if(i % 4 === 0) {
-      path.splineTo([randomX + 200, 250])
+      path.splineTo([randomX + 100, 125])
     }
     else if(i % 4 === 1) {
-      path.splineTo([randomX + 250, 175])
+      path.splineTo([randomX + 200, 75])
     }
     else if( i % 4 === 2) {
-      path.splineTo([randomX + 200, 125])
+      path.splineTo([randomX + 100, 75])
     }
     else if( i % 4 === 3) {
-      path.splineTo([randomX, 100])
+      path.splineTo([randomX, 75])
     }
   }
+
+  path.lineTo(randomX, 650)
+
   addEnemy(scene, Fighter, 'fighter', randomX, 100, path)
 }
 

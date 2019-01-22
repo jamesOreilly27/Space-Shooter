@@ -5,8 +5,8 @@ export default class Ship extends Phaser.GameObjects.Sprite {
     super(config.scene, config.x, config.y, config.key, config.path)
     this.scene.physics.world.enable(this)
     this.scene.add.existing(this)
-    this.scaleX = .8
-    this.scaleY = .8
+    this.scaleX = .6
+    this.scaleY = .6
   }
 
   explode() {

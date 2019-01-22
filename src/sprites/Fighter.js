@@ -7,7 +7,7 @@ export default class Fighter extends Ship {
     this.follower = { t: 0, vec: new Phaser.Math.Vector2() }
     this.path = config.path
     this.body.setCollideWorldBounds(true)
-    this.speed = 1/15000
+    this.speed = 1/80000
   }
 
   startOnPath() {
