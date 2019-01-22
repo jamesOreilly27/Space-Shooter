@@ -53,7 +53,15 @@ export const addFighter = scene => {
 
 export const addRandomEnemy = scene => {
   const randNum = Math.floor(Math.random() * 3)
-  if(randNum === 0) addPatrol(scene, 1)
-  else if(randNum === 1) addDivebombers(scene, 1)
+  if(randNum === 0) addPatrol(scene, 3)
+  else if(randNum === 1) addDivebombers(scene, 3)
   else addChaser(scene)
+}
+
+export const spawnEnemies = (scene, time) => {
+  if(time < scene.nextSpawn) { return }
+    addFighter(scene)
+    addDivebombers(scene, 3)
+    addRandomEnemy(scene)
+    scene.nextSpawn = time + scene.spawnRate
 }

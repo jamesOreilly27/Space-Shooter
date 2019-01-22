@@ -1,11 +1,13 @@
 import Phaser, { Scene } from 'phaser'
 import { Player, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
 import { enemyDestroy, destroy, powerup, shieldBlock, laserCollision, meteorDestroy, battlefieldImageLoad } from './utils'
-import { addPatrol, addDivebombers, addChaser, addFighter, addRandomEnemy } from './utils/enemies'
+import { addPatrol, addDivebombers, addChaser, addFighter, addRandomEnemy, spawnEnemies } from './utils/enemies'
 
 export default class Battlefield extends Scene {
   constructor() {
     super({ key: 'Battlefield', active: true })
+    this.spawnRate = 5000
+    this.nextSpawn = 0
     this.updateCount = 0
   }
 
@@ -39,7 +41,7 @@ export default class Battlefield extends Scene {
     // addPatrol(this, 3)
     // addDivebombers(this, 3)
     // addChaser(this)
-    addFighter(this)
+    // addFighter(this)
     // addRandomEnemy(this)
 
     // ***** Colliders *****
@@ -69,6 +71,7 @@ export default class Battlefield extends Scene {
     this.playerLasers.children.entries.forEach(laser => { laser.update(time, delta) })
     this.enemyLasers.children.entries.forEach(laser => { laser.update(time, delta) })
     this.shields.children.entries.forEach(shield => { shield.update(time, delta) })
+    spawnEnemies(this, time, delta)
     if(this.updateCount >= 200) this.updateCount = 0
   }
 }

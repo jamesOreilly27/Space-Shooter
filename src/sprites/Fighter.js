@@ -19,12 +19,11 @@ export default class Fighter extends Ship {
 
   generateLaserPair() {
     this.scene.enemyLasers.add(new FighterLaser({ scene: this.scene, key: 'fighter-laser', x: this.x - 3, y: this.y + 25 }))
-    this.scene.enemyLasers.add(new FighterLaser({ scene: this.scene, key: 'fighter-laser', x: this.x + 3cl, y: this.y + 25 }))
+    this.scene.enemyLasers.add(new FighterLaser({ scene: this.scene, key: 'fighter-laser', x: this.x + 3, y: this.y + 25 }))
     
   }
 
   shoot(time, delta) {
-    console.log('TIME', time, 'NEXT FIRE', this.nextFire)
     if(time < this.nextFire) { return }
     this.generateLaserPair()
     this.nextFire = time + this.fireRate
