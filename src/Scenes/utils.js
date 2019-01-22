@@ -45,7 +45,7 @@ export const destroy = (object1, object2) => {
 }
 
 export const enemyDestroy = (enemy, playerLaser) => {
-  enemy.explode()
+  enemy.enemyExplode()
   playerLaser.destroy()
 }
 

@@ -14,4 +14,15 @@ export default class Ship extends Phaser.GameObjects.Sprite {
     explosion.play('explode')
     this.destroy()
   }
+
+  updateScore() {
+    console.log(this.scene)
+    this.scene.score += 3
+    this.scene.scoreText.setText(`score: ${this.scene.score}`)
+  }
+
+  enemyExplode() {
+    this.updateScore()
+    this.explode()
+  }
 }
