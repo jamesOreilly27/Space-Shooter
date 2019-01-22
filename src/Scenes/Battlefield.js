@@ -1,7 +1,7 @@
 import Phaser, { Scene } from 'phaser'
 import { Player, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
 import { enemyDestroy, destroy, powerup, shieldBlock, laserCollision, meteorDestroy, battlefieldImageLoad } from './utils'
-import { addPatrol, addDivebombers, addChaser, addRandomEnemy } from './utils/enemies'
+import { addPatrol, addDivebombers, addChaser, addFighter, addRandomEnemy } from './utils/enemies'
 
 export default class Battlefield extends Scene {
   constructor() {
@@ -36,10 +36,11 @@ export default class Battlefield extends Scene {
     this.laserCollide.active = false;
     this.meteors.add(new Meteor({ scene: this, x: 400, y: 300, key: 'med-meteor'}))
 
-    addPatrol(this, 3)
-    addDivebombers(this, 3)
-    addChaser(this)
-    addRandomEnemy(this)
+    // addPatrol(this, 3)
+    // addDivebombers(this, 3)
+    // addChaser(this)
+    addFighter(this)
+    // addRandomEnemy(this)
 
     // ***** Colliders *****
     this.addCollider(this.enemies, this.playerLasers, enemyDestroy)
@@ -61,13 +62,13 @@ export default class Battlefield extends Scene {
     })
   }
   
-  update() {
+  update(time, delta) {
     this.updateCount++
-    this.player.update()
-    this.enemies.children.entries.forEach(enemy => { enemy.update() })
-    this.playerLasers.children.entries.forEach(laser => { laser.update() })
-    this.enemyLasers.children.entries.forEach(laser => { laser.update() })
-    this.shields.children.entries.forEach(shield => { shield.update() })
+    this.player.update(time, delta)
+    this.enemies.children.entries.forEach(enemy => { enemy.update(time, delta) })
+    this.playerLasers.children.entries.forEach(laser => { laser.update(time, delta) })
+    this.enemyLasers.children.entries.forEach(laser => { laser.update(time, delta) })
+    this.shields.children.entries.forEach(shield => { shield.update(time, delta) })
     if(this.updateCount >= 200) this.updateCount = 0
   }
 }

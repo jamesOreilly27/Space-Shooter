@@ -10,6 +10,7 @@ const images = [
   { key: 'divebomber', path: 'enemyRed4' },
   { key: 'divebomber-laser', path: 'laserRed14' },
   { key: 'chaser', path: 'enemyBlack2' },
+  { key: 'fighter', path: 'enemyRed2'},
   { key: 'bronze-shield', path: 'shield_bronze' },
   { key: 'silver-shield', path: 'shield_silver' },
   { key: 'gold-shield', path: 'shield_gold' },
@@ -19,7 +20,8 @@ const images = [
   { key: 'gun-upgrade', path: 'gun10' },
   { key: 'big-meteor', path: 'meteorBrown_big1' },
   { key: 'med-meteor', path: 'meteorBrown_med3' },
-  { key: 'meteor-piece', path: 'meteorBrown_tiny1' }
+  { key: 'meteor-piece', path: 'meteorBrown_tiny1' },
+  { key: 'fighter-laser', path: 'laserRed13' }
 ]
 
 //image load will only load .png files from the assets folder

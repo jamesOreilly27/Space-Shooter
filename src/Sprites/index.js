@@ -4,12 +4,14 @@ export { default as Player } from './Player'
 export { default as PatrolShip } from './PatrolShip'
 export { default as Divebomber } from './Divebomber'
 export { default as Chaser } from './Chaser'
+export { default as Fighter } from './Fighter'
 
 //Lasers
 export { default as Laser } from './Laser'
 export { default as PlayerLaser } from './PlayerLaser'
 export { default as PatrolShipLaser } from './PatrolShipLaser'
 export { default as DivebomberLaser } from './DivebomberLaser'
+export { default as FighterLaser } from './FighterLaser'
 
 //Powerups
 export { default as Powerup } from './Powerup'
