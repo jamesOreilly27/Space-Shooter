@@ -9,12 +9,18 @@ export default class Battlefield extends Scene {
     this.spawnRate = 5000
     this.nextSpawn = 0
     this.updateCount = 0
+    this.level = 1
     this.score = 0
     this.scoreText = ''
   }
 
   addCollider(group1, group2, callback) {
     return this.physics.add.collider(group1, group2, callback, null, this)
+  }
+
+  levelUp() {
+    console.log('LEVEL', this.level)
+    if(this.score >= 50) this.level = 2
   }
 
   preload() {
@@ -75,6 +81,7 @@ export default class Battlefield extends Scene {
     this.playerLasers.children.entries.forEach(laser => { laser.update(time, delta) })
     this.enemyLasers.children.entries.forEach(laser => { laser.update(time, delta) })
     this.shields.children.entries.forEach(shield => { shield.update(time, delta) })
+    this.levelUp()
     spawnEnemies(this, time, delta)
     if(this.updateCount >= 200) this.updateCount = 0
   }
