@@ -7,7 +7,7 @@ export default class FighterLaser extends Laser {
 
   move() {
     if(this.active) {
-      this.body.setVelocityY(450)
+      this.body.setVelocityY(350)
 
     }
   }

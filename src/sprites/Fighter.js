@@ -7,7 +7,8 @@ export default class Fighter extends Ship {
     this.follower = { t: 0, vec: new Phaser.Math.Vector2() }
     this.path = config.path
     this.speed = 1/80000
-    this.shot = false
+    this.nextFire = 0
+    this.fireRate = 750
   }
 
   startOnPath() {
@@ -17,14 +18,16 @@ export default class Fighter extends Ship {
   }
 
   generateLaserPair() {
-    this.scene.enemyLasers.add(new FighterLaser({ scene: this.scene, key: 'fighter-laser', x: this.x - 5, y: this.y + 40 }))
-    this.scene.enemyLasers.add(new FighterLaser({ scene: this.scene, key: 'fighter-laser', x: this.x + 5, y: this.y + 40 }))
+    this.scene.enemyLasers.add(new FighterLaser({ scene: this.scene, key: 'fighter-laser', x: this.x - 3, y: this.y + 25 }))
+    this.scene.enemyLasers.add(new FighterLaser({ scene: this.scene, key: 'fighter-laser', x: this.x + 3cl, y: this.y + 25 }))
     
   }
 
-  shoot() {
+  shoot(time, delta) {
+    console.log('TIME', time, 'NEXT FIRE', this.nextFire)
+    if(time < this.nextFire) { return }
     this.generateLaserPair()
-    this.shot = true
+    this.nextFire = time + this.fireRate
   }
 
   update(time, delta) {
@@ -32,6 +35,6 @@ export default class Fighter extends Ship {
     this.follower.t += this.speed * delta
     this.path.getPoint(this.follower.t, this.follower.vec)
     this.setPosition(this.follower.vec.x, this.follower.vec.y)
-    if(!this.shot) this.shoot()
+    this.shoot(time, delta)
   }
 }
