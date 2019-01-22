@@ -9,6 +9,8 @@ export default class Battlefield extends Scene {
     this.spawnRate = 5000
     this.nextSpawn = 0
     this.updateCount = 0
+    this.score = 0
+    this.scoreText = ''
   }
 
   addCollider(group1, group2, callback) {
@@ -32,6 +34,8 @@ export default class Battlefield extends Scene {
 
   create() {
     //Filling in Battlefield Properties
+    this.scoreText = this.add.text(16, 16, `score: ${this.score}`, { fontSize: '32px', fill: '#FFF'})
+    console.log(this)
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     this.cursors = this.input.keyboard.createCursorKeys()
     this.laserCollide = this.addCollider(this.playerLasers, this.enemyLasers, laserCollision)
