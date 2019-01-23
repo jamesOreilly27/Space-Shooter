@@ -22,6 +22,8 @@ export default class Battlefield extends Scene {
 
   levelUp() {
     if(this.score >= 50) this.level = 2
+    if(this.score >= 50 && this.score <= 500) this.level = 3
+    if(this.score >= 500 && this.score <= 1000) this.level = 4
   }
 
   preload() {
