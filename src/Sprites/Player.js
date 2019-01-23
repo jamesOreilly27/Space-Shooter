@@ -6,6 +6,7 @@ export default class Player extends Ship {
     super(config)
     this.shieldLevel = 0
     this.laserLevel = 1
+    this.speed = 150
     this.body.setCollideWorldBounds(true)
   }
 
@@ -38,12 +39,12 @@ export default class Player extends Ship {
   }
 
   move() {
-    if(this.scene.cursors.left.isDown) this.body.setVelocityX(-250)
-    else if(this.scene.cursors.right.isDown) this.body.setVelocityX(250)
+    if(this.scene.cursors.left.isDown) this.body.setVelocityX(-this.speed)
+    else if(this.scene.cursors.right.isDown) this.body.setVelocityX(this.speed)
     else this.body.setVelocityX(0)
   
-    if(this.scene.cursors.down.isDown) this.body.setVelocityY(250)
-    else if(this.scene.cursors.up.isDown) this.body.setVelocityY(-250)
+    if(this.scene.cursors.down.isDown) this.body.setVelocityY(this.speed)
+    else if(this.scene.cursors.up.isDown) this.body.setVelocityY(-this.speed)
     else this.body.setVelocityY(0)
   }
 
