@@ -69,6 +69,7 @@ export default class Battlefield extends Scene {
   }
   
   update(time, delta) {
+    let currentLevel = this.level
     this.updateCount++
     this.player.update(time, delta)
     this.enemies.children.entries.forEach(enemy => { enemy.update(time, delta) })
@@ -76,6 +77,9 @@ export default class Battlefield extends Scene {
     this.enemyLasers.children.entries.forEach(laser => { laser.update(time, delta) })
     this.shields.children.entries.forEach(shield => { shield.update(time, delta) })
     this.levelUp()
+    if(this.level !== currentLevel) {
+      console.log('hello')
+    }
     spawnEnemies(this, time, delta)
     spawnMeteors(this)
     if(this.updateCount >= 200) this.updateCount = 0
