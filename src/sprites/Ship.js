@@ -17,6 +17,8 @@ export default class Ship extends Phaser.GameObjects.Sprite {
 
   setSpeed(newSpeed) { this.speed = newSpeed }
 
+  setBulletSpeed(newSpeed) { this.bulletSpeed = newSpeed }
+
   explode() {
     const explosion = this.scene.physics.add.sprite(this.x, this.y, 'explosion')
     explosion.play('explode')
