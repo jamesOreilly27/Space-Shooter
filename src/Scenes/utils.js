@@ -1,3 +1,5 @@
+import { Meteor } from '../sprites'
+
 /***** Preload Images Utils *****/
 
 //Add any images needed for the game to this array and they will automatically be added to the preload function in the Battlefield Scene
@@ -37,6 +39,17 @@ export const battlefieldImageLoad = scene => {
   })
 }
 
+/***** Spawn Meteors *****/
+
+export const createMeteor = (scene) => {
+  scene.meteors.add(new Meteor({ scene: scene, x: 400, y: 300, key: 'med-meteor' }))
+}
+export const spawnMeteors = scene => {
+  if(scene.score < scene.nextMeteorSpawn) { return }
+  createMeteor(scene)
+  scene.nextMeteorSpawn = scene.score + scene.meteorSpawnRate
+}
+
 
 /***** Destroy Utils *****/
 export const destroy = (object1, object2) => {
@@ -45,7 +58,7 @@ export const destroy = (object1, object2) => {
 }
 
 export const enemyDestroy = (enemy, playerLaser) => {
-  enemy.explode()
+  enemy.enemyExplode()
   playerLaser.destroy()
 }
 

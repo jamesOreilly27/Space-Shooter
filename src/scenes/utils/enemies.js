@@ -59,9 +59,9 @@ export const addRandomEnemy = scene => {
 }
 
 export const spawnEnemies = (scene, time) => {
-  if(time < scene.nextSpawn) { return }
+  if(time < scene.nextEnemySpawn) { return }
     addFighter(scene)
     addDivebombers(scene, 5)
     addRandomEnemy(scene)
-    scene.nextSpawn = time + scene.spawnRate
+    scene.nextEnemySpawn = time + scene.enemySpawnRate
 }

@@ -1,18 +1,27 @@
 import Phaser, { Scene } from 'phaser'
 import { Player, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
-import { enemyDestroy, destroy, powerup, shieldBlock, laserCollision, meteorDestroy, battlefieldImageLoad } from './utils'
+import { enemyDestroy, destroy, powerup, shieldBlock, laserCollision, meteorDestroy, battlefieldImageLoad, spawnMeteors } from './utils'
 import { addPatrol, addDivebombers, addChaser, addFighter, addRandomEnemy, spawnEnemies } from './utils/enemies'
 
 export default class Battlefield extends Scene {
   constructor() {
     super({ key: 'Battlefield', active: true })
-    this.spawnRate = 5000
-    this.nextSpawn = 0
+    this.enemySpawnRate = 5000
+    this.meteorSpawnRate = 75
+    this.nextMeteor = 0
+    this.nextEnemySpawn = 0
     this.updateCount = 0
+    this.level = 1
+    this.score = 0
+    this.scoreText = ''
   }
 
   addCollider(group1, group2, callback) {
     return this.physics.add.collider(group1, group2, callback, null, this)
+  }
+
+  levelUp() {
+    if(this.score >= 50) this.level = 2
   }
 
   preload() {
@@ -32,11 +41,12 @@ export default class Battlefield extends Scene {
 
   create() {
     //Filling in Battlefield Properties
+    this.scoreText = this.add.text(16, 16, `score: ${this.score}`, { fontSize: '32px', fill: '#FFF'})
+    console.log(this)
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     this.cursors = this.input.keyboard.createCursorKeys()
     this.laserCollide = this.addCollider(this.playerLasers, this.enemyLasers, laserCollision)
-    this.laserCollide.active = false;
-    this.meteors.add(new Meteor({ scene: this, x: 400, y: 300, key: 'med-meteor'}))
+    this.laserCollide.active = false
 
     // ***** Colliders *****
     this.addCollider(this.enemies, this.playerLasers, enemyDestroy)
@@ -65,7 +75,9 @@ export default class Battlefield extends Scene {
     this.playerLasers.children.entries.forEach(laser => { laser.update(time, delta) })
     this.enemyLasers.children.entries.forEach(laser => { laser.update(time, delta) })
     this.shields.children.entries.forEach(shield => { shield.update(time, delta) })
+    this.levelUp()
     spawnEnemies(this, time, delta)
+    spawnMeteors(this)
     if(this.updateCount >= 200) this.updateCount = 0
   }
 }
