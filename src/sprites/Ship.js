@@ -8,6 +8,9 @@ export default class Ship extends Phaser.GameObjects.Sprite {
     this.key = config.key
     this.scaleX = .4
     this.scaleY = .4
+    this.speed = 0
+    this.bulletSpeed = 0
+    this.fireRate = 0
   }
 
   explode() {

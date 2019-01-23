@@ -8,7 +8,7 @@ export default class Fighter extends Ship {
     this.path = config.path
     this.speed = 1/80000
     this.nextFire = 0
-    this.fireRate = 750
+    this.fireRate = 1500
   }
 
   startOnPath() {
