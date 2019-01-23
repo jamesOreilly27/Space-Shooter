@@ -13,6 +13,10 @@ export default class Ship extends Phaser.GameObjects.Sprite {
     this.fireRate = 0
   }
 
+  setFireRate(newRate) {
+    this.fireRate = newRate
+  }
+
   explode() {
     const explosion = this.scene.physics.add.sprite(this.x, this.y, 'explosion')
     explosion.play('explode')
