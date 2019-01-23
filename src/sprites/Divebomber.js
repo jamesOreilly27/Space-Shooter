@@ -5,7 +5,7 @@ export default class Divebomber extends Ship {
   constructor(config) {
     super(config)
     this.shot = false
-    this.left = this.x <=400
+    this.left = this.x <= 400
   }
 
   move() {
@@ -18,7 +18,7 @@ export default class Divebomber extends Ship {
 
   shoot() {
     while(!this.shot) {
-      this.scene.enemyLasers.add(new DivebomberLaser({ scene: this.scene, x: this.x, y: this.y, key: 'divebomber-laser'}))
+      this.scene.enemyLasers.add(new DivebomberLaser({ scene: this.scene, x: this.x, y: this.y, key: 'divebomber-laser', bulletSpeed: this.bulletSpeed}))
       this.shot = true
     }
   }
