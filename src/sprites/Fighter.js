@@ -29,6 +29,26 @@ export default class Fighter extends Ship {
     this.nextFire = time + this.fireRate
   }
 
+  levelUp(scene) {
+    if(scene.level === 2) {
+      this.setSpeed(1/98000)
+      this.setFireRate(1400)
+      console.log('2', this.speed)
+    }
+
+    if(scene.level === 3) {
+      this.setSpeed(1/95000)
+      this.setFireRate(1250)
+      console.log('3', this.speed)
+    }
+
+    if(scene.level === 4) {
+      this.setSpeed(1/91000)
+      this.setFireRate(1050)
+      console.log('4', this.speed)
+    }
+  }
+
   update(time, delta) {
     if(this.follower.t === 0) this.startOnPath()
     this.follower.t += this.speed * delta

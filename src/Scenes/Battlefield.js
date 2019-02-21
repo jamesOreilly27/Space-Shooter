@@ -22,8 +22,8 @@ export default class Battlefield extends Scene {
 
   levelUp() {
     if(this.score >= 50) this.level = 2
-    if(this.score >= 50 && this.score <= 500) this.level = 3
-    if(this.score >= 500 && this.score <= 1000) this.level = 4
+    if(this.score >= 51 && this.score <= 500) this.level = 3
+    if(this.score >= 501 && this.score <= 1000) this.level = 4
   }
 
   preload() {
@@ -80,7 +80,8 @@ export default class Battlefield extends Scene {
     this.shields.children.entries.forEach(shield => { shield.update(time, delta) })
     this.levelUp()
     if(this.level !== currentLevel) {
-      console.log('hello')
+      console.log('HELLO', this.level)
+      this.enemies.children.entries.forEach(enemy => { enemy.levelUp(this) })
     }
     spawnEnemies(this, time, delta)
     spawnMeteors(this)
