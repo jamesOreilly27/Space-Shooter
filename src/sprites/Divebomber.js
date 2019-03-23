@@ -28,7 +28,7 @@ export default class Divebomber extends Ship {
 
   levelUp(scene) {
     this.setSpeed(enemySpecs.Divebomber.speed)
-    this.setBulletSpeed(enemySpecs.Divebomer.bulletSpeed)
+    this.setBulletSpeed(enemySpecs.Divebomber.bulletSpeed)
   }
 
   update() {
