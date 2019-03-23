@@ -1,14 +1,15 @@
 import Phaser from 'phaser'
 import { Ship, FighterLaser } from '../sprites'
+import { enemySpecs } from '../scenes/utils/enemies'
 
 export default class Fighter extends Ship {
   constructor(config) {
     super(config)
     this.follower = { t: 0, vec: new Phaser.Math.Vector2() }
     this.path = config.path
-    this.speed = 1/100000
+    this.speed = enemySpecs.Fighter.speed
     this.nextFire = 0
-    this.fireRate = 1500
+    this.fireRate = enemySpecs.Fighter.fireRate
   }
 
   startOnPath() {
@@ -25,36 +26,34 @@ export default class Fighter extends Ship {
 
   shoot(time, delta) {
     if(time < this.nextFire) { return }
+    console.log(this.fireRate)
     this.generateLaserPair()
     this.nextFire = time + this.fireRate
   }
 
   levelUp(scene) {
-    this.setSpeed()
-    
-    
-    if(scene.level === 2) {
-      this.setSpeed(1/95000)
-      this.setFireRate(1400)
-      console.log('2', this.speed)
-    }
+    this.setSpeed(enemySpecs.Fighter.speed)
+    this.setFireRate(enemySpecs.Fighter.fireRate)
 
-    if(scene.level === 3) {
-      this.setSpeed(1/91000)
-      this.setFireRate(1250)
-      console.log('3', this.speed)
-    }
+    // if(scene.level === 2) {
+    //   this.setSpeed(this.speed * 1.25)
+    //   this.setFireRate(1400)
+    // }
 
-    if(scene.level === 4) {
-      this.setSpeed(1/87000)
-      this.setFireRate(1050)
-      console.log('4', this.speed)
-    }
+    // if(scene.level === 3) {
+    //   this.setSpeed(1/91000)
+    //   this.setFireRate(1250)
+    // }
+
+    // if(scene.level === 4) {
+    //   this.setSpeed(1/87000)
+    //   this.setFireRate(1050)
+    // }
   }
 
   update(time, delta) {
     if(this.follower.t === 0) this.startOnPath()
-    this.follower.t += this.speed * delta
+    this.follower.t += enemySpecs.Fighter.speed * delta
     this.path.getPoint(this.follower.t, this.follower.vec)
     this.setPosition(this.follower.vec.x, this.follower.vec.y)
     this.shoot(time, delta)

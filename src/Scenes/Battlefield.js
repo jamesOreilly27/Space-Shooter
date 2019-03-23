@@ -1,7 +1,7 @@
 import Phaser, { Scene } from 'phaser'
 import { Player, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
 import { enemyDestroy, destroy, powerup, shieldBlock, laserCollision, meteorDestroy, battlefieldImageLoad, spawnMeteors } from './utils'
-import { addPatrol, addDivebombers, addChaser, addFighter, addRandomEnemy, spawnEnemies } from './utils/enemies'
+import { addPatrol, addDivebombers, addChaser, addFighter, addRandomEnemy, spawnEnemies, enemySpecs } from './utils/enemies'
 
 export default class Battlefield extends Scene {
   constructor() {
@@ -20,10 +20,15 @@ export default class Battlefield extends Scene {
     return this.physics.add.collider(group1, group2, callback, null, this)
   }
 
-  levelUp() {
+  incrementLevel() {
     if(this.score >= 50) this.level = 2
     if(this.score >= 51 && this.score <= 500) this.level = 3
     if(this.score >= 501 && this.score <= 1000) this.level = 4
+  }
+
+  incrementEnemySpecs() {
+    enemySpecs.Fighter.speed *= 1.25
+    enemySpecs.Fighter.fireRate *= .75
   }
 
   preload() {
@@ -78,9 +83,10 @@ export default class Battlefield extends Scene {
     this.playerLasers.children.entries.forEach(laser => { laser.update(time, delta) })
     this.enemyLasers.children.entries.forEach(laser => { laser.update(time, delta) })
     this.shields.children.entries.forEach(shield => { shield.update(time, delta) })
-    this.levelUp()
+    this.incrementLevel()
     if(this.level !== currentLevel) {
       console.log('HELLO', this.level)
+      this.incrementEnemySpecs()
       this.enemies.children.entries.forEach(enemy => { enemy.levelUp(this) })
     }
     spawnEnemies(this, time, delta)

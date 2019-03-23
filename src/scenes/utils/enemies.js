@@ -1,6 +1,13 @@
 import Phaser from 'phaser'
 import { PatrolShip, Divebomber, Chaser, Fighter } from '../../sprites'
 
+export const enemySpecs = {
+  Fighter: {
+    speed: 1/100000,
+    fireRate: 1500
+  }
+}
+
 export const randomCoordinateX = () => ( Math.floor(Math.random() * 600) )
 
 export const randomCoordinateY = () => ( Math.floor(Math.random() * 300) )
