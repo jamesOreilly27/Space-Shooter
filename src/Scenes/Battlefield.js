@@ -27,8 +27,11 @@ export default class Battlefield extends Scene {
   }
 
   incrementEnemySpecs() {
+    //Will want to move this to another file later. Will likely take up too many lines here to be reasonable
     enemySpecs.Fighter.speed *= 1.25
     enemySpecs.Fighter.fireRate *= .75
+    enemySpecs.Divebomber.speed *= 1.25
+    enemySpecs.Divebomber.bulletSpeed *= 1.25
   }
 
   preload() {
