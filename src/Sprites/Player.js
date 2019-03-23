@@ -10,9 +10,6 @@ export default class Player extends Ship {
     this.body.setCollideWorldBounds(true)
   }
 
-  //TODO: I'm thinking of removing the idea of different colored shield power ups for different levels
-  //Overall I think it's better that the shield upgrades when you collect and downgrades when you get hit
-  //Visually the type of shield you have is enough to tell what you will be getting from the powerup
   getShieldPowerupSprite() {
     if(this.shieldLevel === 0) return 'bronze-shield'
     else if(this.shieldLevel === 1) return 'silver-shield'
@@ -63,6 +60,7 @@ export default class Player extends Ship {
 
   update() {
     if(this.active) {
+      console.log('TEST', this.speed)
       this.move() 
       this.shoot()
 
