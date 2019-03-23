@@ -6,9 +6,9 @@ export default class Fighter extends Ship {
     super(config)
     this.follower = { t: 0, vec: new Phaser.Math.Vector2() }
     this.path = config.path
-    this.speed = 1/80000
+    this.speed = 1/100000
     this.nextFire = 0
-    this.fireRate = 750
+    this.fireRate = 1500
   }
 
   startOnPath() {
@@ -27,6 +27,29 @@ export default class Fighter extends Ship {
     if(time < this.nextFire) { return }
     this.generateLaserPair()
     this.nextFire = time + this.fireRate
+  }
+
+  levelUp(scene) {
+    this.setSpeed()
+    
+    
+    if(scene.level === 2) {
+      this.setSpeed(1/98000)
+      this.setFireRate(1400)
+      console.log('2', this.speed)
+    }
+
+    if(scene.level === 3) {
+      this.setSpeed(1/95000)
+      this.setFireRate(1250)
+      console.log('3', this.speed)
+    }
+
+    if(scene.level === 4) {
+      this.setSpeed(1/91000)
+      this.setFireRate(1050)
+      console.log('4', this.speed)
+    }
   }
 
   update(time, delta) {
