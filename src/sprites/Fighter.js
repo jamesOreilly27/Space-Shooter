@@ -26,7 +26,6 @@ export default class Fighter extends Ship {
 
   shoot(time, delta) {
     if(time < this.nextFire) { return }
-    console.log(this.fireRate)
     this.generateLaserPair()
     this.nextFire = time + this.fireRate
   }
