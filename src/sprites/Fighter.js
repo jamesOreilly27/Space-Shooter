@@ -33,21 +33,6 @@ export default class Fighter extends Ship {
   levelUp(scene) {
     this.setSpeed(enemySpecs.Fighter.speed)
     this.setFireRate(enemySpecs.Fighter.fireRate)
-
-    // if(scene.level === 2) {
-    //   this.setSpeed(this.speed * 1.25)
-    //   this.setFireRate(1400)
-    // }
-
-    // if(scene.level === 3) {
-    //   this.setSpeed(1/91000)
-    //   this.setFireRate(1250)
-    // }
-
-    // if(scene.level === 4) {
-    //   this.setSpeed(1/87000)
-    //   this.setFireRate(1050)
-    // }
   }
 
   update(time, delta) {
