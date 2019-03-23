@@ -33,7 +33,7 @@ export default class Battlefield extends Scene {
     enemySpecs.Divebomber.speed *= 1.25
     enemySpecs.Divebomber.bulletSpeed *= 1.25
     enemySpecs.Patrol.speed *= 1.25
-    enemySpecs.Patrol.bulletSpeed *= 2
+    enemySpecs.Patrol.bulletSpeed *= 1.25
   }
 
   preload() {

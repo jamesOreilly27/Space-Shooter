@@ -31,6 +31,7 @@ export default class PatrolShip extends Ship {
 
   levelUp(scene) {
     this.setSpeed(enemySpecs.Patrol.speed)
+    this.setBulletSpeed(enemySpecs.Patrol.bulletSpeed)
     if(this.body.velocity.x < 0) this.body.setVelocityX(-this.speed)
     else if(this.body.velocity.x > 0) this.body.setVelocityX(this.speed)
   }
