@@ -32,6 +32,8 @@ export default class Battlefield extends Scene {
     enemySpecs.Fighter.fireRate *= .75
     enemySpecs.Divebomber.speed *= 1.25
     enemySpecs.Divebomber.bulletSpeed *= 1.25
+    enemySpecs.Patrol.speed *= 1.25
+    enemySpecs.Patrol.bulletSpeed *= 2
   }
 
   preload() {

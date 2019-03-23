@@ -9,6 +9,11 @@ export const enemySpecs = {
   Divebomber: {
     speed: 250,
     bulletSpeed: 320
+  },
+  Patrol: {
+    speed: 80,
+    bulletSpeed: 100,
+    fireRate: 1200
   }
 }
 
@@ -71,10 +76,11 @@ export const addRandomEnemy = scene => {
 
 export const spawnEnemies = (scene, time) => {
   if(time < scene.nextEnemySpawn) { return }
-    addFighter(scene)
-    addFighter(scene)
-    addFighter(scene)
-    addDivebombers(scene, 3)
+    // addFighter(scene)
+    // addFighter(scene)
+    // addFighter(scene)
+    addPatrol(scene, 2)
+    // addDivebombers(scene, 3)
     // addRandomEnemy(scene)
     scene.nextEnemySpawn = time + scene.enemySpawnRate
 }

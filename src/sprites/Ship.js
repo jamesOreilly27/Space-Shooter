@@ -32,10 +32,10 @@ export default class Ship extends Phaser.GameObjects.Sprite {
   }
 
   updateScore() {
-    if(this.key === 'divebomber') this.scene.score += 5
+    if(this.key === 'divebomber') this.scene.score += 50
     if(this.key === 'fighter') this.scene.score += 50
     if(this.key === 'chaser') this.scene.score += 3
-    if(this.key === 'patrol-ship') this.scene.score += 3
+    if(this.key === 'patrol-ship') this.scene.score += 50
     this.scene.scoreText.setText(`score: ${this.scene.score}`)
   }
 
