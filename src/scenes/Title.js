@@ -12,7 +12,8 @@ export default class Title extends Scene {
   }
 
   create() {
-    this.titleText = this.add.text(105, 40, 'Space Shooter', { fontSize: '75px', fill: '#32CD32' })
+    this.titleText = this.add.text(60, 16, 'Space Shooter', { fontSize: '100px', fontFamily: 'Josefin Sans', fill: '#32CD32' })
+    console.log(this.titleText)
 
     this.playerTitle = this.add.image(475, 225, 'player-title').setScale(1.3, 1.3).setAngle(225)
     this.enemyTitle = this.add.image(300, 380, 'enemy-title').setScale(1.15, 1.15).setAngle(45)
@@ -21,7 +22,7 @@ export default class Title extends Scene {
     this.input.manager.enabled = true
     this.startKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
     
-    this.startPrompt = this.add.text(65, 500, 'Press Spacebar to Start', { fontSize: '50px', fill: '#32CD32' })
+    this.startPrompt = this.add.text(143, 500, 'Press Spacebar to Start', { fontSize: '45px', fontFamily: 'Josefin Sans', fill: '#32CD32' })
   }
 
   update() {
