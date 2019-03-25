@@ -5,7 +5,7 @@ import { addPatrol, addDivebombers, addChaser, addFighter, addRandomEnemy, spawn
 
 export default class Battlefield extends Scene {
   constructor() {
-    super({ key: 'Battlefield', active: true })
+    super({ key: 'Battlefield' })
     this.enemySpawnRate = 5000
     this.meteorSpawnRate = 75
     this.nextMeteor = 0
