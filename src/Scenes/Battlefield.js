@@ -21,19 +21,20 @@ export default class Battlefield extends Scene {
   }
 
   incrementLevel() {
-    if(this.score >= 50) this.level = 2
-    if(this.score >= 51 && this.score <= 500) this.level = 3
-    if(this.score >= 501 && this.score <= 1000) this.level = 4
+    if(this.score >= 500) this.level = 2
+    if(this.score >= 501 && this.score <= 1000) this.level = 3
+    if(this.score >= 1001 && this.score <= 1500) this.level = 4
+    if(this.score >= 1501) this.level = 5
   }
 
   incrementEnemySpecs() {
     //Will want to move this to another file later. Will likely take up too many lines here to be reasonable
-    enemySpecs.Fighter.speed *= 1.25
-    enemySpecs.Fighter.fireRate *= .75
-    enemySpecs.Divebomber.speed *= 1.25
-    enemySpecs.Divebomber.bulletSpeed *= 1.25
-    enemySpecs.Patrol.speed *= 1.25
-    enemySpecs.Patrol.bulletSpeed *= 1.25
+    enemySpecs.Fighter.speed *= 1.1
+    enemySpecs.Fighter.fireRate *= .9
+    enemySpecs.Divebomber.speed *= 1.1
+    enemySpecs.Divebomber.bulletSpeed *= 1.1
+    enemySpecs.Patrol.speed *= 1.1
+    enemySpecs.Patrol.bulletSpeed *= 1.1
   }
 
   preload() {
