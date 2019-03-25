@@ -8,6 +8,21 @@ export default class Ship extends Phaser.GameObjects.Sprite {
     this.key = config.key
     this.scaleX = .4
     this.scaleY = .4
+    this.speed = 0
+    this.bulletSpeed = 0
+    this.fireRate = 0
+  }
+
+  setFireRate(newRate) {
+    this.fireRate = newRate
+  }
+
+  setSpeed(newSpeed) {
+    this.speed = newSpeed
+  }
+
+  setBulletSpeed(newSpeed) {
+    this.bulletSpeed = newSpeed
   }
 
   explode() {
@@ -17,10 +32,10 @@ export default class Ship extends Phaser.GameObjects.Sprite {
   }
 
   updateScore() {
-    if(this.key === 'divebomber') this.scene.score += 5
-    if(this.key === 'fighter') this.scene.score +=2
+    if(this.key === 'divebomber') this.scene.score += 50
+    if(this.key === 'fighter') this.scene.score += 50
     if(this.key === 'chaser') this.scene.score += 3
-    if(this.key === 'patrol-ship') this.scene.score += 3
+    if(this.key === 'patrol-ship') this.scene.score += 50
     this.scene.scoreText.setText(`score: ${this.scene.score}`)
   }
 

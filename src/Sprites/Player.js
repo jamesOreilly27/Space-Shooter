@@ -6,12 +6,10 @@ export default class Player extends Ship {
     super(config)
     this.shieldLevel = 0
     this.laserLevel = 1
+    this.speed = 150
     this.body.setCollideWorldBounds(true)
   }
 
-  //TODO: I'm thinking of removing the idea of different colored shield power ups for different levels
-  //Overall I think it's better that the shield upgrades when you collect and downgrades when you get hit
-  //Visually the type of shield you have is enough to tell what you will be getting from the powerup
   getShieldPowerupSprite() {
     if(this.shieldLevel === 0) return 'bronze-shield'
     else if(this.shieldLevel === 1) return 'silver-shield'
@@ -38,12 +36,12 @@ export default class Player extends Ship {
   }
 
   move() {
-    if(this.scene.cursors.left.isDown) this.body.setVelocityX(-250)
-    else if(this.scene.cursors.right.isDown) this.body.setVelocityX(250)
+    if(this.scene.cursors.left.isDown) this.body.setVelocityX(-this.speed)
+    else if(this.scene.cursors.right.isDown) this.body.setVelocityX(this.speed)
     else this.body.setVelocityX(0)
   
-    if(this.scene.cursors.down.isDown) this.body.setVelocityY(250)
-    else if(this.scene.cursors.up.isDown) this.body.setVelocityY(-250)
+    if(this.scene.cursors.down.isDown) this.body.setVelocityY(this.speed)
+    else if(this.scene.cursors.up.isDown) this.body.setVelocityY(-this.speed)
     else this.body.setVelocityY(0)
   }
 

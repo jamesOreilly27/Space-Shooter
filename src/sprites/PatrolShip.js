@@ -1,38 +1,43 @@
 import Phaser from 'phaser'
+import { enemySpecs } from '../scenes/utils/enemies'
 import { Ship, PatrolShipLaser } from '../sprites'
 
 export default class PatrolShip extends Ship {
   constructor(config) {
     super(config)
-    this.movestarted = false
+    this.speed = enemySpecs.Patrol.speed
+    this.bulletSpeed = enemySpecs.Patrol.bulletSpeed
+    this.nextFire = 0
+    this.fireRate = enemySpecs.Patrol.fireRate
+    this.moveStarted = false
   }
 
   move() {
     if(this.active) {
-      while(!this.started) {
-        this.body.setVelocityX(80)
-        this.started = true
+      while(!this.moveStarted) {
+        this.body.setVelocityX(this.speed)
+        this.moveStarted = true
       }
-      if(this.x > 800) this.body.setVelocityX(-80)
-      else if(this.x < 10) this.body.setVelocityX(80)
+      if(this.x > 800) this.body.setVelocityX(-this.speed)
+      else if(this.x < 10) this.body.setVelocityX(this.speed)
     }
   }
 
-  shoot(spriteStr) {
-    const laserRechargeCount = this.scene.updateCount
-    if(laserRechargeCount % 100 === 0 && this.active) {
-      this.scene.enemyLasers.add(new PatrolShipLaser({ scene: this.scene, x: this.x, y: this.y + 40, key: spriteStr }))
-    }
+  shoot(time, delta) {
+    if(time < this.nextFire) { return }
+    this.scene.enemyLasers.add(new PatrolShipLaser({ scene: this.scene, x: this.x, y: this.y + 40, key: 'patrol-ship-laser', bulletSpeed: this.bulletSpeed }))
+    this.nextFire = time + this.fireRate
   }
 
-  // explode() {
-  //   const explosion = this.scene.physics.add.sprite(this.x, this.y, 'explosion')
-  //   explosion.play('explode')
-  //   this.destroy()
-  // }
+  levelUp(scene) {
+    this.setSpeed(enemySpecs.Patrol.speed)
+    this.setBulletSpeed(enemySpecs.Patrol.bulletSpeed)
+    if(this.body.velocity.x < 0) this.body.setVelocityX(-this.speed)
+    else if(this.body.velocity.x > 0) this.body.setVelocityX(this.speed)
+  }
 
-  update() {
-    this.move(this.scene.updateCount)
-    this.shoot('patrol-ship-laser')
+  update(time, delta) {
+    this.move()
+    this.shoot(time, delta)
   }
 }
