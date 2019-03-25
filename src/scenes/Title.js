@@ -6,11 +6,11 @@ export default class Title extends Scene {
   }
 
   preload() {
-
+    this.load.image('title-image', './assets/playerShip1_green.png')
   }
 
   create() {
-
+    
   }
 
   update() {
