@@ -2,7 +2,7 @@ import Phaser, { Scene } from 'phaser'
 
 export default class Title extends Scene {
   constructor() {
-    super({ key: 'Title' })
+    super({ key: 'Title', active: true })
   }
 
   preload() {
@@ -10,7 +10,8 @@ export default class Title extends Scene {
   }
 
   create() {
-    
+    this.titleImage = this.add.image(400, 400, 'title-image')
+    console.log(this.titleImage)
   }
 
   update() {
