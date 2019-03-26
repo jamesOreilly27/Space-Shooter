@@ -67,7 +67,6 @@ export default class Battlefield extends Scene {
   }
   
   update(time, delta) {
-    // console.log(this.level)
     let currentLevel = this.level
     this.updateCount++
     this.player.update(time, delta)

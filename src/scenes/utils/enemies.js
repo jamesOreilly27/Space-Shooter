@@ -40,6 +40,14 @@ export const enemySpecs = {
   }
 }
 
+export const resetEnemySpecs = () => {
+  for(let enemyClass in enemySpecs) {
+    enemySpecs[enemyClass].speed = baseStats[enemyClass].speed
+    enemySpecs[enemyClass].fireRate = baseStats[enemyClass].fireRate
+    enemySpecs[enemyClass].bulletSpeed = baseStats[enemyClass].bulletSpeed
+  }
+}
+
 export const incrementEnemySpecs = () => {
   for(let enemyClass in enemySpecs) {
     enemySpecs[enemyClass].speed *= 1.1
