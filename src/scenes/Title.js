@@ -3,8 +3,6 @@ import Phaser, { Scene } from 'phaser'
 export default class Title extends Scene {
   constructor() {
     super({ key: 'Title', active: true })
-    // console.log(this.sys.events)
-    // this.event.once()
   }
 
   preload() {
