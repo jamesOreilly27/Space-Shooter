@@ -1,6 +1,6 @@
 import Phaser, { Scene } from 'phaser'
 import { Player, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
-import { enemyDestroy, destroy, powerup, shieldBlock, laserCollision, meteorDestroy, battlefieldImageLoad, spawnMeteors } from './utils'
+import { enemyDestroy, playerDestroy, destroy, powerup, shieldBlock, laserCollision, meteorDestroy, battlefieldImageLoad, spawnMeteors } from './utils'
 import { addPatrol, addDivebombers, addChaser, addFighter, addRandomEnemy, spawnEnemies, enemySpecs } from './utils/enemies'
 
 export default class Battlefield extends Scene {
@@ -54,8 +54,7 @@ export default class Battlefield extends Scene {
 
   create() {
     //Filling in Battlefield Properties
-    this.scoreText = this.add.text(16, 16, `score: ${this.score}`, { fontSize: '32px', fill: '#FFF'})
-    console.log(this)
+    this.scoreText = this.add.text(16, 16, `SCORE: ${this.score}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF'})
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     this.cursors = this.input.keyboard.createCursorKeys()
     this.laserCollide = this.addCollider(this.playerLasers, this.enemyLasers, laserCollision)
@@ -64,7 +63,7 @@ export default class Battlefield extends Scene {
     // ***** Colliders *****
     this.addCollider(this.enemies, this.playerLasers, enemyDestroy)
     this.addCollider(this.player, this.enemies, enemyDestroy)
-    this.addCollider(this.player, this.enemyLasers, enemyDestroy)
+    this.addCollider(this.player, this.enemyLasers, playerDestroy)
     this.addCollider(this.player, this.powerups, powerup)
     this.addCollider(this.enemies, this.shields, shieldBlock)
     this.addCollider(this.enemyLasers, this.shields, shieldBlock)
@@ -91,7 +90,6 @@ export default class Battlefield extends Scene {
     this.shields.children.entries.forEach(shield => { shield.update(time, delta) })
     this.incrementLevel()
     if(this.level !== currentLevel) {
-      console.log('HELLO', this.level)
       this.player.speed *= 1.15
       this.incrementEnemySpecs()
       this.enemies.children.entries.forEach(enemy => { enemy.levelUp(this) })

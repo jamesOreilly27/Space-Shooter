@@ -31,6 +31,14 @@ export default class Ship extends Phaser.GameObjects.Sprite {
     this.destroy()
   }
 
+  playerExplode() {
+    // const explosion = this.scene.physics.add.sprite(this.x, this.y, 'explosion')
+    // explosion.play('explode')
+    this.scene.scene.pause()
+    this.scene.scene.manager.start('Death', { score: this.scene.score })
+    // this.destroy()
+  }
+
   updateScore() {
     if(this.key === 'divebomber') this.scene.score += 50
     if(this.key === 'fighter') this.scene.score += 50
