@@ -1,4 +1,4 @@
-/***** Preload Images Utils *****/
+/*************** Preload Images ***************/
 
 //Add any images needed for the game to this array and they will automatically be added to the preload function in the Battlefield Scene
 const images = [
@@ -31,8 +31,32 @@ export const imageLoad = (scene, key, path) => {
 
 //Run imageLoad function for everything in the images array
 //This function is exported to Battlefield scene and runs in the preload method
-export const battlefieldImageLoad = scene => {
+export const battlefieldImageLoad = battlefield => {
   images.forEach(image => {
-    imageLoad(scene, image.key, image.path)
+    imageLoad(battlefield, image.key, image.path)
   })
+}
+
+/*************** Incrementing Level ***************/
+export const incrementLevelText = battlefield => {
+  battlefield.levelText.setText(`LEVEL: ${battlefield.level}`)
+}
+
+export const incrementLevel = battlefield => {
+  if(battlefield.score >= 500) {
+    battlefield.level = 2
+    incrementLevelText(battlefield)
+  }
+  if(battlefield.score >= 501 && battlefield.score <= 1000) {
+    battlefield.level = 3
+    incrementLevelText(battlefield)
+  }
+  if(battlefield.score >= 1001 && battlefield.score <= 1500) {
+    battlefield.level = 4
+    incrementLevelText(battlefield)
+  }
+  if(battlefield.score >= 1501) {
+    battlefield.level = 5
+    incrementLevelText(battlefield)
+  }
 }
