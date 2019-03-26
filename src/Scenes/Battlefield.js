@@ -3,7 +3,7 @@ import { Player, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
 import { spawnMeteors } from './utils'
 import { battlefieldImageLoad, incrementLevel } from './utils/battlefield'
 import { enemyDestroy, playerDestroy, powerup, shieldBlock, laserCollision, meteorDestroy } from './utils/collisions'
-import { addPatrol, addDivebombers, addChaser, addFighter, addRandomEnemy, spawnEnemies, enemySpecs, incrementEnemySpecs } from './utils/enemies'
+import { addPatrol, addDivebombers, addChaser, addFighter, addRandomEnemy, spawnEnemies, enemySpecs, incrementEnemySpecs, resetEnemySpecs } from './utils/enemies'
 
 export default class Battlefield extends Scene {
   constructor() {
@@ -36,6 +36,7 @@ export default class Battlefield extends Scene {
   }
 
   create() {
+    resetEnemySpecs()
     //Filling in Battlefield Properties
     this.score = this.scene.settings.data.score
     this.level = this.scene.settings.data.level
