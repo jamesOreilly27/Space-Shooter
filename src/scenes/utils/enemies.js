@@ -1,11 +1,14 @@
 import Phaser from 'phaser'
 import { PatrolShip, Divebomber, Chaser, Fighter } from '../../sprites'
 
-/*************** Enemy Specs ***************/
-export const enemySpecs = {
+/*************** Enemy Stats ***************/
+
+/***** Base Stats ******/
+const baseStats = {
   Fighter: {
     speed: 1/100000,
-    fireRate: 1500
+    fireRate: 1500,
+    bulletSpeed: 0
   },
   Divebomber: {
     speed: 250,
@@ -16,6 +19,24 @@ export const enemySpecs = {
     speed: 80,
     fireRate: 1200,
     bulletSpeed: 100
+  }
+}
+/***** Enemy Specs *****/
+export const enemySpecs = {
+  Fighter: {
+    speed: baseStats.Fighter.speed,
+    fireRate: baseStats.Fighter.fireRate,
+    bulletSpeed: baseStats.Fighter.bulletSpeed
+  },
+  Divebomber: {
+    speed: baseStats.Divebomber.speed,
+    fireRate: baseStats.Divebomber.fireRate,
+    bulletSpeed: baseStats.Divebomber.bulletSpeed
+  },
+  Patrol: {
+    speed: baseStats.Patrol.speed,
+    fireRate: baseStats.Patrol.fireRate,
+    bulletSpeed: baseStats.Patrol.bulletSpeed
   }
 }
 
