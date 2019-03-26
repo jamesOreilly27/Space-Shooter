@@ -1,6 +1,7 @@
 import Phaser from 'phaser'
 import { PatrolShip, Divebomber, Chaser, Fighter } from '../../sprites'
 
+/*************** Enemy Specs ***************/
 export const enemySpecs = {
   Fighter: {
     speed: 1/100000,
@@ -8,15 +9,25 @@ export const enemySpecs = {
   },
   Divebomber: {
     speed: 250,
+    fireRate: 0,
     bulletSpeed: 320
   },
   Patrol: {
     speed: 80,
-    bulletSpeed: 100,
-    fireRate: 1200
+    fireRate: 1200,
+    bulletSpeed: 100
   }
 }
 
+export const incrementEnemySpecs = () => {
+  for(let enemyClass in enemySpecs) {
+    enemySpecs[enemyClass].speed *= 1.1
+    enemySpecs[enemyClass].fireRate *= .9
+    enemySpecs[enemyClass].bulletSpeed *= 1.1
+  }
+}
+
+/*************** Spawning Enemies ***************/
 export const randomCoordinateX = () => ( Math.floor(Math.random() * 600) )
 
 export const randomCoordinateY = () => ( Math.floor(Math.random() * 300) )
@@ -61,7 +72,6 @@ export const addFighter = scene => {
       path.splineTo([randomX, 75])
     }
   }
-
   path.lineTo(randomX, 650)
 
   addEnemy(scene, Fighter, 'fighter', randomX, 100, path)

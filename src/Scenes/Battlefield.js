@@ -1,7 +1,9 @@
 import Phaser, { Scene } from 'phaser'
 import { Player, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
-import { enemyDestroy, playerDestroy, destroy, powerup, shieldBlock, laserCollision, meteorDestroy, battlefieldImageLoad, spawnMeteors } from './utils'
-import { addPatrol, addDivebombers, addChaser, addFighter, addRandomEnemy, spawnEnemies, enemySpecs } from './utils/enemies'
+import { spawnMeteors } from './utils'
+import { battlefieldImageLoad, incrementLevel } from './utils/battlefield'
+import { enemyDestroy, playerDestroy, powerup, shieldBlock, laserCollision, meteorDestroy } from './utils/collisions'
+import { addPatrol, addDivebombers, addChaser, addFighter, addRandomEnemy, spawnEnemies, enemySpecs, incrementEnemySpecs } from './utils/enemies'
 
 export default class Battlefield extends Scene {
   constructor() {
@@ -16,39 +18,6 @@ export default class Battlefield extends Scene {
 
   addCollider(group1, group2, callback) {
     return this.physics.add.collider(group1, group2, callback, null, this)
-  }
-
-  incrementLevelText() {
-    this.levelText.setText(`LEVEL: ${this.level}`)
-  }
-
-  incrementLevel() {
-    if(this.score >= 500) {
-      this.level = 2
-      this.incrementLevelText()
-    }
-    if(this.score >= 501 && this.score <= 1000) {
-      this.level = 3
-      this.incrementLevelText()
-    }
-    if(this.score >= 1001 && this.score <= 1500) {
-      this.level = 4
-      this.incrementLevelText()
-    }
-    if(this.score >= 1501) {
-      this.level = 5
-      this.incrementLevelText()
-    }
-  }
-
-  incrementEnemySpecs() {
-    //Will want to move this to another file later. Will likely take up too many lines here to be reasonable
-    enemySpecs.Fighter.speed *= 1.1
-    enemySpecs.Fighter.fireRate *= .9
-    enemySpecs.Divebomber.speed *= 1.1
-    enemySpecs.Divebomber.bulletSpeed *= 1.1
-    enemySpecs.Patrol.speed *= 1.1
-    enemySpecs.Patrol.bulletSpeed *= 1.1
   }
 
   preload() {
@@ -106,10 +75,10 @@ export default class Battlefield extends Scene {
     this.playerLasers.children.entries.forEach(laser => { laser.update(time, delta) })
     this.enemyLasers.children.entries.forEach(laser => { laser.update(time, delta) })
     this.shields.children.entries.forEach(shield => { shield.update(time, delta) })
-    this.incrementLevel()
+    incrementLevel(this)
     if(this.level !== currentLevel) {
       this.player.speed *= 1.15
-      this.incrementEnemySpecs()
+      incrementEnemySpecs()
       this.enemies.children.entries.forEach(enemy => { enemy.levelUp(this) })
     }
     spawnEnemies(this, time, delta)
