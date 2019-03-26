@@ -26,7 +26,7 @@ export default class Title extends Scene {
   update() {
     if(this.startKey.isDown) {
       this.startKey.reset()
-      this.scene.start('Battlefield')
+      this.scene.start('Battlefield', { score: 0, level: 1 })
     }
   }
 }

@@ -11,8 +11,6 @@ export default class Battlefield extends Scene {
     this.nextMeteor = 0
     this.nextEnemySpawn = 0
     this.updateCount = 0
-    this.level = 1
-    this.score = 0
     this.scoreText = ''
   }
 
@@ -20,11 +18,27 @@ export default class Battlefield extends Scene {
     return this.physics.add.collider(group1, group2, callback, null, this)
   }
 
+  incrementLevelText() {
+    this.levelText.setText(`LEVEL: ${this.level}`)
+  }
+
   incrementLevel() {
-    if(this.score >= 500) this.level = 2
-    if(this.score >= 501 && this.score <= 1000) this.level = 3
-    if(this.score >= 1001 && this.score <= 1500) this.level = 4
-    if(this.score >= 1501) this.level = 5
+    if(this.score >= 500) {
+      this.level = 2
+      this.incrementLevelText()
+    }
+    if(this.score >= 501 && this.score <= 1000) {
+      this.level = 3
+      this.incrementLevelText()
+    }
+    if(this.score >= 1001 && this.score <= 1500) {
+      this.level = 4
+      this.incrementLevelText()
+    }
+    if(this.score >= 1501) {
+      this.level = 5
+      this.incrementLevelText()
+    }
   }
 
   incrementEnemySpecs() {
@@ -54,7 +68,10 @@ export default class Battlefield extends Scene {
 
   create() {
     //Filling in Battlefield Properties
-    this.scoreText = this.add.text(16, 16, `SCORE: ${this.score}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF'})
+    this.score = this.scene.settings.data.score
+    this.level = this.scene.settings.data.level
+    this.scoreText = this.add.text(16, 16, `SCORE: ${this.score}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF' })
+    this.levelText = this.add.text(16, 50, `LEVEL: ${this.level}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF' })
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     this.cursors = this.input.keyboard.createCursorKeys()
     this.laserCollide = this.addCollider(this.playerLasers, this.enemyLasers, laserCollision)
@@ -81,6 +98,7 @@ export default class Battlefield extends Scene {
   }
   
   update(time, delta) {
+    // console.log(this.level)
     let currentLevel = this.level
     this.updateCount++
     this.player.update(time, delta)

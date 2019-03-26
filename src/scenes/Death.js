@@ -18,7 +18,7 @@ export default class Death extends Scene {
     if(this.startKey.isDown) {
       this.scene.manager.stop('Battlefield')
       this.startKey.reset()
-      this.scene.start('Battlefield')
+      this.scene.start('Battlefield', { score: 0, level: 1 })
     }
   }
 }
