@@ -1,6 +1,7 @@
 import Phaser, { Scene } from 'phaser'
 import { Player, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
-import { battlefieldImageLoad, spawnMeteors } from './utils'
+import { spawnMeteors } from './utils'
+import { battlefieldImageLoad } from './utils/battlefield'
 import { enemyDestroy, playerDestroy, powerup, shieldBlock, laserCollision, meteorDestroy } from './utils/collisions'
 import { addPatrol, addDivebombers, addChaser, addFighter, addRandomEnemy, spawnEnemies, enemySpecs } from './utils/enemies'
 
