@@ -9,12 +9,21 @@ export const enemySpecs = {
   },
   Divebomber: {
     speed: 250,
+    fireRate: 0,
     bulletSpeed: 320
   },
   Patrol: {
     speed: 80,
-    bulletSpeed: 100,
-    fireRate: 1200
+    fireRate: 1200,
+    bulletSpeed: 100
+  }
+}
+
+export const incrementEnemySpecs = () => {
+  for(let enemyClass in enemySpecs) {
+    enemySpecs[enemyClass].speed *= 1.1
+    enemySpecs[enemyClass].fireRate *= .9
+    enemySpecs[enemyClass].bulletSpeed *= 1.1
   }
 }
 
