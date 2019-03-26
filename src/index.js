@@ -11,7 +11,7 @@ const gameConfig = {
       debug: false
     }
   },
-  scene: [ Background, Title, Battlefield, Death]
+  scene: [ Background, Title, Battlefield, Death ]
 }
 
 new Game(gameConfig)
