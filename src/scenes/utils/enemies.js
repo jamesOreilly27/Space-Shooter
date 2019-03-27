@@ -81,28 +81,28 @@ export const incrementEnemySpecs = () => {
 export const randomCoordinateX = () => ( Math.floor(Math.random() * 600) )
 export const randomCoordinateY = () => ( Math.floor(Math.random() * 300) )
 
-export const addEnemy = (scene, enemyClass, key, x, y, path) => {
-  scene.enemies.add(new enemyClass({ scene, key, x, y, path}))
+//Helper function that takes a scene and an enemy object as arguments
+//Adds an enemy with the properties specified in enemy object to the scene
+export const addEnemy = (scene, enemy) => {
+  scene.enemies.add(new enemy.class({ scene, key: enemy.key, x: enemy.x, y: enemy.y, path: enemy.path }))
 }
 
 //Add Patrol ships in quantities up to 3 ships
 export const addPatrol = (scene, quantity) => {
   const randomX = randomCoordinateX()
   for(let i = 0; i < quantity; i++) {
-    addEnemy(scene, PatrolShip, 'patrol-ship', randomX + (35 * i), 20)
+    addEnemy(scene, { class: PatrolShip, key: 'patrol-ship', x: randomX + (35 * i), y: 20 })
   }
 }
 
 export const addDivebombers = (scene, quantity) => {
   const randomX = randomCoordinateX()
   for(let i = 0; i < quantity; i++) {
-    addEnemy(scene, Divebomber, 'divebomber', randomX + (20 * i), (-20 - (30 * i)))
+    addEnemy(scene, { class: Divebomber, key: 'divebomber', x: randomX + (20 * i), y: (-20 - (30 * i)) })
   }
 }
 
-export const addChaser = scene => {
-  addEnemy(scene, Chaser, 'chaser', scene.player.x, 600)
-}
+export const addChaser = scene => addEnemy(scene, { class: Chaser, key: 'chaser', x: scene.player.x, y: 600 })
 
 export const addFighter = scene => {
   const randomX = randomCoordinateX()
@@ -123,7 +123,8 @@ export const addFighter = scene => {
   }
   path.lineTo(randomX, 650)
 
-  addEnemy(scene, Fighter, 'fighter', randomX, 100, path)
+  // addEnemy(scene, Fighter, 'fighter', randomX, 100, path)
+  addEnemy(scene, { class: Fighter, key: 'fighter', x: randomX, y: 100, path: path })
 }
 
 export const addRandomEnemy = scene => {
@@ -136,8 +137,9 @@ export const addRandomEnemy = scene => {
 export const spawnEnemies = (scene, time) => {
   if(time < scene.nextEnemySpawn) { return }
     // addFighter(scene)
+    addChaser(scene)
     addFighter(scene)
-    addFighter(scene)
+    // addFighter(scene)
     // addPatrol(scene, 2)
     // addDivebombers(scene, 3)
     // addRandomEnemy(scene)
