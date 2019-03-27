@@ -60,7 +60,6 @@ export default class Player extends Ship {
 
   update() {
     if(this.active) {
-      console.log(this.speed)
       this.move() 
       this.shoot()
 
