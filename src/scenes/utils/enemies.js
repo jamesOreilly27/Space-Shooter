@@ -75,11 +75,15 @@ export const incrementEnemySpecs = () => {
   }
 }
 
-/*************** Spawning Enemies ***************/
+/************************* Spawning Enemies *************************/
 
 /***** Random Coordinate Generators ******/
 export const randomCoordinateX = () => ( Math.floor(Math.random() * 600) )
 export const randomCoordinateY = () => ( Math.floor(Math.random() * 300) )
+
+export const genRandNum = max => {
+  return Math.floor(Math.random() * max)
+}
 
 //Helper function that takes a scene and an enemy object as arguments
 //Adds an enemy with the properties specified in enemy object to the scene
@@ -92,6 +96,12 @@ export const addPatrol = (scene, quantity) => {
   const randomX = randomCoordinateX()
   for(let i = 0; i < quantity; i++) {
     addEnemy(scene, { class: PatrolShip, key: 'patrol-ship', x: randomX + (35 * i), y: 20 })
+  }
+}
+
+export const addMultiplePatrol = (scene, quantity) => {
+  for(let i = 0; i < quantity; i++) {
+    addPatrol(scene, 1)
   }
 }
 
@@ -127,21 +137,29 @@ export const addFighter = scene => {
   addEnemy(scene, { class: Fighter, key: 'fighter', x: randomX, y: 100, path: path })
 }
 
+/***** Enemy Spawn Helper Functions by Level *****/
+export const levelOneSpawn = scene => { addPatrol(scene, 1) }
+export const levelTwoSpawn = scene => { addMultiplePatrol(scene, 2) }
+
+export const levelThreeSpawn = scene => {
+  const randNum = genRandNum(1000)
+  console.log(randNum)
+  if(randNum < 500) { addMultiplePatrol(scene, 2) }
+  else { addDivebombers(scene, 2) }
+}
+
 export const addRandomEnemy = scene => {
-  const randNum = Math.floor(Math.random() * 3)
-  if(randNum === 0) addPatrol(scene, 3)
-  else if(randNum === 1) addDivebombers(scene, 3)
-  else addChaser(scene)
+  // const randNum = Math.floor(Math.random() * 4)
+  // if(randNum === 0) addPatrol(scene, 3)
+  // else if(randNum === 1) addDivebombers(scene, 3)
+  // else addChaser(scene)
+  if(scene.level === 1) levelOneSpawn(scene)
+  if(scene.level === 2) levelTwoSpawn(scene)
+  if(scene.level >= 3) levelThreeSpawn(scene)
 }
 
 export const spawnEnemies = (scene, time) => {
   if(time < scene.nextEnemySpawn) { return }
-    // addFighter(scene)
-    addChaser(scene)
-    addFighter(scene)
-    // addFighter(scene)
-    // addPatrol(scene, 2)
-    // addDivebombers(scene, 3)
-    // addRandomEnemy(scene)
+  addRandomEnemy(scene)
     scene.nextEnemySpawn = time + scene.enemySpawnRate
 }

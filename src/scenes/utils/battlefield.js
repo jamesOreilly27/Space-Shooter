@@ -43,40 +43,40 @@ export const incrementLevelText = battlefield => {
 }
 
 export const incrementLevel = battlefield => {
-  if(battlefield.score === 50) {
+  if(battlefield.score === 100) {
     battlefield.level = 2
     incrementLevelText(battlefield)
   }
-  if(battlefield.score >= 51 && battlefield.score <= 100) {
+  if(battlefield.score >= 201) {
     battlefield.level = 3
     incrementLevelText(battlefield)
   }
-  if(battlefield.score >= 101 && battlefield.score <= 150) {
-    battlefield.level = 4
-    incrementLevelText(battlefield)
-  }
-  if(battlefield.score >= 151 && battlefield.score <= 200) {
-    battlefield.level = 5
-    incrementLevelText(battlefield)
-  }
-  if(battlefield.score >= 201 && battlefield.score <= 250) {
-    battlefield.level = 6
-    incrementLevelText(battlefield)
-  }
-  if(battlefield.score >= 251 && battlefield.score <= 300) {
-    battlefield.level = 7
-    incrementLevelText(battlefield)
-  }
-  if(battlefield.score >= 351 && battlefield.score <= 400) {
-    battlefield.level = 8
-    incrementLevelText(battlefield)
-  }
-  if(battlefield.score >= 401 && battlefield.score <= 450) {
-    battlefield.level = 9
-    incrementLevelText(battlefield)
-  }
-  if(battlefield.score >= 451 && battlefield.score <= 500) {
-    battlefield.level = 10
-    incrementLevelText(battlefield)
-  }
+  // if(battlefield.score >= 301 && battlefield.score <= 400) {
+  //   battlefield.level = 4
+  //   incrementLevelText(battlefield)
+  // }
+  // if(battlefield.score >= 400 && battlefield.score <= 500) {
+  //   battlefield.level = 5
+  //   incrementLevelText(battlefield)
+  // }
+  // if(battlefield.score >= 501 && battlefield.score <= 600) {
+  //   battlefield.level = 6
+  //   incrementLevelText(battlefield)
+  // }
+  // if(battlefield.score >= 601 && battlefield.score <= 700) {
+  //   battlefield.level = 7
+  //   incrementLevelText(battlefield)
+  // }
+  // if(battlefield.score >= 701 && battlefield.score <= 800) {
+  //   battlefield.level = 8
+  //   incrementLevelText(battlefield)
+  // }
+  // if(battlefield.score >= 801 && battlefield.score <= 900) {
+  //   battlefield.level = 9
+  //   incrementLevelText(battlefield)
+  // }
+  // if(battlefield.score >= 901 && battlefield.score <= 1000) {
+  //   battlefield.level = 10
+  //   incrementLevelText(battlefield)
+  // }
 }
