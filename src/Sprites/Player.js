@@ -7,6 +7,8 @@ export default class Player extends Ship {
     this.shieldLevel = 0
     this.laserLevel = 1
     this.speed = 150
+    this.nextFire = 0
+    this.fireRate = 1000
     this.body.setCollideWorldBounds(true)
   }
 
@@ -45,12 +47,12 @@ export default class Player extends Ship {
     else this.body.setVelocityY(0)
   }
 
-  shoot() {
+  shoot(time, delta) {
     const spacebar = this.scene.cursors.space
-    const laserRechargeCount = this.scene.updateCount
-    if(spacebar.isDown && 
-      ((laserRechargeCount % 20 === 0) || this.scene.time.now - spacebar.timeDown < 20)) {
-        this.scene.playerLasers.add(new PlayerLaser({ scene: this.scene, x: this.x, y: this.y -40, key: this.getLaserSprite() }))
+    if(time < this.nextFire) { return }
+    if(spacebar.isDown) {
+      this.scene.playerLasers.add(new PlayerLaser({ scene: this.scene, x: this.x, y: this.y -40, key: this.getLaserSprite() }))
+      this.nextFire = time + this.fireRate
     }
   }
 
@@ -58,10 +60,10 @@ export default class Player extends Ship {
     this.createShield(this.getShieldSprite())
   }
 
-  update() {
+  update(time, delta) {
     if(this.active) {
       this.move() 
-      this.shoot()
+      this.shoot(time, delta)
 
       if(this.scene.shields.children.entries.length === 0) this.updateShield()
   
