@@ -16,6 +16,10 @@ export default class Chaser extends Ship {
     }
   }
 
+  levelUp() {
+    this.setSpeed(enemySpecs.Chaser.speed)
+  }
+
   update() {
     super.update()
     this.move()
