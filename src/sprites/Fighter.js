@@ -30,7 +30,7 @@ export default class Fighter extends Ship {
     this.nextFire = time + this.fireRate
   }
 
-  levelUp(scene) {
+  levelUp() {
     this.setSpeed(enemySpecs.Fighter.speed)
     this.setFireRate(enemySpecs.Fighter.fireRate)
   }
