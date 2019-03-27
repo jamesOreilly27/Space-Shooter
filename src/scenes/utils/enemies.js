@@ -4,6 +4,7 @@ import { PatrolShip, Divebomber, Chaser, Fighter } from '../../sprites'
 /*************** Enemy Stats ***************/
 
 /***** Base Stats ******/
+//This object acts as a place holder for the stats that each enemy class starts the game with
 const baseStats = {
   Fighter: {
     speed: 1/135000,
@@ -27,6 +28,7 @@ const baseStats = {
   }
 }
 /***** Enemy Specs *****/
+//This object holds is initialized with values from the base stats object. It is updated as the game levels up
 export const enemySpecs = {
   Fighter: {
     speed: baseStats.Fighter.speed,
@@ -50,6 +52,7 @@ export const enemySpecs = {
   }
 }
 
+//resets enemySpecs object to the base stats. Will be used when the player starts a new game from the Death scene
 export const resetEnemySpecs = () => {
   for(let enemyClass in enemySpecs) {
     enemySpecs[enemyClass].speed = baseStats[enemyClass].speed
@@ -58,6 +61,7 @@ export const resetEnemySpecs = () => {
   }
 }
 
+//increments enemySpecs. Will run whenever the game level increments.
 export const incrementEnemySpecs = () => {
   for(let enemyClass in enemySpecs) {
     if(enemyClass === 'Chaser') {
@@ -72,8 +76,9 @@ export const incrementEnemySpecs = () => {
 }
 
 /*************** Spawning Enemies ***************/
-export const randomCoordinateX = () => ( Math.floor(Math.random() * 600) )
 
+/***** Random Coordinate Generators ******/
+export const randomCoordinateX = () => ( Math.floor(Math.random() * 600) )
 export const randomCoordinateY = () => ( Math.floor(Math.random() * 300) )
 
 export const addEnemy = (scene, enemyClass, key, x, y, path) => {
