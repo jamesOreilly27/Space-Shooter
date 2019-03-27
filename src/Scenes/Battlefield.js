@@ -77,7 +77,7 @@ export default class Battlefield extends Scene {
     this.shields.children.entries.forEach(shield => { shield.update(time, delta) })
     incrementLevel(this)
     if(this.level !== currentLevel) {
-      this.player.speed *= 1.15
+      this.player.speed *= 1.045
       incrementEnemySpecs()
       this.enemies.children.entries.forEach(enemy => { enemy.levelUp(this) })
     }
