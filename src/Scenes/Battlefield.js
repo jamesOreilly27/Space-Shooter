@@ -12,7 +12,6 @@ export default class Battlefield extends Scene {
     this.meteorSpawnRate = 75
     this.nextMeteor = 0
     this.nextEnemySpawn = 0
-    this.updateCount = 0
     this.scoreText = ''
   }
 
@@ -69,7 +68,6 @@ export default class Battlefield extends Scene {
   update(time, delta) {
     // console.log(this.level)
     let currentLevel = this.level
-    this.updateCount++
     this.player.update(time, delta)
     this.enemies.children.entries.forEach(enemy => { enemy.update(time, delta) })
     this.playerLasers.children.entries.forEach(laser => { laser.update(time, delta) })
@@ -83,6 +81,5 @@ export default class Battlefield extends Scene {
     }
     spawnEnemies(this, time, delta)
     spawnMeteors(this)
-    if(this.updateCount >= 200) this.updateCount = 0
   }
 }
