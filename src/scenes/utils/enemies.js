@@ -1,29 +1,73 @@
 import Phaser from 'phaser'
 import { PatrolShip, Divebomber, Chaser, Fighter } from '../../sprites'
 
-/*************** Enemy Specs ***************/
-export const enemySpecs = {
+/*************** Enemy Stats ***************/
+
+/***** Base Stats ******/
+const baseStats = {
   Fighter: {
-    speed: 1/100000,
-    fireRate: 1500
+    speed: 1/135000,
+    fireRate: 3000,
+    bulletSpeed: 0
   },
   Divebomber: {
-    speed: 250,
+    speed: 180,
     fireRate: 0,
-    bulletSpeed: 320
+    bulletSpeed: 230.4
   },
   Patrol: {
     speed: 80,
-    fireRate: 1200,
-    bulletSpeed: 100
+    fireRate: 2000,
+    bulletSpeed: 80
+  },
+  Chaser: {
+    speed: 100,
+    fireRate: 0,
+    bulletSpeed: 0
+  }
+}
+/***** Enemy Specs *****/
+export const enemySpecs = {
+  Fighter: {
+    speed: baseStats.Fighter.speed,
+    fireRate: baseStats.Fighter.fireRate,
+    bulletSpeed: baseStats.Fighter.bulletSpeed
+  },
+  Divebomber: {
+    speed: baseStats.Divebomber.speed,
+    fireRate: baseStats.Divebomber.fireRate,
+    bulletSpeed: baseStats.Divebomber.bulletSpeed
+  },
+  Patrol: {
+    speed: baseStats.Patrol.speed,
+    fireRate: baseStats.Patrol.fireRate,
+    bulletSpeed: baseStats.Patrol.bulletSpeed
+  },
+  Chaser: {
+    speed: baseStats.Chaser.speed,
+    fireRate: baseStats.Patrol.fireRate,
+    bulletSpeed: baseStats.Patrol.bulletSpeed
+  }
+}
+
+export const resetEnemySpecs = () => {
+  for(let enemyClass in enemySpecs) {
+    enemySpecs[enemyClass].speed = baseStats[enemyClass].speed
+    enemySpecs[enemyClass].fireRate = baseStats[enemyClass].fireRate
+    enemySpecs[enemyClass].bulletSpeed = baseStats[enemyClass].bulletSpeed
   }
 }
 
 export const incrementEnemySpecs = () => {
   for(let enemyClass in enemySpecs) {
-    enemySpecs[enemyClass].speed *= 1.1
-    enemySpecs[enemyClass].fireRate *= .9
-    enemySpecs[enemyClass].bulletSpeed *= 1.1
+    if(enemyClass === 'Chaser') {
+      enemySpecs[enemyClass].speed *= 1.08
+    }
+    else {
+      enemySpecs[enemyClass].speed *= 1.1
+      enemySpecs[enemyClass].fireRate *= .9
+      enemySpecs[enemyClass].bulletSpeed *= 1.1
+    }
   }
 }
 

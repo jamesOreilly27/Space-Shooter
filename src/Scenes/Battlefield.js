@@ -3,7 +3,7 @@ import { Player, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
 import { spawnMeteors } from './utils'
 import { battlefieldImageLoad, incrementLevel } from './utils/battlefield'
 import { enemyDestroy, playerDestroy, powerup, shieldBlock, laserCollision, meteorDestroy } from './utils/collisions'
-import { addPatrol, addDivebombers, addChaser, addFighter, addRandomEnemy, spawnEnemies, enemySpecs, incrementEnemySpecs } from './utils/enemies'
+import { addPatrol, addDivebombers, addChaser, addFighter, addRandomEnemy, spawnEnemies, enemySpecs, incrementEnemySpecs, resetEnemySpecs } from './utils/enemies'
 
 export default class Battlefield extends Scene {
   constructor() {
@@ -35,6 +35,7 @@ export default class Battlefield extends Scene {
   }
 
   create() {
+    resetEnemySpecs()
     //Filling in Battlefield Properties
     this.score = this.scene.settings.data.score
     this.level = this.scene.settings.data.level
@@ -66,7 +67,6 @@ export default class Battlefield extends Scene {
   }
   
   update(time, delta) {
-    // console.log(this.level)
     let currentLevel = this.level
     this.player.update(time, delta)
     this.enemies.children.entries.forEach(enemy => { enemy.update(time, delta) })
@@ -75,7 +75,7 @@ export default class Battlefield extends Scene {
     this.shields.children.entries.forEach(shield => { shield.update(time, delta) })
     incrementLevel(this)
     if(this.level !== currentLevel) {
-      this.player.speed *= 1.15
+      this.player.speed *= 1.045
       incrementEnemySpecs()
       this.enemies.children.entries.forEach(enemy => { enemy.levelUp(this) })
     }
