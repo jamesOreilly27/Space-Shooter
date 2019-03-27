@@ -6,8 +6,8 @@ import { PatrolShip, Divebomber, Chaser, Fighter } from '../../sprites'
 /***** Base Stats ******/
 const baseStats = {
   Fighter: {
-    speed: 1/100000,
-    fireRate: 1500,
+    speed: 1/135000,
+    fireRate: 3000,
     bulletSpeed: 0
   },
   Divebomber: {
@@ -115,11 +115,11 @@ export const addRandomEnemy = scene => {
 
 export const spawnEnemies = (scene, time) => {
   if(time < scene.nextEnemySpawn) { return }
+    addFighter(scene)
     // addFighter(scene)
-    addFighter(scene)
-    addFighter(scene)
-    addPatrol(scene, 2)
-    addDivebombers(scene, 3)
+    // addFighter(scene)
+    // addPatrol(scene, 2)
+    // addDivebombers(scene, 3)
     // addRandomEnemy(scene)
     scene.nextEnemySpawn = time + scene.enemySpawnRate
 }
