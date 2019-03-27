@@ -149,10 +149,6 @@ export const levelThreeSpawn = scene => {
 }
 
 export const addRandomEnemy = scene => {
-  // const randNum = Math.floor(Math.random() * 4)
-  // if(randNum === 0) addPatrol(scene, 3)
-  // else if(randNum === 1) addDivebombers(scene, 3)
-  // else addChaser(scene)
   if(scene.level === 1) levelOneSpawn(scene)
   if(scene.level === 2) levelTwoSpawn(scene)
   if(scene.level >= 3) levelThreeSpawn(scene)
