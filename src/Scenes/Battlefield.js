@@ -27,7 +27,6 @@ export default class Battlefield extends Scene {
     this.enemies = this.physics.add.group()
     this.powerups = this.physics.add.group()
     this.shields = this.physics.add.group()
-    this.wreckage = this.physics.add.group()
   }
 
   create() {

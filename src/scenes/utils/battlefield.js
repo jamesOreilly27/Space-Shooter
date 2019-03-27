@@ -18,9 +18,6 @@ const images = [
   { key: 'shield2', path: 'shield2' },
   { key: 'shield3', path: 'shield3' },
   { key: 'gun-upgrade', path: 'gun10' },
-  { key: 'big-meteor', path: 'meteorBrown_big1' },
-  { key: 'med-meteor', path: 'meteorBrown_med3' },
-  { key: 'meteor-piece', path: 'meteorBrown_tiny1' },
   { key: 'fighter-laser', path: 'laserRed13' }
 ]
 
