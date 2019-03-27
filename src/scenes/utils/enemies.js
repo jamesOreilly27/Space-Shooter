@@ -19,6 +19,11 @@ const baseStats = {
     speed: 80,
     fireRate: 2000,
     bulletSpeed: 80
+  },
+  Chaser: {
+    speed: 100,
+    fireRate: 0,
+    bulletSpeed: 0
   }
 }
 /***** Enemy Specs *****/
@@ -35,6 +40,11 @@ export const enemySpecs = {
   },
   Patrol: {
     speed: baseStats.Patrol.speed,
+    fireRate: baseStats.Patrol.fireRate,
+    bulletSpeed: baseStats.Patrol.bulletSpeed
+  },
+  Chaser: {
+    speed: baseStats.Chaser.speed,
     fireRate: baseStats.Patrol.fireRate,
     bulletSpeed: baseStats.Patrol.bulletSpeed
   }
@@ -118,6 +128,7 @@ export const spawnEnemies = (scene, time) => {
     // addFighter(scene)
     // addFighter(scene)
     // addFighter(scene)
+    addChaser(scene)
     addPatrol(scene, 2)
     // addDivebombers(scene, 3)
     // addRandomEnemy(scene)
