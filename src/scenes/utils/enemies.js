@@ -60,9 +60,14 @@ export const resetEnemySpecs = () => {
 
 export const incrementEnemySpecs = () => {
   for(let enemyClass in enemySpecs) {
-    enemySpecs[enemyClass].speed *= 1.1
-    enemySpecs[enemyClass].fireRate *= .9
-    enemySpecs[enemyClass].bulletSpeed *= 1.1
+    if(enemyClass === 'Chaser') {
+      enemySpecs[enemyClass].speed *= 1.08
+    }
+    else {
+      enemySpecs[enemyClass].speed *= 1.1
+      enemySpecs[enemyClass].fireRate *= .9
+      enemySpecs[enemyClass].bulletSpeed *= 1.1
+    }
   }
 }
 
