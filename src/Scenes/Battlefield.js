@@ -8,9 +8,7 @@ import { addPatrol, addDivebombers, addChaser, addFighter, addRandomEnemy, spawn
 export default class Battlefield extends Scene {
   constructor() {
     super({ key: 'Battlefield' })
-    this.enemySpawnRate = 5000
-    this.meteorSpawnRate = 75
-    this.nextMeteor = 0
+    this.enemySpawnRate = 2500
     this.nextEnemySpawn = 0
     this.scoreText = ''
   }
@@ -80,6 +78,5 @@ export default class Battlefield extends Scene {
       this.enemies.children.entries.forEach(enemy => { enemy.levelUp(this) })
     }
     spawnEnemies(this, time, delta)
-    spawnMeteors(this)
   }
 }
