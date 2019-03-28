@@ -36,7 +36,7 @@ export default class Ship extends Phaser.GameObjects.Sprite {
     //there are no powerups on screen
     //That the ship is a divebomber or a fighter class
   checkDrop(number, shieldLevel) {
-    return number <= 500 &&
+    return number <= 200 &&
     shieldLevel < 3 &&
     this.noPowerupOnScreen() &&
     (this.key === 'divebomber' || this.key === 'fighter')
