@@ -27,8 +27,14 @@ export default class Ship extends Phaser.GameObjects.Sprite {
     this.bulletSpeed = newSpeed
   }
 
+  //Helper that returns true if no powerups are on currently on screen
   noPowerupOnScreen() { return this.scene.powerups.children.entries.length === 0 }
 
+  //Helper that checks the following...
+    //that randNum is within the range we want to drop percentage wise
+    //The player's shield isn't maxed out
+    //there are no powerups on screen
+    //That the ship is a divebomber or a fighter class
   checkDrop(number, shieldLevel) {
     return number <= 500 &&
     shieldLevel < 3 &&
@@ -36,6 +42,7 @@ export default class Ship extends Phaser.GameObjects.Sprite {
     (this.key === 'divebomber' || this.key === 'fighter')
   }
 
+  //Drops a shield powerup depending on the players current shield level and that all conditions of the checkDrop method are met
   dropPowerup() {
     const randNum = genRandNum(1000)
     const shieldLevel = this.scene.player.shieldLevel
