@@ -29,6 +29,13 @@ export default class Ship extends Phaser.GameObjects.Sprite {
 
   noPowerupOnScreen() { return this.scene.powerups.children.entries.length === 0 }
 
+  checkDrop(number, shieldLevel) {
+    return number <= 500 &&
+    shieldLevel < 3 &&
+    this.noPowerupOnScreen &&
+    (this.key === 'divebomber' || this.key === 'fighter')
+  }
+
   dropPowerup() {
     const randNum = genRandNum(1000)
     const shieldLevel = this.scene.player.shieldLevel
@@ -36,7 +43,7 @@ export default class Ship extends Phaser.GameObjects.Sprite {
     if(shieldLevel === 0) shieldKey ='bronze-shield'
     if(shieldLevel === 1) shieldKey = 'silver-shield'
     if(shieldLevel === 2) shieldKey = 'gold-shield'
-    if(randNum <= 500 && shieldLevel < 3 && this.noPowerupOnScreen()) {
+    if(this.checkDrop(randNum, shieldLevel)) {
       this.scene.powerups.add(new ShieldPowerup({scene: this.scene, x: this.x, y: this.y, key: shieldKey }))
     }
   }
