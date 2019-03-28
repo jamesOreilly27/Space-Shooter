@@ -32,7 +32,7 @@ export default class Ship extends Phaser.GameObjects.Sprite {
   checkDrop(number, shieldLevel) {
     return number <= 500 &&
     shieldLevel < 3 &&
-    this.noPowerupOnScreen &&
+    this.noPowerupOnScreen() &&
     (this.key === 'divebomber' || this.key === 'fighter')
   }
 
