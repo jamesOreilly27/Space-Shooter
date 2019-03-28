@@ -18,5 +18,5 @@ export { default as Powerup } from './Powerup'
 export { default as ShieldPowerup } from './ShieldPowerup'
 export { default as LaserPowerup } from './LaserPowerup'
 export { default as Shield } from './Shield'
-
+export { default as Bomb } from './Bomb'
 export { default as Explosion } from './Explosion'
