@@ -1,4 +1,4 @@
-import { Powerup, Shield } from '../sprites'
+import { Powerup } from '../sprites'
 
 export default class ShieldPowerup extends Powerup {
   constructor(config) {
