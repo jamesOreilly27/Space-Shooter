@@ -1,16 +1,13 @@
 import Phaser, { Scene } from 'phaser'
-import { Player, ShieldPowerup, LaserPowerup, Meteor } from '../sprites'
-import { spawnMeteors } from './utils'
+import { Player, ShieldPowerup, LaserPowerup } from '../sprites'
 import { battlefieldImageLoad, incrementLevel } from './utils/battlefield'
-import { enemyDestroy, playerDestroy, powerup, shieldBlock, laserCollision, meteorDestroy } from './utils/collisions'
-import { addPatrol, addDivebombers, addChaser, addFighter, addRandomEnemy, spawnEnemies, enemySpecs, incrementEnemySpecs, resetEnemySpecs } from './utils/enemies'
+import { enemyDestroy, playerDestroy, powerup, shieldBlock, laserCollision } from './utils/collisions'
+import { spawnEnemies, incrementEnemySpecs, resetEnemySpecs, baseSpawnRate, resetEnemySpawnRate } from './utils/enemies'
 
 export default class Battlefield extends Scene {
   constructor() {
     super({ key: 'Battlefield' })
-    this.enemySpawnRate = 5000
-    this.meteorSpawnRate = 75
-    this.nextMeteor = 0
+    this.enemySpawnRate = baseSpawnRate
     this.nextEnemySpawn = 0
     this.scoreText = ''
   }
@@ -30,31 +27,30 @@ export default class Battlefield extends Scene {
     this.enemies = this.physics.add.group()
     this.powerups = this.physics.add.group()
     this.shields = this.physics.add.group()
-    this.meteors = this.physics.add.group()
-    this.wreckage = this.physics.add.group()
   }
 
   create() {
     resetEnemySpecs()
+    resetEnemySpawnRate(this)
+    console.log(this.enemySpawnRate)
     //Filling in Battlefield Properties
     this.score = this.scene.settings.data.score
     this.level = this.scene.settings.data.level
     this.scoreText = this.add.text(16, 16, `SCORE: ${this.score}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF' })
     this.levelText = this.add.text(16, 50, `LEVEL: ${this.level}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF' })
-    this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     this.cursors = this.input.keyboard.createCursorKeys()
+    this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
+    
+    // ***** Colliders *****
     this.laserCollide = this.addCollider(this.playerLasers, this.enemyLasers, laserCollision)
     this.laserCollide.active = false
-
-    // ***** Colliders *****
     this.addCollider(this.enemies, this.playerLasers, enemyDestroy)
-    this.addCollider(this.player, this.enemies, enemyDestroy)
+    this.addCollider(this.player, this.enemies, playerDestroy)
     this.addCollider(this.player, this.enemyLasers, playerDestroy)
     this.addCollider(this.player, this.powerups, powerup)
     this.addCollider(this.enemies, this.shields, shieldBlock)
     this.addCollider(this.enemyLasers, this.shields, shieldBlock)
     this.addCollider(this.player, this.powerups, powerup)
-    this.addCollider(this.playerLasers, this.meteors, meteorDestroy)
 
     /***** Animations *****/
     this.anims.create({
@@ -80,6 +76,5 @@ export default class Battlefield extends Scene {
       this.enemies.children.entries.forEach(enemy => { enemy.levelUp(this) })
     }
     spawnEnemies(this, time, delta)
-    spawnMeteors(this)
   }
 }

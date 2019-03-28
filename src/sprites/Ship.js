@@ -32,8 +32,10 @@ export default class Ship extends Phaser.GameObjects.Sprite {
   }
 
   playerExplode() {
-    this.scene.scene.pause()
-    this.scene.scene.manager.start('Death', { score: this.scene.score })
+    for(let arrowKey in this.scene.cursors) {
+      this.scene.cursors[arrowKey].reset()
+    }
+    this.scene.scene.start('Death', { score: this.scene.score })
   }
 
   updateScore() {

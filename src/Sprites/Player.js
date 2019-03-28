@@ -8,7 +8,7 @@ export default class Player extends Ship {
     this.laserLevel = 1
     this.speed = 150
     this.nextFire = 0
-    this.fireRate = 750
+    this.fireRate = 600
     this.body.setCollideWorldBounds(true)
   }
 
