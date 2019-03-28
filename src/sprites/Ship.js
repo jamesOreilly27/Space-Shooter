@@ -1,4 +1,6 @@
 import Phaser from 'phaser'
+import { ShieldPowerup } from '../sprites'
+import { genRandNum } from '../scenes/utils/enemies.js'
 
 export default class Ship extends Phaser.GameObjects.Sprite {
   constructor(config) {
@@ -25,9 +27,24 @@ export default class Ship extends Phaser.GameObjects.Sprite {
     this.bulletSpeed = newSpeed
   }
 
+  noPowerupOnScreen() { return this.scene.powerups.children.entries.length === 0 }
+
+  dropPowerup() {
+    const randNum = genRandNum(1000)
+    const shieldLevel = this.scene.player.shieldLevel
+    let shieldKey = ''
+    if(shieldLevel === 0) shieldKey ='bronze-shield'
+    if(shieldLevel === 1) shieldKey = 'silver-shield'
+    if(shieldLevel === 2) shieldKey = 'gold-shield'
+    if(randNum <= 500 && shieldLevel < 3 && this.noPowerupOnScreen()) {
+      this.scene.powerups.add(new ShieldPowerup({scene: this.scene, x: this.x, y: this.y, key: shieldKey }))
+    }
+  }
+
   explode() {
     const explosion = this.scene.physics.add.sprite(this.x, this.y, 'explosion')
     explosion.play('explode')
+    this.dropPowerup()
     this.destroy()
   }
 
