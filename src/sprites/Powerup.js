@@ -19,8 +19,4 @@ export default class Powerup extends Phaser.GameObjects.Sprite {
       repeat: -1
     })
   }
-
-  update() {
-    //Use this method to create an animation that runs for each power up we render
-  }
 }
