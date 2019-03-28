@@ -2,12 +2,12 @@ import Phaser, { Scene } from 'phaser'
 import { Player, ShieldPowerup, LaserPowerup } from '../sprites'
 import { battlefieldImageLoad, incrementLevel } from './utils/battlefield'
 import { enemyDestroy, playerDestroy, powerup, shieldBlock, laserCollision } from './utils/collisions'
-import { addPatrol, addDivebombers, addChaser, addFighter, addRandomEnemy, spawnEnemies, enemySpecs, incrementEnemySpecs, resetEnemySpecs } from './utils/enemies'
+import { spawnEnemies, incrementEnemySpecs, resetEnemySpecs, baseSpawnRate, resetEnemySpawnRate } from './utils/enemies'
 
 export default class Battlefield extends Scene {
   constructor() {
     super({ key: 'Battlefield' })
-    this.enemySpawnRate = 2500
+    this.enemySpawnRate = baseSpawnRate
     this.nextEnemySpawn = 0
     this.scoreText = ''
   }
@@ -31,6 +31,8 @@ export default class Battlefield extends Scene {
 
   create() {
     resetEnemySpecs()
+    resetEnemySpawnRate(this)
+    console.log(this.enemySpawnRate)
     //Filling in Battlefield Properties
     this.score = this.scene.settings.data.score
     this.level = this.scene.settings.data.level
