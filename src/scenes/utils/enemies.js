@@ -145,6 +145,7 @@ export const levelThreeSpawn = scene => {
   const randNum = genRandNum(1000)
   console.log(randNum)
   if(randNum < 500) { addMultiplePatrol(scene, 2) }
+  else if(randNum >= 500 && randNum < 800) { addFighter(scene) }
   else { addDivebombers(scene, 2) }
 }
 

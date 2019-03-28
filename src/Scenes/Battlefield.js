@@ -36,12 +36,12 @@ export default class Battlefield extends Scene {
     this.level = this.scene.settings.data.level
     this.scoreText = this.add.text(16, 16, `SCORE: ${this.score}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF' })
     this.levelText = this.add.text(16, 50, `LEVEL: ${this.level}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF' })
-    this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     this.cursors = this.input.keyboard.createCursorKeys()
+    this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
+    
+    // ***** Colliders *****
     this.laserCollide = this.addCollider(this.playerLasers, this.enemyLasers, laserCollision)
     this.laserCollide.active = false
-
-    // ***** Colliders *****
     this.addCollider(this.enemies, this.playerLasers, enemyDestroy)
     this.addCollider(this.player, this.enemies, playerDestroy)
     this.addCollider(this.player, this.enemyLasers, playerDestroy)
