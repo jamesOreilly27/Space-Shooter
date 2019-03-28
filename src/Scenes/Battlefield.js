@@ -1,5 +1,5 @@
 import Phaser, { Scene } from 'phaser'
-import { Player, ShieldPowerup, LaserPowerup } from '../sprites'
+import { Player, ShieldPowerup, LaserPowerup, Bomb } from '../sprites'
 import { battlefieldImageLoad, incrementLevel } from './utils/battlefield'
 import { enemyDestroy, playerDestroy, powerup, shieldBlock, laserCollision } from './utils/collisions'
 import { spawnEnemies, incrementEnemySpecs, resetEnemySpecs, baseSpawnRate, resetEnemySpawnRate } from './utils/enemies'
@@ -40,6 +40,8 @@ export default class Battlefield extends Scene {
     this.levelText = this.add.text(16, 50, `LEVEL: ${this.level}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF' })
     this.cursors = this.input.keyboard.createCursorKeys()
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
+
+    this.testBomb = new Bomb({ scene: this, key: 'bomb', x: 400, y: 400 })
     
     // ***** Colliders *****
     this.laserCollide = this.addCollider(this.playerLasers, this.enemyLasers, laserCollision)
