@@ -28,7 +28,7 @@ export default class Ship extends Phaser.GameObjects.Sprite {
   }
 
   //Helper that returns true if no powerups are on currently on screen
-  noPowerupOnScreen() { return this.scene.powerups.children.entries.length === 0 }
+  // noPowerupOnScreen() { return this.scene.powerups.children.entries.length === 0 }
 
   //Helper that checks the following...
     //that randNum is within the range we want to drop percentage wise
