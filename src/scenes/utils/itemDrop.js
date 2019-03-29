@@ -1,5 +1,9 @@
 import { genRandNum } from './enemies.js'
 
+//Helper that takes a number a floor and a cieling as arguments
+//returns true if the number falls between the floor and cieling, bottom inclusive
+const checkRange = (number, floor, cieling) => number >= floor && number < cieling
+
 //Helper that returns true if no powerups are on screen
 const noPowerupOnScreen = scene => !scene.powerups.children.entries.length
 
