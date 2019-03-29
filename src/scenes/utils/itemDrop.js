@@ -12,3 +12,10 @@ const shouldDrop = scene => genRandNum(1000) < 200 && noPowerupOnScreen(scene)
 
 //Helper that returns true if the player's shield can upgrade
 const canUpgradeShield = shieldLevel => shieldLevel < 3
+
+const choosePowerup = ship => {
+  const randNum = genRandNum(900)
+  const shieldLevel = ship.scene.player.shieldLevel
+  if(checkRange(randNum, 300, 900) && canUpgradeShield(shieldLevel)) { ship.dropShield()}
+  else { ship.dropBomb() }
+}
