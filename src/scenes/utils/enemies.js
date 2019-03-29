@@ -6,26 +6,10 @@ import { PatrolShip, Divebomber, Chaser, Fighter } from '../../sprites'
 /***** Base Stats ******/
 //This object acts as a place holder for the stats that each enemy class starts the game with
 const baseStats = {
-  Fighter: {
-    speed: 1/135000,
-    fireRate: 3000,
-    bulletSpeed: 0
-  },
-  Divebomber: {
-    speed: 180,
-    fireRate: 0,
-    bulletSpeed: 230.4
-  },
-  Patrol: {
-    speed: 80,
-    fireRate: 2000,
-    bulletSpeed: 80
-  },
-  Chaser: {
-    speed: 100,
-    fireRate: 0,
-    bulletSpeed: 0
-  }
+  Fighter: { speed: 1/135000, fireRate: 3000, bulletSpeed: 0 },
+  Divebomber: { speed: 180, fireRate: 0, bulletSpeed: 230.4 },
+  Patrol: { speed: 80, fireRate: 2000, bulletSpeed: 80 },
+  Chaser: { speed: 100, fireRate: 0, bulletSpeed: 0 }
 }
 
 /***** Enemy Specs *****/
@@ -85,9 +69,7 @@ export const resetEnemySpawnRate = scene => { scene.enemySpawnRate = baseSpawnRa
 export const randomCoordinateX = () => ( Math.floor(Math.random() * 600) )
 export const randomCoordinateY = () => ( Math.floor(Math.random() * 300) )
 
-export const genRandNum = max => {
-  return Math.floor(Math.random() * max)
-}
+export const genRandNum = max => { return Math.floor(Math.random() * max) }
 
 //Helper function that takes a scene and an enemy object as arguments
 //Adds an enemy with the properties specified in enemy object to the scene
@@ -104,9 +86,7 @@ export const addPatrol = (scene, quantity) => {
 }
 
 export const addMultiplePatrol = (scene, quantity) => {
-  for(let i = 0; i < quantity; i++) {
-    addPatrol(scene, 1)
-  }
+  for(let i = 0; i < quantity; i++) { addPatrol(scene, 1) }
 }
 
 export const addDivebombers = (scene, quantity) => {
@@ -122,22 +102,13 @@ export const addFighter = scene => {
   const randomX = randomCoordinateX()
   const path = new Phaser.Curves.Path(randomX, 75)
   for(let i = 0; i < 100; i ++) {
-    if(i % 4 === 0) {
-      path.splineTo([randomX + 100, 125])
-    }
-    else if(i % 4 === 1) {
-      path.splineTo([randomX + 200, 75])
-    }
-    else if( i % 4 === 2) {
-      path.splineTo([randomX + 100, 75])
-    }
-    else if( i % 4 === 3) {
-      path.splineTo([randomX, 75])
-    }
+    if(i % 4 === 0) { path.splineTo([randomX + 100, 125]) }
+    else if(i % 4 === 1) { path.splineTo([randomX + 200, 75]) }
+    else if( i % 4 === 2) { path.splineTo([randomX + 100, 75]) }
+    else if( i % 4 === 3) { path.splineTo([randomX, 75])}
   }
   path.lineTo(randomX, 650)
 
-  // addEnemy(scene, Fighter, 'fighter', randomX, 100, path)
   addEnemy(scene, { class: Fighter, key: 'fighter', x: randomX, y: 100, path: path })
 }
 
@@ -171,5 +142,5 @@ export const addRandomEnemy = scene => {
 export const spawnEnemies = (scene, time) => {
   if(time < scene.nextEnemySpawn) { return }
   addRandomEnemy(scene)
-    scene.nextEnemySpawn = time + scene.enemySpawnRate
+  scene.nextEnemySpawn = time + scene.enemySpawnRate
 }

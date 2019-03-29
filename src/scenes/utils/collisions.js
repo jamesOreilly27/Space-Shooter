@@ -4,8 +4,13 @@ export const destroy = (object1, object2) => {
 }
 
 export const enemyDestroy = (ship, laser) => {
-  ship.enemyExplode()
-  laser.destroy()
+  if(laser.key === 'player-laser') {
+    ship.enemyExplode()
+    laser.destroy()
+  } 
+  else {
+    ship.destroy()
+  }
 }
 
 export const playerDestroy = (player, enemyLaser) => {
@@ -19,11 +24,17 @@ export const shieldBlock = (enemy, shield) => {
 }
 
 export const laserCollision = (playerLaser, enemyLaser) => {
-  enemyLaser.destroy()
-  playerLaser.body.setVelocityY(-600)
+  const player = playerLaser.scene.player
+  if(playerLaser.key === 'player-laser'  && player.isLaserMaxed()) {
+    enemyLaser.destroy()
+    playerLaser.body.setVelocityY(-600)
+  }
+  else if(playerLaser.key !== 'player-laser' && playerLaser.visible){
+    enemyLaser.destroy()
+  }
 }
 
-export const powerup = (player, powerup) => {
+export const getPowerup = (player, powerup) => {
   powerup.handleCollision()
   powerup.destroy()
 }

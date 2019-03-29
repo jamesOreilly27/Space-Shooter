@@ -9,6 +9,7 @@ export default class Bomb extends Powerup {
 
   handleCollision() {
     const bombExplosion = this.scene.physics.add.sprite(this.x, this.y, 'bomb-explosion')
+    this.scene.playerLasers.add(bombExplosion)
     bombExplosion.scaleX = 7
     bombExplosion.scaleY = 5
     bombExplosion.play('bomb-explode')

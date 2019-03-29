@@ -1,7 +1,7 @@
 import Phaser, { Scene } from 'phaser'
 import { Player, ShieldPowerup, LaserPowerup, Bomb } from '../sprites'
 import { battlefieldImageLoad, incrementLevel } from './utils/battlefield'
-import { enemyDestroy, playerDestroy, powerup, shieldBlock, laserCollision } from './utils/collisions'
+import { enemyDestroy, playerDestroy, getPowerup, shieldBlock, laserCollision } from './utils/collisions'
 import { spawnEnemies, incrementEnemySpecs, resetEnemySpecs, baseSpawnRate, resetEnemySpawnRate } from './utils/enemies'
 
 export default class Battlefield extends Scene {
@@ -43,16 +43,14 @@ export default class Battlefield extends Scene {
 
     this.powerups.add(new Bomb({ scene: this, key: 'bomb', x: 400, y: 400 }))
     
-    // ***** Colliders *****
-    this.laserCollide = this.addCollider(this.playerLasers, this.enemyLasers, laserCollision)
-    this.laserCollide.active = false
+    /***** Colliders  & Overlaps *****/
+    this.physics.add.overlap(this.playerLasers, this.enemyLasers, laserCollision, null, this)
     this.addCollider(this.enemies, this.playerLasers, enemyDestroy)
     this.addCollider(this.player, this.enemies, playerDestroy)
     this.addCollider(this.player, this.enemyLasers, playerDestroy)
-    this.addCollider(this.player, this.powerups, powerup)
+    this.addCollider(this.player, this.powerups, getPowerup)
     this.addCollider(this.enemies, this.shields, shieldBlock)
     this.addCollider(this.enemyLasers, this.shields, shieldBlock)
-    this.addCollider(this.player, this.powerups, powerup)
 
     /***** Animations *****/
     this.anims.create({
@@ -73,7 +71,7 @@ export default class Battlefield extends Scene {
         prefix: 'explosion',
         suffix: '.png'
       }),
-      frameRate: 20,
+      frameRate: 25,
       repeat: 0,
       hideOnComplete: true
     })
