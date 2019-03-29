@@ -1,6 +1,5 @@
 import Phaser from 'phaser'
-import { ShieldPowerup } from '../sprites'
-import { genRandNum } from '../scenes/utils/enemies.js'
+import { shouldDrop, choosePowerup } from '../scenes/utils/itemDrop.js'
 
 export default class Ship extends Phaser.GameObjects.Sprite {
   constructor(config) {
@@ -27,32 +26,8 @@ export default class Ship extends Phaser.GameObjects.Sprite {
     this.bulletSpeed = newSpeed
   }
 
-  //Helper that returns true if no powerups are on currently on screen
-  noPowerupOnScreen() { return this.scene.powerups.children.entries.length === 0 }
-
-  //Helper that checks the following...
-    //that randNum is within the range we want to drop percentage wise
-    //The player's shield isn't maxed out
-    //there are no powerups on screen
-    //That the ship is a divebomber or a fighter class
-  checkDrop(number, shieldLevel) {
-    return number <= 200 &&
-    shieldLevel < 3 &&
-    this.noPowerupOnScreen() &&
-    (this.key === 'divebomber' || this.key === 'fighter')
-  }
-
-  //Drops a shield powerup depending on the players current shield level and that all conditions of the checkDrop method are met
   dropPowerup() {
-    const randNum = genRandNum(1000)
-    const shieldLevel = this.scene.player.shieldLevel
-    let shieldKey = ''
-    if(shieldLevel === 0) shieldKey ='bronze-shield'
-    if(shieldLevel === 1) shieldKey = 'silver-shield'
-    if(shieldLevel === 2) shieldKey = 'gold-shield'
-    if(this.checkDrop(randNum, shieldLevel)) {
-      this.scene.powerups.add(new ShieldPowerup({scene: this.scene, x: this.x, y: this.y, key: shieldKey }))
-    }
+    if(shouldDrop(this.scene)) { choosePowerup(this) }
   }
 
   explode() {
