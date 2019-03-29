@@ -10,3 +10,5 @@ const noPowerupOnScreen = scene => !scene.powerups.children.entries.length
 //Helper that returns true 20% of the time if no power ups are on screen
 const shouldDrop = scene => genRandNum(1000) < 200 && noPowerupOnScreen(scene)
 
+//Helper that returns true if the player's shield can upgrade
+const canUpgradeShield = shieldLevel => shieldLevel < 3
