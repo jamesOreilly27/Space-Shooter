@@ -1,0 +1,230 @@
+{
+	"textures": [
+		{
+			"image": "bomb-explosion.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 263,
+				"h": 251
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "explosion06.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 105,
+						"h": 105
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 7,
+						"w": 91,
+						"h": 91
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 91,
+						"h": 91
+					}
+				},
+				{
+					"filename": "explosion08.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 105,
+						"h": 105
+					},
+					"spriteSourceSize": {
+						"x": 8,
+						"y": 8,
+						"w": 89,
+						"h": 89
+					},
+					"frame": {
+						"x": 1,
+						"y": 94,
+						"w": 89,
+						"h": 89
+					}
+				},
+				{
+					"filename": "explosion02.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 105,
+						"h": 105
+					},
+					"spriteSourceSize": {
+						"x": 27,
+						"y": 26,
+						"w": 51,
+						"h": 51
+					},
+					"frame": {
+						"x": 1,
+						"y": 185,
+						"w": 51,
+						"h": 51
+					}
+				},
+				{
+					"filename": "explosion01.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 105,
+						"h": 105
+					},
+					"spriteSourceSize": {
+						"x": 44,
+						"y": 44,
+						"w": 17,
+						"h": 17
+					},
+					"frame": {
+						"x": 54,
+						"y": 185,
+						"w": 17,
+						"h": 17
+					}
+				},
+				{
+					"filename": "explosion09.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 105,
+						"h": 105
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 9,
+						"w": 87,
+						"h": 87
+					},
+					"frame": {
+						"x": 92,
+						"y": 94,
+						"w": 87,
+						"h": 87
+					}
+				},
+				{
+					"filename": "explosion04.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 105,
+						"h": 105
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 12,
+						"w": 81,
+						"h": 81
+					},
+					"frame": {
+						"x": 181,
+						"y": 1,
+						"w": 81,
+						"h": 81
+					}
+				},
+				{
+					"filename": "explosion07.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 105,
+						"h": 105
+					},
+					"spriteSourceSize": {
+						"x": 10,
+						"y": 10,
+						"w": 85,
+						"h": 85
+					},
+					"frame": {
+						"x": 94,
+						"y": 1,
+						"w": 85,
+						"h": 85
+					}
+				},
+				{
+					"filename": "explosion05.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 105,
+						"h": 105
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 12,
+						"w": 81,
+						"h": 81
+					},
+					"frame": {
+						"x": 181,
+						"y": 84,
+						"w": 81,
+						"h": 81
+					}
+				},
+				{
+					"filename": "explosion10.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 105,
+						"h": 105
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 12,
+						"w": 81,
+						"h": 81
+					},
+					"frame": {
+						"x": 181,
+						"y": 167,
+						"w": 81,
+						"h": 81
+					}
+				},
+				{
+					"filename": "explosion03.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 105,
+						"h": 105
+					},
+					"spriteSourceSize": {
+						"x": 19,
+						"y": 19,
+						"w": 67,
+						"h": 67
+					},
+					"frame": {
+						"x": 92,
+						"y": 183,
+						"w": 67,
+						"h": 67
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:a2b5f2f783adba4bec77543e83610da2:51ffee4cb0499a83d2c1d4ece79b2946:92dc1053737aa6f39c87485d6bba5fcd$"
+	}
+}

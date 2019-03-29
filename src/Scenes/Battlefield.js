@@ -20,6 +20,7 @@ export default class Battlefield extends Scene {
     /***** Preload all images *****/
     battlefieldImageLoad(this)
     this.load.spritesheet('explosion', './assets/explosion.png', { frameWidth: 32, frameHeight: 48, endFrame: 5 })
+    this.load.multiatlas('bomb-aftermath', '/assets/bomb-explosion.json', 'assets')
 
     /***** Add the needed Physics Groups *****/
     this.playerLasers = this.physics.add.group()
@@ -32,7 +33,6 @@ export default class Battlefield extends Scene {
   create() {
     resetEnemySpecs()
     resetEnemySpawnRate(this)
-    console.log(this.enemySpawnRate)
     //Filling in Battlefield Properties
     this.score = this.scene.settings.data.score
     this.level = this.scene.settings.data.level
@@ -41,7 +41,7 @@ export default class Battlefield extends Scene {
     this.cursors = this.input.keyboard.createCursorKeys()
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
 
-    this.testBomb = new Bomb({ scene: this, key: 'bomb', x: 400, y: 400 })
+    this.powerups.add(new Bomb({ scene: this, key: 'bomb', x: 400, y: 400 }))
     
     // ***** Colliders *****
     this.laserCollide = this.addCollider(this.playerLasers, this.enemyLasers, laserCollision)
@@ -58,6 +58,21 @@ export default class Battlefield extends Scene {
     this.anims.create({
       key: 'explode',
       frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 5, first: 5 }),
+      frameRate: 20,
+      repeat: 0,
+      hideOnComplete: true
+    })
+
+    this.anims.create({
+      key: 'bomb-explode',
+      frames: this.anims.generateFrameNames('bomb-aftermath',
+      {
+        start: 1,
+        end: 10,
+        zeroPad: 2,
+        prefix: 'explosion',
+        suffix: '.png'
+      }),
       frameRate: 20,
       repeat: 0,
       hideOnComplete: true
