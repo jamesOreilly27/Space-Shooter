@@ -11,13 +11,7 @@ export default class Player extends Ship {
     this.fireRate = 600
     this.body.setCollideWorldBounds(true)
   }
-
-  getShieldPowerupSprite() {
-    if(this.shieldLevel === 0) return 'bronze-shield'
-    else if(this.shieldLevel === 1) return 'silver-shield'
-    else return 'gold-shield'
-  }
-
+  
   getShieldSprite() {
     if(this.shieldLevel === 1) return 'shield1'
     else if(this.shieldLevel === 2) return 'shield2'
