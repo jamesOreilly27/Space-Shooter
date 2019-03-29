@@ -33,9 +33,7 @@ export default class Player extends Ship {
     this.scene.shields.add(new Shield({ scene: this.scene, x: this.x, y: this.y, key: shieldStr }))
   }
 
-  isLaserMaxed() {
-    return this.laserLevel === 3
-  }
+  isLaserMaxed() { return this.laserLevel === 3 }
 
   move() {
     if(this.scene.cursors.left.isDown) this.body.setVelocityX(-this.speed)
@@ -66,9 +64,6 @@ export default class Player extends Ship {
       this.shoot(time, delta)
 
       if(this.scene.shields.children.entries.length === 0) this.updateShield()
-  
-      if(this.isLaserMaxed()) this.scene.laserCollide.active = true;
-      else this.scene.laserCollide.active = false;
     }
   }
 }
