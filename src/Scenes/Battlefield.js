@@ -1,5 +1,5 @@
 import Phaser, { Scene } from 'phaser'
-import { Player } from '../sprites'
+import { Player, ShieldPowerup } from '../sprites'
 import { battlefieldImageLoad, incrementLevel } from './utils/battlefield'
 import { enemyDestroy, playerDestroy, getPowerup, shieldBlock, laserCollision } from './utils/collisions'
 import { spawnEnemies, incrementEnemySpecs, resetEnemySpecs, baseSpawnRate, resetEnemySpawnRate } from './utils/enemies'
@@ -53,6 +53,10 @@ export default class Battlefield extends Scene {
     this.addCollider(this.player, this.powerups, getPowerup)
     this.addCollider(this.enemies, this.shields, shieldBlock)
     this.addCollider(this.enemyLasers, this.shields, shieldBlock)
+
+    // this.powerups.add(new ShieldPowerup({ scene: this, key: 'bronze-shield', x: 350, y: 400 }))
+    // this.powerups.add(new ShieldPowerup({ scene: this, key: 'bronze-shield', x: 400, y: 400 }))
+    // this.powerups.add(new ShieldPowerup({ scene: this, key: 'bronze-shield', x: 450, y: 400 }))
     
     /***** Animations *****/
     this.anims.create({
