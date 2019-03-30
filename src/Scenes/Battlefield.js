@@ -1,5 +1,5 @@
 import Phaser, { Scene } from 'phaser'
-import { Player, ShieldPowerup, LaserPowerup, Bomb } from '../sprites'
+import { Player } from '../sprites'
 import { battlefieldImageLoad, incrementLevel } from './utils/battlefield'
 import { enemyDestroy, playerDestroy, getPowerup, shieldBlock, laserCollision } from './utils/collisions'
 import { spawnEnemies, incrementEnemySpecs, resetEnemySpecs, baseSpawnRate, resetEnemySpawnRate } from './utils/enemies'
