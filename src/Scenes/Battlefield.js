@@ -1,5 +1,5 @@
 import Phaser, { Scene } from 'phaser'
-import { Player, ShieldPowerup, LaserPowerup, Bomb } from '../sprites'
+import { Player } from '../sprites'
 import { battlefieldImageLoad, incrementLevel } from './utils/battlefield'
 import { enemyDestroy, playerDestroy, getPowerup, shieldBlock, laserCollision } from './utils/collisions'
 import { spawnEnemies, incrementEnemySpecs, resetEnemySpecs, baseSpawnRate, resetEnemySpawnRate } from './utils/enemies'
@@ -14,6 +14,10 @@ export default class Battlefield extends Scene {
 
   addCollider(group1, group2, callback) {
     return this.physics.add.collider(group1, group2, callback, null, this)
+  }
+
+  addOverlap(group1, group2, callback) {
+    return this.physics.add.overlap(group1, group2, callback, null, this)
   }
 
   preload() {
@@ -42,8 +46,8 @@ export default class Battlefield extends Scene {
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     
     /***** Colliders  & Overlaps *****/
-    this.physics.add.overlap(this.playerLasers, this.enemyLasers, laserCollision, null, this)
-    this.addCollider(this.enemies, this.playerLasers, enemyDestroy)
+    this.addOverlap(this.playerLasers, this.enemyLasers, laserCollision)
+    this.addOverlap(this.enemies, this.playerLasers, enemyDestroy)
     this.addCollider(this.player, this.enemies, playerDestroy)
     this.addCollider(this.player, this.enemyLasers, playerDestroy)
     this.addCollider(this.player, this.powerups, getPowerup)
