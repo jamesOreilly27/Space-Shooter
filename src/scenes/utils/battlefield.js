@@ -55,6 +55,7 @@ export const incrementLevel = battlefield => {
     battlefield.level = 4
     incrementLevelText(battlefield)
     increaseEnemySpawnRate(battlefield)
+    battlefield.player.setFireRate(450)
   }
   if(battlefield.score >= 5501 && battlefield.score <= 14400) {
     battlefield.level = 5
