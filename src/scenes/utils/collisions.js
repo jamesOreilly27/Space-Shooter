@@ -9,7 +9,7 @@ export const enemyDestroy = (ship, laser) => {
     laser.destroy()
   } 
   else if(laser.visible) {
-    ship.destroy()
+    ship.enemyExplode()
   }
 }
 
