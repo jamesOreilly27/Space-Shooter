@@ -62,7 +62,7 @@ export const incrementEnemySpecs = () => {
 
 /************************* Spawning Enemies *************************/
 
-export const baseSpawnRate = 2500
+export const baseSpawnRate = 2800
 export const resetEnemySpawnRate = scene => { scene.enemySpawnRate = baseSpawnRate }
 
 /***** Random Coordinate Generators ******/
@@ -143,7 +143,7 @@ export const levelFiveSpawn = scene => {
   if(randNum <= 300) { addChaser(scene) }
   else if(randNum > 300 && randNum <= 1000) { addMultiplePatrol(scene, 3) }
   else if(randNum > 1000 && randNum <= 1500) { addFighter(scene) }
-  else { addDiveBombers(scene, 3) }
+  else { addDivebombers(scene, 3) }
 }
 
 export const addRandomEnemy = scene => {
@@ -156,7 +156,6 @@ export const addRandomEnemy = scene => {
 
 export const spawnEnemies = (scene, time) => {
   if(time < scene.nextEnemySpawn) { return }
-  // addRandomEnemy(scene)
-  addDivebombers(scene, 3)
+  addRandomEnemy(scene)
   scene.nextEnemySpawn = time + scene.enemySpawnRate
 }

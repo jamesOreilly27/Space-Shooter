@@ -40,7 +40,7 @@ export const incrementLevelText = battlefield => {
   battlefield.levelText.setText(`LEVEL: ${battlefield.level}`)
 }
 
-export const increaseEnemySpawnRate = battlefield => { battlefield.enemySpawnRate = 2000 }
+export const increaseEnemySpawnRate = battlefield => { battlefield.enemySpawnRate = 2500 }
 
 export const incrementLevel = battlefield => {
   if(battlefield.score === 300) {
