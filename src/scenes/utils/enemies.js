@@ -62,7 +62,7 @@ export const incrementEnemySpecs = () => {
 
 /************************* Spawning Enemies *************************/
 
-export const baseSpawnRate = 2800
+export const baseSpawnRate = 2500
 export const resetEnemySpawnRate = scene => { scene.enemySpawnRate = baseSpawnRate }
 
 /***** Random Coordinate Generators ******/
