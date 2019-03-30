@@ -6,7 +6,7 @@ export default class Divebomber extends Ship {
   constructor(config) {
     super(config)
     this.shot = false
-    this.left = this.x <= 400
+    this.left = config.left
     this.speed = enemySpecs.Divebomber.speed
     this.bulletSpeed = enemySpecs.Divebomber.bulletSpeed
   }
