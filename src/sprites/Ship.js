@@ -3,7 +3,7 @@ import { shouldDrop, choosePowerup } from '../scenes/utils/itemDrop.js'
 
 export default class Ship extends Phaser.GameObjects.Sprite {
   constructor(config) {
-    super(config.scene, config.x, config.y, config.key, config.path)
+    super(config.scene, config.x, config.y, config.key, config.path, config.left)
     this.scene.physics.world.enable(this)
     this.scene.add.existing(this)
     this.key = config.key
@@ -45,9 +45,9 @@ export default class Ship extends Phaser.GameObjects.Sprite {
   }
 
   updateScore() {
-    if(this.key === 'divebomber') this.scene.score += 50
-    if(this.key === 'fighter') this.scene.score += 50
-    if(this.key === 'chaser') this.scene.score += 3
+    if(this.key === 'divebomber') this.scene.score += 250
+    if(this.key === 'fighter') this.scene.score += 125
+    if(this.key === 'chaser') this.scene.score += 400
     if(this.key === 'patrol-ship') this.scene.score += 50
     this.scene.scoreText.setText(`SCORE: ${this.scene.score}`)
   }

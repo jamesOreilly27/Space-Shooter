@@ -6,7 +6,7 @@ export default class Divebomber extends Ship {
   constructor(config) {
     super(config)
     this.shot = false
-    this.left = this.x <= 400
+    this.left = config.left
     this.speed = enemySpecs.Divebomber.speed
     this.bulletSpeed = enemySpecs.Divebomber.bulletSpeed
   }
@@ -21,7 +21,7 @@ export default class Divebomber extends Ship {
 
   shoot() {
     while(!this.shot) {
-      this.scene.enemyLasers.add(new DivebomberLaser({ scene: this.scene, x: this.x, y: this.y, key: 'divebomber-laser', bulletSpeed: this.bulletSpeed}))
+      this.scene.enemyLasers.add(new DivebomberLaser({ scene: this.scene, x: this.x, y: this.y, key: 'divebomber-laser', bulletSpeed: this.bulletSpeed, left: this.left}))
       this.shot = true
     }
   }

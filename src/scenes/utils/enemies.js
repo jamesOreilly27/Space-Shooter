@@ -74,7 +74,7 @@ export const genRandNum = max => { return Math.floor(Math.random() * max) }
 //Helper function that takes a scene and an enemy object as arguments
 //Adds an enemy with the properties specified in enemy object to the scene
 export const addEnemy = (scene, enemy) => {
-  scene.enemies.add(new enemy.class({ scene, key: enemy.key, x: enemy.x, y: enemy.y, path: enemy.path }))
+  scene.enemies.add(new enemy.class({ scene, key: enemy.key, x: enemy.x, y: enemy.y, path: enemy.path, left: enemy.left }))
 }
 
 //Add Patrol ships in quantities up to 3 ships
@@ -89,11 +89,26 @@ export const addMultiplePatrol = (scene, quantity) => {
   for(let i = 0; i < quantity; i++) { addPatrol(scene, 1) }
 }
 
+//Helper determines if xCoordinate is on left side of screen or not
+export const isLeft = (enemyX, playerX) => enemyX <= playerX
+
+//Helper determines which way divebombers squadrons will form up
+export const stepDivebombers = (scene, quantity, x, isLeft) => {
+  if(!isLeft) {
+    for(let i = 0; i < quantity; i++) {
+      addEnemy(scene, { class: Divebomber, key: 'divebomber', x: x + (20 * i), y: (-20 - (30 * i)), left: false })
+    }
+  }
+  else {
+    for(let i = 0; i > -quantity; i--) {
+      addEnemy(scene, { class: Divebomber, key: 'divebomber', x: x + (20 * i), y: (-20 + (30 * i)), left: true })
+    }
+  }
+}
+
 export const addDivebombers = (scene, quantity) => {
   const randomX = randomCoordinateX()
-  for(let i = 0; i < quantity; i++) {
-    addEnemy(scene, { class: Divebomber, key: 'divebomber', x: randomX + (20 * i), y: (-20 - (30 * i)) })
-  }
+  stepDivebombers(scene, quantity, randomX, isLeft(randomX, scene.player.x), )
 }
 
 export const addChaser = scene => addEnemy(scene, { class: Chaser, key: 'chaser', x: scene.player.x, y: 600 })
@@ -128,7 +143,7 @@ export const levelFiveSpawn = scene => {
   if(randNum <= 300) { addChaser(scene) }
   else if(randNum > 300 && randNum <= 1000) { addMultiplePatrol(scene, 3) }
   else if(randNum > 1000 && randNum <= 1500) { addFighter(scene) }
-  else { addDiveBombers(scene, 3) }
+  else { addDivebombers(scene, 3) }
 }
 
 export const addRandomEnemy = scene => {

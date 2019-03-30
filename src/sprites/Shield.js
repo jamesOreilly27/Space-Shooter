@@ -6,23 +6,23 @@ export default class Shield extends Phaser.GameObjects.Sprite {
     this.scene = config.scene
     this.scene.physics.world.enable(this)
     this.scene.add.existing(this)
-    this.scaleX = .4
-    this.scaleY = .4
+    this.scaleX = .35
+    this.scaleY = .35
   }
 
   move() {
     const playerSpeed = this.scene.player.speed
     //first if statement will check if the shield has hit the left or right side of the game area
-    if(this.x > 41.6 && this.x < 760) {
+    if(this.x > 20.5 && this.x < 779.5) {
       if(this.scene.cursors.left.isDown) this.body.setVelocityX(-playerSpeed)
       else if(this.scene.cursors.right.isDown) this.body.setVelocityX(playerSpeed)
       else this.body.setVelocityX(0)
     } 
-    else if(this.x > 41.6 && this.x >= 760) {
+    else if(this.x > 20.5 && this.x >= 779.5) {
       if(this.scene.cursors.left.isDown) this.body.setVelocityX(-playerSpeed)
       else this.body.setVelocityX(0)
     } 
-    else if(this.x <= 41.6 && this.x < 760) {
+    else if(this.x <= 20.5 && this.x < 779.5) {
       if(this.scene.cursors.right.isDown) this.body.setVelocityX(playerSpeed)
       else this.body.setVelocityX(0)
     }
@@ -33,11 +33,11 @@ export default class Shield extends Phaser.GameObjects.Sprite {
       else if(this.scene.cursors.up.isDown) this.body.setVelocityY(-playerSpeed)
       else this.body.setVelocityY(0)
     }
-    else if(this.y > 29.16 && this.y >= 568.2) {
+    else if(this.y > 17 && this.y >= 583) {
       if(this.scene.cursors.up.isDown) this.body.setVelocityY(-playerSpeed)
       else this.body.setVelocityY(0)
     }
-    else if(this.y <= 29.16 && this.y < 568.2) {
+    else if(this.y <= 17 && this.y < 583) {
       if(this.scene.cursors.down.isDown) this.body.setVelocityY(playerSpeed)
       else this.body.setVelocityY(0)
     }
