@@ -12,6 +12,11 @@ export default class Laser extends Phaser.GameObjects.Sprite {
     this.scaleY = .3
   }
 
+  updateScore() {
+    this.scene.score += 3
+    this.scene.scoreText.setText(`SCORE: ${this.scene.score}`)
+  }
+
   update() {
     killOffScreen(this)
   }
