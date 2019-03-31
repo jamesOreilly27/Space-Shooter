@@ -7,9 +7,7 @@ import { spawnEnemies, incrementEnemySpecs, resetEnemySpecs, baseSpawnRate, rese
 export default class Battlefield extends Scene {
   constructor() {
     super({ key: 'Battlefield' })
-    this.enemySpawnRate = baseSpawnRate
     this.nextEnemySpawn = 0
-    this.scoreText = ''
   }
 
   addCollider(group1, group2, callback) {
@@ -36,12 +34,11 @@ export default class Battlefield extends Scene {
 
   create() {
     resetEnemySpecs()
-    resetEnemySpawnRate(this)
     //Filling in Battlefield Properties
     this.score = this.scene.settings.data.score
     this.level = this.scene.settings.data.level
     this.scoreText = this.add.text(16, 16, `SCORE: ${this.score}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF' })
-    this.levelText = this.add.text(16, 50, `LEVEL: ${this.level}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF' })
+    this.levelText = this.add.text(16, 50, `LEVEL: ${this.level.number}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF' })
     this.cursors = this.input.keyboard.createCursorKeys()
     this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     
@@ -53,10 +50,6 @@ export default class Battlefield extends Scene {
     this.addCollider(this.player, this.powerups, getPowerup)
     this.addCollider(this.enemies, this.shields, shieldBlock)
     this.addCollider(this.enemyLasers, this.shields, shieldBlock)
-
-    // this.powerups.add(new ShieldPowerup({ scene: this, key: 'bronze-shield', x: 350, y: 400 }))
-    // this.powerups.add(new ShieldPowerup({ scene: this, key: 'bronze-shield', x: 400, y: 400 }))
-    // this.powerups.add(new ShieldPowerup({ scene: this, key: 'bronze-shield', x: 450, y: 400 }))
     
     /***** Animations *****/
     this.anims.create({
@@ -84,18 +77,18 @@ export default class Battlefield extends Scene {
   }
   
   update(time, delta) {
-    let currentLevel = this.level
+    let currentLevel = this.level.number
     this.player.update(time, delta)
     this.enemies.children.entries.forEach(enemy => { enemy.update(time, delta) })
     this.playerLasers.children.entries.forEach(laser => { laser.update(time, delta) })
     this.enemyLasers.children.entries.forEach(laser => { laser.update(time, delta) })
     this.shields.children.entries.forEach(shield => { shield.update(time, delta) })
     incrementLevel(this)
-    if(this.level !== currentLevel) {
+    if(this.level.number !== currentLevel) {
       this.player.speed *= 1.045
       incrementEnemySpecs()
       this.enemies.children.entries.forEach(enemy => { enemy.levelUp(this) })
     }
-    spawnEnemies(this, time, delta)
+    this.level.spawnEnemies(this, time)
   }
 }

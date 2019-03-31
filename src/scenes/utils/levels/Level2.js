@@ -1,12 +1,16 @@
 import { addMultiplePatrol } from '../enemies'
 
-export default class Level1 {
+class Level2 {
   constructor() {
     this.number = 2
     this.enemySpawnRate = 2500
   }
 
-  spawnEnemies(scene) {
+  spawnEnemies(scene, time) {
+    if(time < scene.nextEnemySpawn) { return }
     addMultiplePatrol(scene, 2)
+    scene.nextEnemySpawn = time + this.enemySpawnRate
   }
 }
+
+export default new Level2()

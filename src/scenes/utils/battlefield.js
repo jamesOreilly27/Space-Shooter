@@ -38,22 +38,19 @@ export const battlefieldImageLoad = battlefield => {
 }
 
 /*************** Incrementing Level ***************/
-const level2 = new Level2()
-const level3 = new Level3()
-
 export const incrementLevelText = battlefield => {
-  battlefield.levelText.setText(`LEVEL: ${battlefield.level}`)
+  battlefield.levelText.setText(`LEVEL: ${battlefield.level.number}`)
 }
 
 export const increaseEnemySpawnRate = battlefield => { battlefield.enemySpawnRate = 2000 }
 
 export const incrementLevel = battlefield => {
   if(battlefield.score >= 300  && battlefield.score < 750) {
-    battlefield.level = level2
+    battlefield.level = Level2
     incrementLevelText(battlefield)
   }
   if(battlefield.score >= 750 && battlefield.score < 1875) {
-    battlefield.level = level3
+    battlefield.level = Level3
     incrementLevelText(battlefield)
   }
   // if(battlefield.score >= 1875 && battlefield.score < 4687) {
