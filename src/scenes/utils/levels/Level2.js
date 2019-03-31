@@ -1,4 +1,4 @@
-import { addPatrol } from '../enemies'
+import { addMultiplePatrol } from '../enemies'
 
 export default class Level1 {
   constructor() {
@@ -6,6 +6,6 @@ export default class Level1 {
   }
 
   spawnEnemies(scene) {
-    addPatrol(scene, 1)
+    addMultiplePatrol(scene, 2)
   }
 }
