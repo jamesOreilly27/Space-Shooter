@@ -1,3 +1,5 @@
+import { Level2, Level3 } from './levels'
+
 /*************** Preload Images ***************/
 
 //Add any images needed for the game to this array and they will automatically be added to the preload function in the Battlefield Scene
@@ -36,6 +38,9 @@ export const battlefieldImageLoad = battlefield => {
 }
 
 /*************** Incrementing Level ***************/
+const level2 = new Level2()
+const level3 = new Level3()
+
 export const incrementLevelText = battlefield => {
   battlefield.levelText.setText(`LEVEL: ${battlefield.level}`)
 }
@@ -43,42 +48,44 @@ export const incrementLevelText = battlefield => {
 export const increaseEnemySpawnRate = battlefield => { battlefield.enemySpawnRate = 2000 }
 
 export const incrementLevel = battlefield => {
-  if(battlefield.score === 300) {
-    battlefield.level = 2
+  if(battlefield.score >= 300  && battlefield.score < 750) {
+    battlefield.level = level2
     incrementLevelText(battlefield)
   }
-  if(battlefield.score >= 800 && battlefield.score < 2100) {
-    battlefield.level = 3
+  if(battlefield.score >= 750 && battlefield.score < 1875) {
+    battlefield.level = level3
     incrementLevelText(battlefield)
   }
-  if(battlefield.score >= 2100 && battlefield.score <= 5500) {
-    battlefield.level = 4
-    incrementLevelText(battlefield)
-    increaseEnemySpawnRate(battlefield)
-    battlefield.player.setFireRate(450)
-  }
-  if(battlefield.score >= 5501 && battlefield.score <= 14400) {
-    battlefield.level = 5
-    incrementLevelText(battlefield)
-  }
-  // if(battlefield.score >= 501 && battlefield.score <= 600) {
+  // if(battlefield.score >= 1875 && battlefield.score < 4687) {
+  //   battlefield.level = 4
+  //   incrementLevelText(battlefield)
+  //   increaseEnemySpawnRate(battlefield)
+  //   battlefield.player.setFireRate(450)
+  // }
+  // if(battlefield.score >= 4687 && battlefield.score < 11716) {
+  //   battlefield.level = 5
+  //   incrementLevelText(battlefield)
+  // }
+  // if(battlefield.score >= 11716 && battlefield.score <= 20658) {
   //   battlefield.level = 6
   //   incrementLevelText(battlefield)
   // }
-  // if(battlefield.score >= 601 && battlefield.score <= 700) {
+  // if(battlefield.score >= 20658 && battlefield.score <= 25354) {
   //   battlefield.level = 7
   //   incrementLevelText(battlefield)
+  //   battlefield.player.setFireRate(300)
   // }
-  // if(battlefield.score >= 701 && battlefield.score <= 800) {
+  // if(battlefield.score >= 25354 && battlefield.score <= 30968) {
   //   battlefield.level = 8
   //   incrementLevelText(battlefield)
   // }
-  // if(battlefield.score >= 801 && battlefield.score <= 900) {
+  // if(battlefield.score >= 30968 && battlefield.score <= 35722) {
   //   battlefield.level = 9
   //   incrementLevelText(battlefield)
   // }
-  // if(battlefield.score >= 901 && battlefield.score <= 1000) {
+  // if(battlefield.score >= 35722) {
   //   battlefield.level = 10
   //   incrementLevelText(battlefield)
+  //   battlefield.player.setFireRate(150)
   // }
 }
