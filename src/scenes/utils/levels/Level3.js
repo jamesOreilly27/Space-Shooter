@@ -2,6 +2,7 @@ import { addMultiplePatrol, addDivebombers, addFighters } from '../enemies'
 
 export default class Level1 {
   constructor() {
+    this.number = 3
     this.enemySpawnRate = 2500
   }
 
