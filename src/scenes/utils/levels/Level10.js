@@ -1,14 +1,13 @@
 import { genRandNum, addMultiplePatrol, addDivebombers, addFighter, addChaser } from '../enemies'
 import { checkRange } from '../itemDrop'
 
-class Level9 {
+class Level10 {
   constructor() {
-    this.number = 9
-    this.enemySpawnRate = 2000
+    this.number = 10
+    this.enemySpawnRate = 1700
   }
 
-  spawnEnemies(scene, time) {
-    if(time < scene.nextEnemySpawn) { return }
+  addEnemies(scene) {
     const randNum = genRandNum(2000)
     if(randNum < 400) { addChaser(scene) }
     else if(checkRange(randNum, 400, 900)) { addMultiplePatrol(scene, 4) }
@@ -17,8 +16,14 @@ class Level9 {
       addFighter(scene)
       addFighter(scene)
     }
+  }
+
+  spawnEnemies(scene, time) {
+    if(time < scene.nextEnemySpawn) { return }
+    this.addEnemies(scene)
+    this.addEnemies(scene)
     scene.nextEnemySpawn = time + this.enemySpawnRate
   }
 }
 
-export default new Level9()
+export default new Level10()
