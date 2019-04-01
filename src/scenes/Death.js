@@ -1,4 +1,5 @@
 import Phaser, { Scene } from 'phaser'
+import { Level1 } from './utils/levels'
 
 export default class Death extends Scene {
   constructor() {
@@ -17,7 +18,7 @@ export default class Death extends Scene {
   update() {
     if(this.startKey.isDown) {
       this.startKey.reset()
-      this.scene.start('Battlefield', { score: 0, level: 1 })
+      this.scene.start('Battlefield', { score: 0, level: Level1 })
     }
   }
 }
