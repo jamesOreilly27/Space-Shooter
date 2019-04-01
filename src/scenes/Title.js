@@ -1,5 +1,6 @@
 import Phaser, { Scene } from 'phaser'
 import { Level1 } from './utils/levels'
+import { basePlayerConfig } from './utils'
 
 export default class Title extends Scene {
   constructor() {
@@ -27,7 +28,7 @@ export default class Title extends Scene {
   update() {
     if(this.startKey.isDown) {
       this.startKey.reset()
-      this.scene.start('Battlefield', { score: 0, level: Level1 })
+      this.scene.start('Battlefield', { score: 0, level: Level1, playerConfig: basePlayerConfig })
     }
   }
 }

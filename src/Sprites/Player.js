@@ -4,11 +4,11 @@ import { Ship, PlayerLaser, Shield } from '../sprites'
 export default class Player extends Ship {
   constructor(config) {
     super(config)
-    this.shieldLevel = 0
-    this.laserLevel = 1
-    this.speed = 150
+    this.shieldLevel = config.shieldLevel
+    this.laserLevel = config.laserLevel
+    this.speed = config.speed
+    this.fireRate = config.fireRate
     this.nextFire = 0
-    this.fireRate = 600
     this.body.setCollideWorldBounds(true)
   }
   
