@@ -1,4 +1,4 @@
-import { Level2, Level3 } from './levels'
+import { Level2, Level3, Level4, Level5 } from './levels'
 
 /*************** Preload Images ***************/
 
@@ -53,16 +53,16 @@ export const incrementLevel = battlefield => {
     battlefield.level = Level3
     incrementLevelText(battlefield)
   }
-  // if(battlefield.score >= 1875 && battlefield.score < 4687) {
-  //   battlefield.level = 4
-  //   incrementLevelText(battlefield)
-  //   increaseEnemySpawnRate(battlefield)
-  //   battlefield.player.setFireRate(450)
-  // }
-  // if(battlefield.score >= 4687 && battlefield.score < 11716) {
-  //   battlefield.level = 5
-  //   incrementLevelText(battlefield)
-  // }
+  if(battlefield.score >= 1875 && battlefield.score < 4687) {
+    battlefield.level = Level4
+    incrementLevelText(battlefield)
+    increaseEnemySpawnRate(battlefield)
+    battlefield.player.setFireRate(450)
+  }
+  if(battlefield.score >= 4687 && battlefield.score < 11716) {
+    battlefield.level = Level5
+    incrementLevelText(battlefield)
+  }
   // if(battlefield.score >= 11716 && battlefield.score <= 20658) {
   //   battlefield.level = 6
   //   incrementLevelText(battlefield)
