@@ -1,4 +1,4 @@
-import { Level2, Level3, Level4, Level5 } from './levels'
+import { Level2, Level3, Level4, Level5, Level6, Level7, Level8, Level9, Level10 } from './levels'
 
 /*************** Preload Images ***************/
 
@@ -63,26 +63,26 @@ export const incrementLevel = battlefield => {
     battlefield.level = Level5
     incrementLevelText(battlefield)
   }
-  // if(battlefield.score >= 11716 && battlefield.score <= 20658) {
-  //   battlefield.level = 6
-  //   incrementLevelText(battlefield)
-  // }
-  // if(battlefield.score >= 20658 && battlefield.score <= 25354) {
-  //   battlefield.level = 7
-  //   incrementLevelText(battlefield)
-  //   battlefield.player.setFireRate(300)
-  // }
-  // if(battlefield.score >= 25354 && battlefield.score <= 30968) {
-  //   battlefield.level = 8
-  //   incrementLevelText(battlefield)
-  // }
-  // if(battlefield.score >= 30968 && battlefield.score <= 35722) {
-  //   battlefield.level = 9
-  //   incrementLevelText(battlefield)
-  // }
-  // if(battlefield.score >= 35722) {
-  //   battlefield.level = 10
-  //   incrementLevelText(battlefield)
-  //   battlefield.player.setFireRate(150)
-  // }
+  if(battlefield.score >= 11716 && battlefield.score < 20658) {
+    battlefield.level = Level6
+    incrementLevelText(battlefield)
+  }
+  if(battlefield.score >= 20658 && battlefield.score < 25354) {
+    battlefield.level = Level7
+    incrementLevelText(battlefield)
+    battlefield.player.setFireRate(300)
+  }
+  if(battlefield.score >= 25354 && battlefield.score < 30968) {
+    battlefield.level = Level8
+    incrementLevelText(battlefield)
+  }
+  if(battlefield.score >= 30968 && battlefield.score < 35722) {
+    battlefield.level = Level9
+    incrementLevelText(battlefield)
+  }
+  if(battlefield.score >= 35722) {
+    battlefield.level = Level10
+    incrementLevelText(battlefield)
+    battlefield.player.setFireRate(150)
+  }
 }
