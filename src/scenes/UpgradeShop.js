@@ -21,6 +21,10 @@ export default class UpgradeShop extends Scene {
     return new UpgradeButton({ scene: this, x: x, y: y, key: 'upgrade-btn'})
   }
 
+  addUpgradeText(x, y) {
+    this.add.text(x, y, 'UPGRADE', { fontSize: '12px', fontFamily: 'Lato', fill: '#0A0A0A' })
+  }
+
   create() {
 
   }
