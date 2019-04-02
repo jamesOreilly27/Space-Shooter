@@ -13,8 +13,8 @@ export default class UpgradeShop extends Scene {
     this.load.image('upgrade-btn', './assets/upgrade-btn.png')
   }
 
-  addRectangle(x, y) {
-    return new UpgradeContainer({ scene: this, x: x, y: y, width: 216, height: 300, fillColor: 0x000036, alpha: .8 })
+  addRectangle(x, y, highlighted) {
+    return new UpgradeContainer({ scene: this, x: x, y: y, width: 216, height: 300, fillColor: 0x000036, alpha: .8, highlighted: highlighted })
   }
 
   addUpgradeButton(x, y) {
@@ -43,6 +43,8 @@ export default class UpgradeShop extends Scene {
   }
 
   update() {
-
+    this.moveSpeedContainer.update()
+    this.fireRateContainer.update()
+    this.laserContainer.update()
   }
 }
