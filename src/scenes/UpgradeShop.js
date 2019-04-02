@@ -26,17 +26,17 @@ export default class UpgradeShop extends Scene {
   }
 
   create() {
-    this.moveSpeedContainer = this.addRectangle(140, 300)
+    this.moveSpeedContainer = this.addRectangle(140, 300, true)
     this.moveSpeedImage = this.add.image(146, 300, 'movement-speed')
     this.moveSpeedButton = this.addUpgradeButton(146, 400)
     this.addUpgradeText(121, 393)
 
-    this.fireRateContainer = this.addRectangle(400, 300)
+    this.fireRateContainer = this.addRectangle(400, 300, false)
     this.fireRateImage = this.add.image(406, 285, 'fire-rate')
     this.fireRateButton = this.addUpgradeButton(406, 400)
     this.addUpgradeText(381, 393)
 
-    this.laserContainer = this.addRectangle(660, 300)
+    this.laserContainer = this.addRectangle(660, 300, false)
     this.laserImage = this.add.image(666, 285, 'laser-upgrade')
     this.laserButton = this.addUpgradeButton(666, 400)
     this.addUpgradeText(641, 393)

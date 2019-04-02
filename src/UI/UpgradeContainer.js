@@ -7,6 +7,8 @@ export default class UpgradeContainer extends Phaser.GameObjects.Rectangle {
     this.highlighted = config.highlighted
   }
 
+  flipHighlighted() { this.highlighted = !this.highlighted }
+
   update() {
     if(this.highlighted) { this.setFillStyle(0x006400, 0.8) }
   }
