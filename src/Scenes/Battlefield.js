@@ -18,6 +18,12 @@ export default class Battlefield extends Scene {
     return this.physics.add.overlap(group1, group2, callback, null, this)
   }
 
+  goToShop() {
+    if((this.score > 1875 && this.score <= 1950) || (this.score > 20658 && this.score < 21000) ) {
+      return true
+    }
+  }
+
   preload() {
     /***** Preload all images *****/
     battlefieldImageLoad(this)
@@ -79,7 +85,7 @@ export default class Battlefield extends Scene {
   }
   
   update(time, delta) {
-    if(this.level.number === 2) this.scene.start('UpgradeShop', { player: this.player })
+    if(this.goToShop()) this.scene.start('UpgradeShop', { player: this.player, level: this.level, score: this.score })
     let currentLevel = this.level.number
     this.player.update(time, delta)
     this.enemies.children.entries.forEach(enemy => { enemy.update(time, delta) })

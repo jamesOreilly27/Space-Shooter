@@ -1,9 +1,11 @@
 import Phaser, { Scene } from 'phaser'
 import { UpgradeContainer, UpgradeButton } from '../UI'
+import { Level3 } from './utils/levels'
 
 export default class UpgradeShop extends Scene {
   constructor() {
     super({ key: 'UpgradeShop' })
+    this.upgrades = 2
   }
 
   preload() {
@@ -47,15 +49,29 @@ export default class UpgradeShop extends Scene {
     }
   }
 
+  upgradeSpeed() { this.playerConfig.speed += 35 }
+
+  upgradeFireRate() { this.playerConfig.fireRate -= 150 }
+
+  upgradeLaser() { this.playerConfig.laserLevel++ }
+
   upgradePlayer() {
-    let index = findHighlightedIndex(this.containers)
+    let index = this.findHighlightedIndex(this.containers)
     if(index === 0) { this.upgradeSpeed() }
     if(index === 1) { this.upgradeFireRate() }
     if(index === 2) { this.upgradeLaser() }
+    this.upgrades--
+    console.log(this.playerConfig)
+  }
+
+  updateUpgradeText() {
+    this.upgradeText.setText(`UPGRADES: ${this.upgrades}`)
   }
 
   create() {
     this.player = this.scene.settings.data.player
+    this.score = this.scene.settings.data.score
+    this.level = this.scene.settings.data.level
     this.playerConfig = {
       scene: {},
       key: 'player',
@@ -67,7 +83,8 @@ export default class UpgradeShop extends Scene {
       laserLevel: this.player.laserLevel
     }
 
-    console.log(this.playerConfig)
+    this.upgradeText = this.add.text(300, 16, `UPGRADES: ${this.upgrades}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF'})
+
     this.moveSpeedContainer = this.addRectangle(140, 300, true)
     this.moveSpeedImage = this.add.image(146, 300, 'movement-speed')
     this.moveSpeedButton = this.addUpgradeButton(146, 400)
@@ -89,6 +106,7 @@ export default class UpgradeShop extends Scene {
   }
 
   update() {
+    if(!this.upgrades) this.scene.start('Battlefield', { score: this.score + 50, level: this.level, playerConfig: this.playerConfig})
     if(this.cursors.right.isDown) {
       this.moveRight(this.containers)
       this.cursors.right.reset()
@@ -96,6 +114,11 @@ export default class UpgradeShop extends Scene {
     if(this.cursors.left.isDown) {
       this.moveLeft(this.containers)
       this.cursors.left.reset()
+    }
+    if(this.upgradeKey.isDown) {
+      this.upgradePlayer()
+      this.upgradeKey.reset()
+      this.updateUpgradeText()
     }
     this.moveSpeedContainer.update()
     this.fireRateContainer.update()
