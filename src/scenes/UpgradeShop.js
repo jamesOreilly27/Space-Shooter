@@ -49,9 +49,9 @@ export default class UpgradeShop extends Scene {
     }
   }
 
-  upgradeSpeed() { this.playerConfig.speed += 35 }
+  upgradeSpeed() { this.playerConfig.speed += 25 }
 
-  upgradeFireRate() { this.playerConfig.fireRate -= 150 }
+  upgradeFireRate() { this.playerConfig.fireRate -= 100 }
 
   upgradeLaser() { this.playerConfig.laserLevel++ }
 

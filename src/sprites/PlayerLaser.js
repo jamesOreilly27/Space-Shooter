@@ -5,11 +5,11 @@ export default class PlayerLaser extends Laser {
     super(config)
     let laserLevel = config.scene.player.laserLevel
     if(laserLevel === 2) {
-      this.scaleX = .8
-      this.scaleY = .8
+      this.scaleX = .5
+      this.scaleY = .5
     } else if(laserLevel === 3) {
-      this.scaleX = 1
-      this.scaleY = 1
+      this.scaleX = .7
+      this.scaleY = .7
     }
   }
 
