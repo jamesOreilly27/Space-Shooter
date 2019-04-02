@@ -26,7 +26,10 @@ export default class UpgradeShop extends Scene {
   }
 
   create() {
-
+    this.moveSpeedContainer = this.addRectangle(140, 300)
+    this.moveSpeedImage = this.add.image(146, 300, 'movement-speed')
+    this.moveSpeedButton = this.addUpgradeButton(146, 400)
+    this.addUpgradeText(121, 393)
   }
 
   update() {
