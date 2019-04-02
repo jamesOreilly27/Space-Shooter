@@ -1,5 +1,5 @@
 import Phaser, { Game } from 'phaser'
-import { Background, Battlefield, Title, Death } from './scenes'
+import { Background, Battlefield, UpgradeShop, Title, Death } from './scenes'
 
 const gameConfig = {
   width: 800,
@@ -11,7 +11,7 @@ const gameConfig = {
       debug: false
     }
   },
-  scene: [ Background, Title, Battlefield, Death ]
+  scene: [ Background, UpgradeShop, Title, Battlefield, Death ]
 }
 
 new Game(gameConfig)
