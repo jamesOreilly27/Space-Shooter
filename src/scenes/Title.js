@@ -4,7 +4,7 @@ import { basePlayerConfig } from './utils'
 
 export default class Title extends Scene {
   constructor() {
-    super({ key: 'Title', active: false })
+    super({ key: 'Title', active: true })
   }
 
   preload() {

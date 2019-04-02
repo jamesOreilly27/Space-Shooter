@@ -3,7 +3,7 @@ import { UpgradeContainer, UpgradeButton } from '../UI'
 
 export default class UpgradeShop extends Scene {
   constructor() {
-    super({ key: 'UpgradeShop', active: true })
+    super({ key: 'UpgradeShop' })
   }
 
   preload() {
@@ -47,7 +47,27 @@ export default class UpgradeShop extends Scene {
     }
   }
 
+  upgradePlayer() {
+    let index = findHighlightedIndex(this.containers)
+    if(index === 0) { this.upgradeSpeed() }
+    if(index === 1) { this.upgradeFireRate() }
+    if(index === 2) { this.upgradeLaser() }
+  }
+
   create() {
+    this.player = this.scene.settings.data.player
+    this.playerConfig = {
+      scene: {},
+      key: 'player',
+      x: 100,
+      y: 450,
+      speed: this.player.speed,
+      fireRate: this.player.fireRate,
+      shieldLevel: this.player.shieldLevel,
+      laserLevel: this.player.laserLevel
+    }
+
+    console.log(this.playerConfig)
     this.moveSpeedContainer = this.addRectangle(140, 300, true)
     this.moveSpeedImage = this.add.image(146, 300, 'movement-speed')
     this.moveSpeedButton = this.addUpgradeButton(146, 400)
@@ -65,12 +85,10 @@ export default class UpgradeShop extends Scene {
 
     this.cursors = this.input.keyboard.createCursorKeys()
     this.containers = [this.moveSpeedContainer, this.fireRateContainer, this.laserContainer]
-
-    // this.input.keyboard.on('keyup_LEFT', this.moveLeft, this);
-    // this.input.keyboard.on('keyup_RIGHT', this.rightMove, this);
+    this.upgradeKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER)
   }
 
-  update(time, delta) {
+  update() {
     if(this.cursors.right.isDown) {
       this.moveRight(this.containers)
       this.cursors.right.reset()
