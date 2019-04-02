@@ -25,9 +25,29 @@ export default class UpgradeShop extends Scene {
     this.add.text(x, y, 'UPGRADE', { fontSize: '12px', fontFamily: 'Lato', fill: '#0A0A0A' })
   }
 
-  create() {
-    this.cursors = this.input.keyboard.createCursorKeys()
+  findHighlightedIndex(containers) {
+    for(let i = 0; i < containers.length; i++) {
+      if(containers[i].highlighted) return i
+    }
+  }
 
+  moveRight() {
+    if(!this.containers[this.containers.length - 1].highlighted) {
+      let highlightedIndex = this.findHighlightedIndex(this.containers)
+      this.containers[highlightedIndex].flipHighlighted()
+      this.containers[highlightedIndex + 1].flipHighlighted()
+    }
+  }
+
+  moveLeft() {
+    if(!this.containers[0].highlighted) {
+      let highlightedIndex = this.findHighlightedIndex(this.containers)
+      this.containers[highlightedIndex].flipHighlighted()
+      this.containers[highlightedIndex - 1].flipHighlighted()
+    }
+  }
+
+  create() {
     this.moveSpeedContainer = this.addRectangle(140, 300, true)
     this.moveSpeedImage = this.add.image(146, 300, 'movement-speed')
     this.moveSpeedButton = this.addUpgradeButton(146, 400)
@@ -42,9 +62,23 @@ export default class UpgradeShop extends Scene {
     this.laserImage = this.add.image(666, 285, 'laser-upgrade')
     this.laserButton = this.addUpgradeButton(666, 400)
     this.addUpgradeText(641, 393)
+
+    this.cursors = this.input.keyboard.createCursorKeys()
+    this.containers = [this.moveSpeedContainer, this.fireRateContainer, this.laserContainer]
+
+    // this.input.keyboard.on('keyup_LEFT', this.moveLeft, this);
+    // this.input.keyboard.on('keyup_RIGHT', this.rightMove, this);
   }
 
-  update() {
+  update(time, delta) {
+    if(this.cursors.right.isDown) {
+      this.moveRight(this.containers)
+      this.cursors.right.reset()
+    }
+    if(this.cursors.left.isDown) {
+      this.moveLeft(this.containers)
+      this.cursors.left.reset()
+    }
     this.moveSpeedContainer.update()
     this.fireRateContainer.update()
     this.laserContainer.update()

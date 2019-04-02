@@ -11,5 +11,6 @@ export default class UpgradeContainer extends Phaser.GameObjects.Rectangle {
 
   update() {
     if(this.highlighted) { this.setFillStyle(0x006400, 0.8) }
+    if(!this.highlighted) { this.setFillStyle(0x000036, 0.8) }
   }
 }
