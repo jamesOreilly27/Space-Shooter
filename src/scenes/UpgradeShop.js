@@ -17,6 +17,10 @@ export default class UpgradeShop extends Scene {
     return new UpgradeContainer({ scene: this, x: x, y: y, width: 216, height: 300, fillColor: 0x000036, alpha: .8 })
   }
 
+  addUpgradeButton(x, y) {
+    return new UpgradeButton({ scene: this, x: x, y: y, key: 'upgrade-btn'})
+  }
+
   create() {
 
   }
