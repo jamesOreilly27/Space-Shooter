@@ -30,6 +30,11 @@ export default class UpgradeShop extends Scene {
     this.moveSpeedImage = this.add.image(146, 300, 'movement-speed')
     this.moveSpeedButton = this.addUpgradeButton(146, 400)
     this.addUpgradeText(121, 393)
+
+    this.fireRateContainer = this.addRectangle(400, 300)
+    this.fireRateImage = this.add.image(406, 285, 'fire-rate')
+    this.fireRateButton = this.addUpgradeButton(406, 400)
+    this.addUpgradeText(381, 393)
   }
 
   update() {
