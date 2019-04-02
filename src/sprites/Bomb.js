@@ -12,7 +12,7 @@ export default class Bomb extends Powerup {
     this.scene.playerLasers.add(bombExplosion)
     bombExplosion.scaleX = 7
     bombExplosion.scaleY = 5
-    bombExplosion.setCircle(35, -20, -18)
+    bombExplosion.setCircle(35, 18, 14)
     bombExplosion.play('bomb-explode')
   }
 }

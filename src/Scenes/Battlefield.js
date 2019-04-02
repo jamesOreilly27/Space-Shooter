@@ -18,6 +18,12 @@ export default class Battlefield extends Scene {
     return this.physics.add.overlap(group1, group2, callback, null, this)
   }
 
+  goToShop() {
+    if((this.score > 1875 && this.score <= 1950) || (this.score > 20658 && this.score < 21000) ) {
+      return true
+    }
+  }
+
   preload() {
     /***** Preload all images *****/
     battlefieldImageLoad(this)
@@ -37,10 +43,12 @@ export default class Battlefield extends Scene {
     //Filling in Battlefield Properties
     this.score = this.scene.settings.data.score
     this.level = this.scene.settings.data.level
+    this.playerConfig = this.scene.settings.data.playerConfig
+    this.playerConfig.scene = this
+    this.player = new Player(this.playerConfig)
     this.scoreText = this.add.text(16, 16, `SCORE: ${this.score}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF' })
     this.levelText = this.add.text(16, 50, `LEVEL: ${this.level.number}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF' })
     this.cursors = this.input.keyboard.createCursorKeys()
-    this.player = new Player({ scene: this, key: 'player', x: 100, y: 450 })
     
     /***** Colliders  & Overlaps *****/
     this.addOverlap(this.playerLasers, this.enemyLasers, laserCollision)
@@ -77,6 +85,7 @@ export default class Battlefield extends Scene {
   }
   
   update(time, delta) {
+    if(this.goToShop()) this.scene.start('UpgradeShop', { player: this.player, level: this.level, score: this.score })
     let currentLevel = this.level.number
     this.player.update(time, delta)
     this.enemies.children.entries.forEach(enemy => { enemy.update(time, delta) })
@@ -85,7 +94,6 @@ export default class Battlefield extends Scene {
     this.shields.children.entries.forEach(shield => { shield.update(time, delta) })
     incrementLevel(this)
     if(this.level.number !== currentLevel) {
-      this.player.speed *= 1.045
       incrementEnemySpecs()
       this.enemies.children.entries.forEach(enemy => { enemy.levelUp(this) })
     }
