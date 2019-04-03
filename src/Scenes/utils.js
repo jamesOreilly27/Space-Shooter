@@ -6,5 +6,6 @@ export const basePlayerConfig = {
   speed: 150,
   fireRate: 600,
   shieldLevel: 0,
-  laserLevel: 1
+  laserLevel: 1,
+  upgradeCount: 0
 }

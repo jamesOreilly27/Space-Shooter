@@ -8,6 +8,7 @@ export default class Player extends Ship {
     this.laserLevel = config.laserLevel
     this.speed = config.speed
     this.fireRate = config.fireRate
+    this.upgradeCount = config.upgradeCount
     this.nextFire = 0
     this.body.setCollideWorldBounds(true)
   }

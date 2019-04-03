@@ -5,7 +5,6 @@ import { Level3 } from './utils/levels'
 export default class UpgradeShop extends Scene {
   constructor() {
     super({ key: 'UpgradeShop' })
-    this.upgrades = 2
   }
 
   preload() {
@@ -61,7 +60,7 @@ export default class UpgradeShop extends Scene {
     if(index === 1) { this.upgradeFireRate() }
     if(index === 2) { this.upgradeLaser() }
     this.upgrades--
-    console.log(this.playerConfig)
+    this.playerConfig.upgradeCount++
   }
 
   updateUpgradeText() {
@@ -72,6 +71,7 @@ export default class UpgradeShop extends Scene {
     this.player = this.scene.settings.data.player
     this.score = this.scene.settings.data.score
     this.level = this.scene.settings.data.level
+    this.upgrades = this.scene.settings.data.upgrades
     this.playerConfig = {
       scene: {},
       key: 'player',
@@ -80,7 +80,8 @@ export default class UpgradeShop extends Scene {
       speed: this.player.speed,
       fireRate: this.player.fireRate,
       shieldLevel: this.player.shieldLevel,
-      laserLevel: this.player.laserLevel
+      laserLevel: this.player.laserLevel,
+      upgradeCount: this.player.upgradeCount
     }
 
     this.upgradeText = this.add.text(300, 16, `UPGRADES: ${this.upgrades}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF'})
