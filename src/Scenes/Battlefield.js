@@ -19,7 +19,7 @@ export default class Battlefield extends Scene {
   }
 
   goToShop() {
-    if((this.level.number === 4 && this.player.upgradeCount === 0)) {
+    if((this.level.number === 1 && this.player.upgradeCount === 0)) {
       return true
     }
   }

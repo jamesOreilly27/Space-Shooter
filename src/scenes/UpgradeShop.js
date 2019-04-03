@@ -1,6 +1,7 @@
 import Phaser, { Scene } from 'phaser'
-import { UpgradeContainer, UpgradeButton } from '../UI'
+import { UpgradeContainer, UpgradeButton, UpgradeCounter, UpgradeCountContainer } from '../UI'
 import { Level3 } from './utils/levels'
+import { Player } from '../sprites';
 
 export default class UpgradeShop extends Scene {
   constructor() {
@@ -31,6 +32,23 @@ export default class UpgradeShop extends Scene {
     for(let i = 0; i < containers.length; i++) {
       if(containers[i].highlighted) return i
     }
+  }
+
+  setUpgradeCounterCoords(index) {
+    let x = 0
+    if(index === 0) { x = 87 }
+    if(index === 1) { x = 352 }
+    if(index === 2) { x = 610 }
+
+    return { x: x, y: 190}
+  }
+
+  addUpgradeCounter(x) {
+    return [
+      new UpgradeCountContainer({ scene: this, x: x, y: 190, width: 31.25, height: 31.25, fillColor: 0x0A0A0A, alpha: 0.5 }),
+      new UpgradeCountContainer({ scene: this, x: x + 50, y: 190, width: 31.25, height: 31.25, fillColor: 0x0A0A0A, alpha: 0.5 }),
+      new UpgradeCountContainer({ scene: this, x: x + 100, y: 190, width: 31.25, height: 31.25, fillColor: 0x0A0A0A, alpha: 0.5 })
+    ]
   }
 
   moveRight() {
@@ -91,16 +109,21 @@ export default class UpgradeShop extends Scene {
     this.moveSpeedImage = this.add.image(146, 300, 'movement-speed')
     this.moveSpeedButton = this.addUpgradeButton(146, 400)
     this.addUpgradeText(121, 393)
+    this.movementCountContainers = this.addUpgradeCounter(96)
 
     this.fireRateContainer = this.addRectangle(400, 300, false)
     this.fireRateImage = this.add.image(406, 285, 'fire-rate')
     this.fireRateButton = this.addUpgradeButton(406, 400)
     this.addUpgradeText(381, 393)
+    this.fireRateContainers = this.addUpgradeCounter(355)
+    console.log(this.fireRateContainers)
 
     this.laserContainer = this.addRectangle(660, 300, false)
     this.laserImage = this.add.image(666, 285, 'laser-upgrade')
     this.laserButton = this.addUpgradeButton(666, 400)
     this.addUpgradeText(641, 393)
+    this.laserContainers = this.addUpgradeCounter(615)
+    console.log(this.laserContainers)
 
     this.cursors = this.input.keyboard.createCursorKeys()
     this.containers = [this.moveSpeedContainer, this.fireRateContainer, this.laserContainer]
@@ -108,7 +131,7 @@ export default class UpgradeShop extends Scene {
   }
 
   update() {
-    if(!this.upgrades) this.scene.start('Battlefield', { score: this.score + 50, level: this.level, playerConfig: this.playerConfig})
+    if(!this.upgrades) this.scene.start('Battlefield', { score: this.score, level: this.level, playerConfig: this.playerConfig})
     if(this.cursors.right.isDown) {
       this.moveRight(this.containers)
       this.cursors.right.reset()
@@ -120,6 +143,7 @@ export default class UpgradeShop extends Scene {
     if(this.upgradeKey.isDown) {
       this.upgradePlayer()
       this.upgradeKey.reset()
+      // this.addUpgradeCounter()
       this.updateUpgradeText()
     }
     this.moveSpeedContainer.update()
