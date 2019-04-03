@@ -12,6 +12,7 @@ export default class UpgradeShop extends Scene {
     this.load.image('fire-rate', './assets/fire-rate.png')
     this.load.image('laser-upgrade', './assets/laser-upgrade.png')
     this.load.image('upgrade-btn', './assets/upgrade-btn.png')
+    this.load.image('upgrade-counter', './assets/upgrade-counter.png')
   }
 
   addRectangle(x, y, highlighted) {
