@@ -34,21 +34,24 @@ export default class UpgradeShop extends Scene {
     }
   }
 
-  setUpgradeCounterCoords(index) {
-    let x = 0
-    if(index === 0) { x = 87 }
-    if(index === 1) { x = 352 }
-    if(index === 2) { x = 610 }
-
-    return { x: x, y: 190}
+  addEmptyUpgradeCounters(x) {
+    return [
+      new UpgradeCountContainer({ scene: this, x: x, y: 190, width: 31.25, height: 31.25, fillColor: 0x0A0A0A, alpha: 0.5, filled: false }),
+      new UpgradeCountContainer({ scene: this, x: x + 50, y: 190, width: 31.25, height: 31.25, fillColor: 0x0A0A0A, alpha: 0.5, filled: false }),
+      new UpgradeCountContainer({ scene: this, x: x + 100, y: 190, width: 31.25, height: 31.25, fillColor: 0x0A0A0A, alpha: 0.5, filled: false })
+    ]
   }
 
-  addUpgradeCounter(x) {
-    return [
-      new UpgradeCountContainer({ scene: this, x: x, y: 190, width: 31.25, height: 31.25, fillColor: 0x0A0A0A, alpha: 0.5 }),
-      new UpgradeCountContainer({ scene: this, x: x + 50, y: 190, width: 31.25, height: 31.25, fillColor: 0x0A0A0A, alpha: 0.5 }),
-      new UpgradeCountContainer({ scene: this, x: x + 100, y: 190, width: 31.25, height: 31.25, fillColor: 0x0A0A0A, alpha: 0.5 })
-    ]
+  addUpgradeCounter() {
+    const index = this.findHighlightedIndex(this.containers)
+    for(let i = 0; i < this.counters[index].length; i++) {
+      if(!this.counters[index][i].filled) {
+        this.add.image(this.counters[index][i].x, this.counters[index][i].y, 'upgrade-counter').setScale(.25)
+        this.counters[index][i].filled = true
+        return 
+      }
+    }
+
   }
 
   moveRight() {
@@ -109,24 +112,23 @@ export default class UpgradeShop extends Scene {
     this.moveSpeedImage = this.add.image(146, 300, 'movement-speed')
     this.moveSpeedButton = this.addUpgradeButton(146, 400)
     this.addUpgradeText(121, 393)
-    this.movementCountContainers = this.addUpgradeCounter(96)
+    this.movementCountContainers = this.addEmptyUpgradeCounters(96)
 
     this.fireRateContainer = this.addRectangle(400, 300, false)
     this.fireRateImage = this.add.image(406, 285, 'fire-rate')
     this.fireRateButton = this.addUpgradeButton(406, 400)
     this.addUpgradeText(381, 393)
-    this.fireRateContainers = this.addUpgradeCounter(355)
-    console.log(this.fireRateContainers)
+    this.fireRateCountContainers = this.addEmptyUpgradeCounters(355)
 
     this.laserContainer = this.addRectangle(660, 300, false)
     this.laserImage = this.add.image(666, 285, 'laser-upgrade')
     this.laserButton = this.addUpgradeButton(666, 400)
     this.addUpgradeText(641, 393)
-    this.laserContainers = this.addUpgradeCounter(615)
-    console.log(this.laserContainers)
+    this.laserCountContainers = this.addEmptyUpgradeCounters(615)
 
     this.cursors = this.input.keyboard.createCursorKeys()
-    this.containers = [this.moveSpeedContainer, this.fireRateContainer, this.laserContainer]
+    this.containers = [ this.moveSpeedContainer, this.fireRateContainer, this.laserContainer ]
+    this.counters = [ this.movementCountContainers, this.fireRateCountContainers, this.laserCountContainers ]
     this.upgradeKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER)
   }
 
@@ -143,7 +145,7 @@ export default class UpgradeShop extends Scene {
     if(this.upgradeKey.isDown) {
       this.upgradePlayer()
       this.upgradeKey.reset()
-      // this.addUpgradeCounter()
+      this.addUpgradeCounter()
       this.updateUpgradeText()
     }
     this.moveSpeedContainer.update()
