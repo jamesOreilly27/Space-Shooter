@@ -34,13 +34,26 @@ export default class UpgradeShop extends Scene {
     }
   }
 
-  addEmptyUpgradeCounters(x) {
+  addEmptyUpgradeCounters(x, filled1, filled2, filled3) {
     return [
-      new UpgradeCountContainer({ scene: this, x: x, y: 190, width: 31.25, height: 31.25, fillColor: 0x0A0A0A, alpha: 0.5, filled: false }),
-      new UpgradeCountContainer({ scene: this, x: x + 50, y: 190, width: 31.25, height: 31.25, fillColor: 0x0A0A0A, alpha: 0.5, filled: false }),
-      new UpgradeCountContainer({ scene: this, x: x + 100, y: 190, width: 31.25, height: 31.25, fillColor: 0x0A0A0A, alpha: 0.5, filled: false })
+      new UpgradeCountContainer({ scene: this, x: x, y: 190, width: 31.25, height: 31.25, fillColor: 0x0A0A0A, alpha: 0.5, filled: filled1 }),
+      new UpgradeCountContainer({ scene: this, x: x + 50, y: 190, width: 31.25, height: 31.25, fillColor: 0x0A0A0A, alpha: 0.5, filled: filled2 }),
+      new UpgradeCountContainer({ scene: this, x: x + 100, y: 190, width: 31.25, height: 31.25, fillColor: 0x0A0A0A, alpha: 0.5, filled: filled3 })
     ]
   }
+
+  addMovementSpeedCounters(x) {
+    let level1 = false
+    let level2 = false
+    let level3 = false
+
+    if(this.player.speed === 175) { level1 = true }
+    if(this.player.speed === 200) { level2 = true }
+    if(this.player.speed === 225) { level3 = true }
+
+    return addEmptyUpgradeContainers(x, level1, level2, level3)
+  }
+
 
   addUpgradeCounter() {
     const index = this.findHighlightedIndex(this.containers)

@@ -20,8 +20,8 @@ export default class Battlefield extends Scene {
 
   goToShop() {
     if(
-      (this.level.number === 4 && this.player.upgradeCount === 0) ||
-      (this.level.number === 7 && this.player.upgradeCount === 2)
+      (this.level.number === 1 && this.player.upgradeCount === 0) ||
+      (this.level.number === 2 && this.player.upgradeCount === 2)
     ) {
       return true
     }
