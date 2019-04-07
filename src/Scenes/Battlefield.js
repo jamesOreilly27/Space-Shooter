@@ -20,8 +20,8 @@ export default class Battlefield extends Scene {
 
   goToShop() {
     if(
-      (this.level.number === 1 && this.player.upgradeCount === 0) ||
-      (this.level.number === 2 && this.player.upgradeCount === 2)
+      (this.level.number === 4 && this.player.upgradeCount === 0) ||
+      (this.level.number === 7 && this.player.upgradeCount === 2)
     ) {
       return true
     }
@@ -42,7 +42,6 @@ export default class Battlefield extends Scene {
   }
 
   create() {
-    resetEnemySpecs()
     //Filling in Battlefield Properties
     this.score = this.scene.settings.data.score
     this.level = this.scene.settings.data.level
@@ -53,6 +52,7 @@ export default class Battlefield extends Scene {
     this.scoreText = this.add.text(16, 16, `SCORE: ${this.score}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF' })
     this.levelText = this.add.text(16, 50, `LEVEL: ${this.level.number}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF' })
     this.cursors = this.input.keyboard.createCursorKeys()
+    resetEnemySpecs(this)
     
     /***** Colliders  & Overlaps *****/
     this.addOverlap(this.playerLasers, this.enemyLasers, laserCollision)
