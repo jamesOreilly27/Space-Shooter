@@ -1,6 +1,6 @@
 import Phaser, { Scene } from 'phaser'
-import { UpgradeButton, UpgradeCounter, UpgradeCountContainer } from '../UI'
-import { addRectangle, addUpgradeButton, } from './utils/upgradeShop'
+import { UpgradeCounter, UpgradeCountContainer } from '../UI'
+import { addRectangle, addUpgradeButton, addUpgradeText } from './utils/upgradeShop'
 import { Level3 } from './utils/levels'
 import { Player } from '../sprites';
 
@@ -15,10 +15,6 @@ export default class UpgradeShop extends Scene {
     this.load.image('laser-upgrade', './assets/laser-upgrade.png')
     this.load.image('upgrade-btn', './assets/upgrade-btn.png')
     this.load.image('upgrade-counter', './assets/upgrade-counter.png')
-  }
-
-  addUpgradeText(x, y) {
-    this.add.text(x, y, 'UPGRADE', { fontSize: '12px', fontFamily: 'Lato', fill: '#0A0A0A' })
   }
 
   findHighlightedIndex(containers) {
@@ -117,19 +113,19 @@ export default class UpgradeShop extends Scene {
     this.moveSpeedContainer = addRectangle(this, 140, 300, true)
     this.moveSpeedImage = this.add.image(146, 300, 'movement-speed')
     this.moveSpeedButton = addUpgradeButton(this, 146, 400)
-    this.addUpgradeText(121, 393)
+    addUpgradeText(this, 121, 393)
     this.movementCountContainers = this.addEmptyUpgradeCounters(96)
 
     this.fireRateContainer = addRectangle(this, 400, 300, false)
     this.fireRateImage = this.add.image(406, 285, 'fire-rate')
     this.fireRateButton = addUpgradeButton(this, 406, 400)
-    this.addUpgradeText(381, 393)
+    addUpgradeText(this, 381, 393)
     this.fireRateCountContainers = this.addEmptyUpgradeCounters(355)
 
     this.laserContainer = addRectangle(this,660, 300, false)
     this.laserImage = this.add.image(666, 285, 'laser-upgrade')
     this.laserButton = addUpgradeButton(this, 666, 400)
-    this.addUpgradeText(641, 393)
+    addUpgradeText(this, 641, 393)
     this.laserCountContainers = this.addEmptyUpgradeCounters(615)
 
     this.cursors = this.input.keyboard.createCursorKeys()
