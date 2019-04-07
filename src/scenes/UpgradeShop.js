@@ -1,5 +1,5 @@
 import Phaser, { Scene } from 'phaser'
-import { UpgradeCounter, UpgradeCountContainer } from '../UI'
+import { UpgradeCountContainer } from '../UI'
 import { addRectangle, addUpgradeButton, addUpgradeText, carryOverUpgrades, findHighlightedIndex, upgradePlayer } from './utils/upgradeShop'
 import { Level3 } from './utils/levels'
 import { Player } from '../sprites';
