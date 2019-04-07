@@ -3,7 +3,7 @@ import { shouldDrop, choosePowerup } from '../scenes/utils/itemDrop.js'
 
 export default class Ship extends Phaser.GameObjects.Sprite {
   constructor(config) {
-    super(config.scene, config.x, config.y, config.key, config.speed, config.fireRate, config.shieldLevel, config.laserLevel, config.upgradeCount, config.path, config.left)
+    super(config.scene, config.x, config.y, config.key, config.speed, config.fireRate, config.shieldLevel, config.laserLevel, config.moveUpgrades, config.fireRateUpgrades, config.laserUpgrades, config.upgradeCount, config.path, config.left)
     this.scene.physics.world.enable(this)
     this.scene.add.existing(this)
     this.key = config.key

@@ -1,6 +1,6 @@
 import Phaser, { Scene } from 'phaser'
 import { UpgradeCounter, UpgradeCountContainer } from '../UI'
-import { addRectangle, addUpgradeButton, addUpgradeText } from './utils/upgradeShop'
+import { addRectangle, addUpgradeButton, addUpgradeText, findHighlightedIndex, upgradePlayer } from './utils/upgradeShop'
 import { Level3 } from './utils/levels'
 import { Player } from '../sprites';
 
@@ -17,12 +17,6 @@ export default class UpgradeShop extends Scene {
     this.load.image('upgrade-counter', './assets/upgrade-counter.png')
   }
 
-  findHighlightedIndex(containers) {
-    for(let i = 0; i < containers.length; i++) {
-      if(containers[i].highlighted) return i
-    }
-  }
-
   addEmptyUpgradeCounters(x, filled1, filled2, filled3) {
     return [
       new UpgradeCountContainer({ scene: this, x: x, y: 190, width: 31.25, height: 31.25, fillColor: 0x0A0A0A, alpha: 0.5, filled: filled1 }),
@@ -31,21 +25,8 @@ export default class UpgradeShop extends Scene {
     ]
   }
 
-  addMovementSpeedCounters(x) {
-    let level1 = false
-    let level2 = false
-    let level3 = false
-
-    if(this.player.speed === 175) { level1 = true }
-    if(this.player.speed === 200) { level2 = true }
-    if(this.player.speed === 225) { level3 = true }
-
-    return addEmptyUpgradeContainers(x, level1, level2, level3)
-  }
-
-
   addUpgradeCounter() {
-    const index = this.findHighlightedIndex(this.containers)
+    const index = findHighlightedIndex(this.containers)
     for(let i = 0; i < this.counters[index].length; i++) {
       if(!this.counters[index][i].filled) {
         this.add.image(this.counters[index][i].x, this.counters[index][i].y, 'upgrade-counter').setScale(.25)
@@ -58,7 +39,7 @@ export default class UpgradeShop extends Scene {
 
   moveRight() {
     if(!this.containers[this.containers.length - 1].highlighted) {
-      let highlightedIndex = this.findHighlightedIndex(this.containers)
+      let highlightedIndex = findHighlightedIndex(this.containers)
       this.containers[highlightedIndex].flipHighlighted()
       this.containers[highlightedIndex + 1].flipHighlighted()
     }
@@ -66,25 +47,10 @@ export default class UpgradeShop extends Scene {
 
   moveLeft() {
     if(!this.containers[0].highlighted) {
-      let highlightedIndex = this.findHighlightedIndex(this.containers)
+      let highlightedIndex = findHighlightedIndex(this.containers)
       this.containers[highlightedIndex].flipHighlighted()
       this.containers[highlightedIndex - 1].flipHighlighted()
     }
-  }
-
-  upgradeSpeed() { this.playerConfig.speed += 25 }
-
-  upgradeFireRate() { this.playerConfig.fireRate -= 100 }
-
-  upgradeLaser() { this.playerConfig.laserLevel++ }
-
-  upgradePlayer() {
-    let index = this.findHighlightedIndex(this.containers)
-    if(index === 0) { this.upgradeSpeed() }
-    if(index === 1) { this.upgradeFireRate() }
-    if(index === 2) { this.upgradeLaser() }
-    this.upgrades--
-    this.playerConfig.upgradeCount++
   }
 
   updateUpgradeText() {
@@ -105,6 +71,9 @@ export default class UpgradeShop extends Scene {
       fireRate: this.player.fireRate,
       shieldLevel: this.player.shieldLevel,
       laserLevel: this.player.laserLevel,
+      moveUpgrades: this.player.moveUpgrades,
+      fireRateUpgrades: this.player.fireRateUpgrades,
+      laserUpgrades: this.player.laserUpgrades,
       upgradeCount: this.player.upgradeCount
     }
 
@@ -145,7 +114,7 @@ export default class UpgradeShop extends Scene {
       this.cursors.left.reset()
     }
     if(this.upgradeKey.isDown) {
-      this.upgradePlayer()
+      upgradePlayer(this, this.playerConfig)
       this.upgradeKey.reset()
       this.addUpgradeCounter()
       this.updateUpgradeText()
