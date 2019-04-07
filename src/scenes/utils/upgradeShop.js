@@ -11,6 +11,12 @@ export const addUpgradeText = (scene, x, y) => {
   scene.add.text(x, y, 'UPGRADE', { fontSize: '12px', fontFamily: 'Lato', fill: '#0A0A0A' })
 }
 
+export const carryOverUpgrades = (scene, countContainers, typeUpgradeCount) => {
+  for(let i = 0; i < typeUpgradeCount; i++) {
+    scene.add.image(countContainers[i].x, countContainers[i].y, 'upgrade-counter').setScale(.25)
+  }
+}
+
 /********** Upgrade Shop UI**********/
 export const findHighlightedIndex = containers => {
   for(let i = 0; i < containers.length; i++) {

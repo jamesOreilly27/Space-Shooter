@@ -1,6 +1,6 @@
 import Phaser, { Scene } from 'phaser'
 import { UpgradeCounter, UpgradeCountContainer } from '../UI'
-import { addRectangle, addUpgradeButton, addUpgradeText, findHighlightedIndex, upgradePlayer } from './utils/upgradeShop'
+import { addRectangle, addUpgradeButton, addUpgradeText, carryOverUpgrades, findHighlightedIndex, upgradePlayer } from './utils/upgradeShop'
 import { Level3 } from './utils/levels'
 import { Player } from '../sprites';
 
@@ -101,6 +101,10 @@ export default class UpgradeShop extends Scene {
     this.containers = [ this.moveSpeedContainer, this.fireRateContainer, this.laserContainer ]
     this.counters = [ this.movementCountContainers, this.fireRateCountContainers, this.laserCountContainers ]
     this.upgradeKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER)
+
+    carryOverUpgrades(this, this.movementCountContainers, this.playerConfig.moveUpgrades)
+    carryOverUpgrades(this, this.fireRateCountContainers, this.playerConfig.fireRateUpgrades)
+    carryOverUpgrades(this, this.laserCountContainers, this.playerConfig.laserUpgrades)
   }
 
   update() {
