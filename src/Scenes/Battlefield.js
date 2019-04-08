@@ -19,7 +19,10 @@ export default class Battlefield extends Scene {
   }
 
   goToShop() {
-    if((this.score > 1875 && this.score <= 1950) || (this.score > 20658 && this.score < 21000) ) {
+    if(
+      (this.level.number === 4 && this.player.upgradeCount === 0) ||
+      (this.level.number === 7 && this.player.upgradeCount === 2)
+    ) {
       return true
     }
   }
@@ -39,16 +42,17 @@ export default class Battlefield extends Scene {
   }
 
   create() {
-    resetEnemySpecs()
     //Filling in Battlefield Properties
     this.score = this.scene.settings.data.score
     this.level = this.scene.settings.data.level
     this.playerConfig = this.scene.settings.data.playerConfig
     this.playerConfig.scene = this
     this.player = new Player(this.playerConfig)
+    console.log(this.player)
     this.scoreText = this.add.text(16, 16, `SCORE: ${this.score}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF' })
     this.levelText = this.add.text(16, 50, `LEVEL: ${this.level.number}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF' })
     this.cursors = this.input.keyboard.createCursorKeys()
+    resetEnemySpecs(this)
     
     /***** Colliders  & Overlaps *****/
     this.addOverlap(this.playerLasers, this.enemyLasers, laserCollision)
@@ -85,7 +89,7 @@ export default class Battlefield extends Scene {
   }
   
   update(time, delta) {
-    if(this.goToShop()) this.scene.start('UpgradeShop', { player: this.player, level: this.level, score: this.score })
+    if(this.goToShop()) this.scene.start('UpgradeShop', { player: this.player, level: this.level, score: this.score, upgrades: 2 })
     let currentLevel = this.level.number
     this.player.update(time, delta)
     this.enemies.children.entries.forEach(enemy => { enemy.update(time, delta) })

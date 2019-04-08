@@ -38,11 +38,13 @@ export const enemySpecs = {
 }
 
 //resets enemySpecs object to the base stats. Will be used when the player starts a new game from the Death scene
-export const resetEnemySpecs = () => {
-  for(let enemyClass in enemySpecs) {
-    enemySpecs[enemyClass].speed = baseStats[enemyClass].speed
-    enemySpecs[enemyClass].fireRate = baseStats[enemyClass].fireRate
-    enemySpecs[enemyClass].bulletSpeed = baseStats[enemyClass].bulletSpeed
+export const resetEnemySpecs = scene => {
+  if(scene.level.number === 1) {
+    for(let enemyClass in enemySpecs) {
+      enemySpecs[enemyClass].speed = baseStats[enemyClass].speed
+      enemySpecs[enemyClass].fireRate = baseStats[enemyClass].fireRate
+      enemySpecs[enemyClass].bulletSpeed = baseStats[enemyClass].bulletSpeed
+    }
   }
 }
 
