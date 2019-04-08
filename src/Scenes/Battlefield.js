@@ -89,7 +89,7 @@ export default class Battlefield extends Scene {
   }
   
   update(time, delta) {
-    if(this.goToShop()) this.scene.start('UpgradeShop', { player: this.player, level: this.level, score: this.score, upgrades: 2 })
+    if(this.goToShop()) this.scene.start('UpgradeShop', { player: this.player, level: this.level, score: this.score, upgrades: 4 })
     let currentLevel = this.level.number
     this.player.update(time, delta)
     this.enemies.children.entries.forEach(enemy => { enemy.update(time, delta) })
