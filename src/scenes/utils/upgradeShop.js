@@ -14,6 +14,7 @@ export const addUpgradeText = (scene, x, y) => {
 export const carryOverUpgrades = (scene, countContainers, typeUpgradeCount) => {
   for(let i = 0; i < typeUpgradeCount; i++) {
     scene.add.image(countContainers[i].x, countContainers[i].y, 'upgrade-counter').setScale(.25)
+    countContainers[i].filled = true
   }
 }
 
