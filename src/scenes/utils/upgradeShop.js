@@ -45,7 +45,7 @@ export const upgradeFireRate = (scene, playerConfig) => {
 }
 
 export const upgradeLaser = (scene, playerConfig) => {
-  if(plauerConfig.laserUpgrades < 3) {
+  if(playerConfig.laserUpgrades < 3) {
     playerConfig.laserLevel++
     playerConfig.laserUpgrades++
     scene.upgrades--
