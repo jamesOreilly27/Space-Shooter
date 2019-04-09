@@ -26,6 +26,8 @@
   },
   "dependencies": {
     "express": "^4.16.4",
+    "volleyball": "^1.5.1",
+    "body-parser": "^1.18.3",
     "phaser": "^3.16.2"
   },
   "engines": {
