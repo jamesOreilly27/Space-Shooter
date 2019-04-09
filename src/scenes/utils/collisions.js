@@ -25,11 +25,12 @@ export const shieldBlock = (enemy, shield) => {
 
 export const laserCollision = (playerLaser, enemyLaser) => {
   const player = playerLaser.scene.player
-  if(playerLaser.key === 'player-laser'  && player.isLaserMaxed()) {
+  if(playerLaser.key === 'player-laser2'  && player.isLaserMaxed()) {
+    enemyLaser.updateScore()
     enemyLaser.destroy()
     playerLaser.body.setVelocityY(-600)
   }
-  else if(playerLaser.key !== 'player-laser' && playerLaser.visible){
+  else if(playerLaser.key !== 'player-laser' && playerLaser.key !== 'player-laser2' && playerLaser.visible){
     enemyLaser.updateScore()
     enemyLaser.destroy()
   }

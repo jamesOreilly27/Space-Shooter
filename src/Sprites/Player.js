@@ -24,14 +24,14 @@ export default class Player extends Ship {
 
   getLaserSprite() {
     if(this.laserLevel === 1) return 'player-laser'
-    else if(this.laserLevel === 2 || this.laserLevel === 3) return 'player-laser2'
+    else if(this.laserLevel === 2 || this.laserLevel === 3 || this.laserLevel === 4) return 'player-laser2'
   }
 
   createShield(shieldStr) {
     this.scene.shields.add(new Shield({ scene: this.scene, x: this.x, y: this.y, key: shieldStr }))
   }
 
-  isLaserMaxed() { return this.laserLevel === 3 }
+  isLaserMaxed() { return this.laserLevel === 4 }
 
   move() {
     if(this.scene.cursors.left.isDown) this.body.setVelocityX(-this.speed)

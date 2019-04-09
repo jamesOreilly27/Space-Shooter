@@ -7,7 +7,7 @@ export default class PlayerLaser extends Laser {
     if(laserLevel === 2) {
       this.scaleX = .5
       this.scaleY = .5
-    } else if(laserLevel === 3) {
+    } else if(laserLevel === 3 || laserLevel === 4) {
       this.scaleX = .7
       this.scaleY = .7
     }

@@ -14,6 +14,7 @@ export const addUpgradeText = (scene, x, y) => {
 export const carryOverUpgrades = (scene, countContainers, typeUpgradeCount) => {
   for(let i = 0; i < typeUpgradeCount; i++) {
     scene.add.image(countContainers[i].x, countContainers[i].y, 'upgrade-counter').setScale(.25)
+    countContainers[i].filled = true
   }
 }
 
@@ -25,28 +26,36 @@ export const findHighlightedIndex = containers => {
 }
 
 /********** Upgrade Player **********/
-export const upgradeSpeed = playerConfig => {
-  playerConfig.speed += 25
-  playerConfig.moveUpgrades++
+export const upgradeSpeed = (scene, playerConfig) => {
+  if(playerConfig.moveUpgrades < 3) {
+    playerConfig.speed += 25
+    playerConfig.moveUpgrades++
+    scene.upgrades--
+    playerConfig.upgradeCount++
+  }
 }
 
-export const upgradeFireRate = playerConfig => {
-  playerConfig.fireRate -= 100
-  playerConfig.fireRateUpgrades++
+export const upgradeFireRate = (scene, playerConfig) => {
+  if(playerConfig.fireRateUpgrades < 3) {
+    playerConfig.fireRate -= 100
+    playerConfig.fireRateUpgrades++
+    scene.upgrades--
+    playerConfig.upgradeCount++
+  }
 }
 
-export const upgradeLaser = playerConfig => {
-  playerConfig.laserLevel++
-  playerConfig.laserUpgrades++
+export const upgradeLaser = (scene, playerConfig) => {
+  if(playerConfig.laserUpgrades < 3) {
+    playerConfig.laserLevel++
+    playerConfig.laserUpgrades++
+    scene.upgrades--
+    playerConfig.upgradeCount++
+  }
 }
 
 export const upgradePlayer = (scene, playerConfig) => {
   let index = findHighlightedIndex(scene.containers)
-  if(index === 0) { upgradeSpeed(playerConfig) }
-  if(index === 1) { upgradeFireRate(playerConfig) }
-  if(index === 2) { upgradeLaser(playerConfig) }
-  
-  scene.upgrades--
-  playerConfig.upgradeCount++
-  console.log('TEST', playerConfig)
+  if(index === 0) { upgradeSpeed(scene, playerConfig) }
+  if(index === 1) { upgradeFireRate(scene, playerConfig) }
+  if(index === 2) { upgradeLaser(scene, playerConfig) }
 }

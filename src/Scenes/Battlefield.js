@@ -48,7 +48,6 @@ export default class Battlefield extends Scene {
     this.playerConfig = this.scene.settings.data.playerConfig
     this.playerConfig.scene = this
     this.player = new Player(this.playerConfig)
-    console.log(this.player)
     this.scoreText = this.add.text(16, 16, `SCORE: ${this.score}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF' })
     this.levelText = this.add.text(16, 50, `LEVEL: ${this.level.number}`, { fontSize: '32px', fontFamily: 'Space Mono', fill: '#FFF' })
     this.cursors = this.input.keyboard.createCursorKeys()
