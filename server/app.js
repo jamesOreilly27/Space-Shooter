@@ -4,7 +4,7 @@ const volleyball = require('volleyball')
 const bodyParser = require('body-parser')
 const chalk = require('chalk')
 const path = require('path')
-const PORT = 9433
+const PORT = process.env.PORT || 9433
 
 app.use(volleyball)
 app.use(bodyParser.json({ extended: true }))
