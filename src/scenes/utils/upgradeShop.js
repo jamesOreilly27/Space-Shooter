@@ -58,5 +58,4 @@ export const upgradePlayer = (scene, playerConfig) => {
   if(index === 0) { upgradeSpeed(scene, playerConfig) }
   if(index === 1) { upgradeFireRate(scene, playerConfig) }
   if(index === 2) { upgradeLaser(scene, playerConfig) }
-  console.log('TEST', playerConfig)
 }

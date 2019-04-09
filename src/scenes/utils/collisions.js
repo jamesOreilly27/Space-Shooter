@@ -29,12 +29,10 @@ export const laserCollision = (playerLaser, enemyLaser) => {
     enemyLaser.updateScore()
     enemyLaser.destroy()
     playerLaser.body.setVelocityY(-600)
-    console.log('FIRING1')
   }
   else if(playerLaser.key !== 'player-laser' && playerLaser.key !== 'player-laser2' && playerLaser.visible){
     enemyLaser.updateScore()
     enemyLaser.destroy()
-    console.log('FIRING2')
   }
 }
 
