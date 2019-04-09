@@ -1,7 +1,7 @@
 {
-  "name": "phaser3-boilerplate",
+  "name": "space-shooter",
   "version": "1.0.0",
-  "description": "A boilerplate for phaser/node/webpack",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "webpack -w & nodemon server/app.js",
@@ -23,5 +23,8 @@
   },
   "dependencies": {
     "phaser": "^3.16.2"
+  },
+  "engines": {
+    "node": "10.15.3"
   }
 }
