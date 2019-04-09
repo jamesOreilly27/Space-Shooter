@@ -57,7 +57,6 @@ export const incrementLevel = battlefield => {
     battlefield.level = Level4
     incrementLevelText(battlefield)
     increaseEnemySpawnRate(battlefield)
-    battlefield.player.setFireRate(450)
   }
   if(battlefield.score >= 4687 && battlefield.score < 11716) {
     battlefield.level = Level5
@@ -70,7 +69,6 @@ export const incrementLevel = battlefield => {
   if(battlefield.score >= 20658 && battlefield.score < 25354) {
     battlefield.level = Level7
     incrementLevelText(battlefield)
-    battlefield.player.setFireRate(300)
   }
   if(battlefield.score >= 25354 && battlefield.score < 30968) {
     battlefield.level = Level8
@@ -83,6 +81,5 @@ export const incrementLevel = battlefield => {
   if(battlefield.score >= 35722) {
     battlefield.level = Level10
     incrementLevelText(battlefield)
-    battlefield.player.setFireRate(150)
   }
 }
