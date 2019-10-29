@@ -27,4 +27,14 @@ app.use('./static', express.static(path.join(__dirname, 'public')))
 
 app.get('*', (req, res, next) => res.sendFile(path.join(__dirname, '..', 'public', 'index.html')))
 
-server.listen(PORT, () => console.log(chalk.blue.bgWhite.bold(`We'll Do It Live on Port ${server.address().port}`)))
+const startListening = () => {
+  if(process.env.PORT) {
+    app.listen(PORT, () => console.log(chalk.red.bgWhite.bold(`We are live on port ${PORT}`)))
+  } else {
+    server.listen(PORT, () => console.log(chalk.blue.bgWhite.bold(`We are live on port ${server.address().port}`)))
+  }
+}
+
+// server.listen(PORT, () => console.log(chalk.blue.bgWhite.bold(`We'll Do It Live on Port ${server.address().port}`)))
+
+startListening()
