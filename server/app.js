@@ -16,7 +16,7 @@ const dir = require('os').homedir()
 //   rejectUnauthorized: false
 // }
 
-const server = https.createServer(options, app)
+// const server = https.createServer(options, app)
 
 app.use(volleyball)
 app.use(bodyParser.json({ extended: true }))
@@ -30,9 +30,10 @@ app.get('*', (req, res, next) => res.sendFile(path.join(__dirname, '..', 'public
 const startListening = () => {
   if(process.env.PORT) {
     app.listen(PORT, () => console.log(chalk.red.bgWhite.bold(`We are live on port ${PORT}`)))
-  } else {
-    server.listen(PORT, () => console.log(chalk.blue.bgWhite.bold(`We are live on port ${server.address().port}`)))
   }
+  // } else {
+  //   server.listen(PORT, () => console.log(chalk.blue.bgWhite.bold(`We are live on port ${server.address().port}`)))
+  // }
 }
 
 startListening()
