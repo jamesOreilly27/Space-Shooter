@@ -35,6 +35,4 @@ const startListening = () => {
   }
 }
 
-// server.listen(PORT, () => console.log(chalk.blue.bgWhite.bold(`We'll Do It Live on Port ${server.address().port}`)))
-
 startListening()
