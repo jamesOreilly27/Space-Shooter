@@ -19,18 +19,18 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.20.1",
     "chalk": "^2.4.1",
-    "express": "^4.16.4",
+    "express": "^4.18.2",
     "fs": "0.0.1-security",
     "https": "^1.0.0",
     "volleyball": "^1.5.1",
     "webpack": "^3.12.0"
   },
   "dependencies": {
-    "express": "^4.16.4",
+    "express": "^4.18.2",
     "volleyball": "^1.5.1",
-    "body-parser": "^1.18.3",
+    "body-parser": "^1.20.1",
     "phaser": "^3.16.2",
     "webpack": "^3.12.0"
   },
